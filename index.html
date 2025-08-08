@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cardápio - Supremo Oriente</title>
+<meta name="description" content="Cardápio interativo do restaurante Supremo Oriente. Explore entradas, pratos, bebibas e muito mais.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="author" content="Supremo Oriente">
+<meta name="keywords" content="cardápio, restaurante, comida oriental, Supremo Oriente, entradas, pratos">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Fonte Great Vibes (para títulos) -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body class="fundo-carregado">
+  <div class="container">
+    <!-- Logo que muda com o tema -->
+    <img id="logo" src="10.jpg" alt="Logo" class="logo" />
+
+    <!-- Título principal -->
+    <h1>SUPREMO ORIENTE</h1>
+    
+    <!-- Bloco de icones <-->
+<div class="social-links">
+  <a href="https://wa.me/+5583988627070" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+  <a href="https://www.instagram.com/supremooriente?igsh=cnRpamhzOTZnbGRl" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+</div>
+    <!-- Menu de seções -->
+    <ul class="menu">
+      <div class="barra-pesquisa">
+  <input type="text" id="searchInput" placeholder="Buscar Item">
+  <div id="busca-destaque" class="busca-destaque-popup" style="display:none;"></div>
+  <p id="msgBusca" style="display:none; color: red; font-weight: bold;">Nenhum item encontrado.</p>
+</div>
+      <li>
+        <button class="secao" onclick="toggleSublista(1)">Entradas</button>
+        <ul class="sublista" id="sublista1">
+          <li>
+            <div class="info-item">
+              <p class="desc">SALADAS</p>
+            </div>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">SALADA SUPREMO ORIENTE</span>
+              <p>Acelga, cenoura, repolho, pimentão, presunto, tudo desfiado e com ovos de codorna.</p>
+            </div>
+            <span class="preco">R$ 26,98</span>
+          </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">SALADA MIX JAPONESA</span>
+              <p>Alface, pepino japonês, rúcula, kani e atum.</p>
+            </div>
+            <span class="preco">R$ 57,99</span>
+          </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">MIX DE POLVO</span>
+              <p>Alface, pepino japonês, rúcula, kani e polvo.</p>
+            </div>
+            <span class="preco">R$ 69,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <p class="desc">SUNOMONOS</p>
+            </div>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">SUNOMONO DE KANI</span>
+              <p>Pepino japonês fatiado em conserva com kani.</p>
+            </div>
+            <span class="preco">R$ 39,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">SUNOMONO ESPECIAL</span>
+              <p>Pepino japonês fatiado em conserva com kani, camarão cozido e salmão.</p>
+            </div>
+            <span class="preco">R$ 58,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <p class="desc">FRITOS</p>
+            </div>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">BATATA FRITA</span>
+              <p>Batatas fritas douradas e crocantes, servidas quentinhas.</p>
+            </div>
+            <span class="preco">R$ 22,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">ROLINHO PRIMAVERA</span>
+              <p>Recheada com carne moída, repolho e cenoura, enrolados em massa fina de harumaki.</p>
+            </div>
+            <span class="preco">R$ 12,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">ROLINHO DE QUEIJO</span>
+              <p>Mussarela enrolada em massa fina de harumaki</p>
+            </div>
+            <span class="preco">R$ 12,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">ROLINHO DE CAMARÃO COM CATUPIRY</span>
+              <p>Filé de camarão refolgado ao alho e óleo com catupiry, enrolados em massa fina de harumaki</p>
+            </div>
+            <span class="preco">R$ 18,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">CHIPS DE BATATA DOCE</span>
+              <p>Batata doce crocante e temperada, ideal como petisco.</p>
+            </div>
+            <span class="preco">R$ 19,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <p class="desc"> OUTROS</p>
+            </div>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">SOBREMESA</span>
+            </div>
+            <span class="preco">R$ 6,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <p class="desc">CAFÉ</p>
+            </div>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">CAFÉ P</span>
+            </div>
+            <span class="preco">R$ 5,00</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">CAFÉ G</span>
+            </div>
+            <span class="preco">R$ 10,00</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">CAPPUCCINO</span>
+            </div>
+            <span class="preco">R$ 12,00</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <p class="desc"> PEÇAS À LA CARTE</p>
+            </div>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">HOT HOOL</span>
+            </div>
+            <span class="preco">R$ 19,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">LAMINA 4 UNIDADES</span>
+            </div>
+            <span class="preco">R$ 19,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">JOY 4 UNIDADES</span>
+            </div>
+            <span class="preco">R$ 22,99</span>
+            </li>
+        </ul>
+      </li>
+      <li>
+        <button class="secao" onclick="toggleSublista(2)">Yakissoba Especial</button>
+        <ul class="sublista" id="sublista2">
+          <li>
+            <div class="info-item">
+              <span class="nome-item">YAKISSOBA ESPECIAL COMPLETO</span>
+              <p>Macarrão com filé de camarão, fatias de carne, cubos de frango, fatias de presunto e legumes fatiados(cenoura, acelga e brócolis).</p>
+            </div>
+            <span class="preco">01 PESSOA R$ 44,98 <br>
+              <br>02 PESSOAS R$ 69,90 <br>
+              <br>05 PESSOAS R$ 129,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">YAKISSOBA ESPECIAL SEM LEGUMES  </span>
+              <p>Macarrão com filé de camarão, fatias de carne, cubos de frango e fatias de presunto.</p>
+            </div>
+            <span class="preco">01 PESSOA R$ 49,90 <br>
+              <br>02 PESSOAS R$ 79,90 <br>
+              <br>05 PESSOAS R$ 139,90
+            </span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">YAKISSOBA SUPREMO COMPLETO</span>
+              <p>Macarrão com filé de camarão, fatias de carne cubos de frango, fatias de presunto, legumes desfiados, cenoura, repolho, pimentão ao molho supremo da casa, refogados com pouco molho.</p>
+            </div>
+            <span class="preco">01 PESSOA R$ 48,98 <br>
+            <br>02 PESSOAS R$ 82,90<br>
+            <br>05 PESSOAS R$ 142,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">YAKISSOBA SUPREMO COMPLETO SEM LEGUMES</span>
+              <p>Macarrão com filé de camarão, fatias de carne, cubos de frango, fatias de presunto ao molho supremo da casa, refogado com pouco molho.</p>
+            </div>
+            <span class="preco">01 PESSOA R$ 53,98 <br>
+            <br>02 PESSOAS R$ 86,90<br>
+            <br>05 PESSOAS R$ 162,90</span>
+            </li>
+        </ul>
+      </li>
+      <li>
+        <button class="secao" onclick="toggleSublista(3)">Bifum</button>
+        <ul class="sublista" id="sublista3">
+          <li>
+            <div class="info-item">
+              <span class="nome-item">BIFUM COMPLETO</span>
+              <p>Macarrão de arroz BIRFUM, tiras de carne, tiras de frango, filé de camarão, tiras de presunto, floco de ovos, legumes fatiados (acelga, cenoura, pimentão ao molho curry).</p>
+            </div>
+            <span class="preco">02 PESSOAS R$ 69,90 <br>
+            <br> 05 PESSOAS R$ 132,00</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">BIFUM SEM LEGUME</span>
+              <p>Macarrão de arroz BIFUM, tiras de carne, tiras de frango, tiras de presunto e floco de ovos ao molho curry.</p>
+            </div>
+            <span class="preco">02 PESSOAS R$ 79,90 <br>
+            <br> 05 PESSOAS R$ 142,00</span>
+            </li>
+        </ul>
+      </li>
+      <li>
+        <button class="secao" onclick="toggleSublista(4)">Frango</button>
+        <ul class="sublista" id="sublista4">
+          <li>
+            <div class="info-item">
+              <span class="nome-item">FRANGO XADREZ COM LEGUMES VARIADOS</span>
+              <p>Frango em cubos, acelga, cenoura, brócolis, pimentão, champion e cebola, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">01 PESSOA R$ 39,90 <br>
+            <br> 02 PESSOAS R$ 59,90 <br>
+            <br> 04 PESSOAS R$ 89,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">FRANGO XADREZ COM PIMENTÃO E CEBOLA</span>
+              <p>Frango em cubos, pimentão, cebola e amendoim, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">01 PESSOA R$ 39,90 <br>
+            <br>02 PESSOAS R$ 59,90<br>
+            <br>04 PESSOAS R$ 89,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">FRANGO XADREZ AO MOLHO DE TOMATE</span>
+              <p>Frango em cubos, tomate, cebola ao molho de tomate, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">01 PESSOA R$ 39,90 <br>
+              <br> 02 PESSOAS R$ 58,90 <br>
+              <br> 04 PESSOAS R$ 89,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">FRANGO XADREZ AO MOLHO CURRY
+              <p>Frango em cubos, fatias de cebola, pimentão e cenoura ao molho curry, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">01 PESSOA R$ 39,90 <br>
+               <br>02 PESSOAS R$ 58,90 <br>
+               <br> 04 PESSOAS R$ 89,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">FRANGO XADREZ SEM LEGUMES</span>
+              <p>Frango em cubos, molho shoyu, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">01 PESSOA R$ 39,90 <br>
+              <br> 02 PESSOAS R$ 62,90 <br>
+              <br> 04 PESSOAS R$ 98,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">FRANGO EMPANADO</span>
+              <p>Frango em cubos empanados em massa fina, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">04 PESSOAS R$ 89,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">FRANGO A MILANESA</span>
+              <p>Filé de frango empanado na farinha panko, refolgado ao molho tonkatsu, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">04 PESSOAS R$ 89,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">FRANGO A PASSARINHA</span>
+              <p>Coxinha de asa de frango, acompanha arroz e fritas</p>
+            </div>
+            <span class="preco">02 PESSOAS R$ 89,90 <br>
+              <br> 04 PESSOAS R$ 99,99</span>
+            </li>
+        </ul>
+      </li>
+      <li>
+        <button class="secao" onclick="toggleSublista(5)">Carnes</button>
+        <ul class="sublista" id="sublista5">
+          <li>
+            <div class="info-item">
+              <span class="nome-item">CARNE IMPERIAL</span>
+              <p>Fatias de carne, cebolinha verde e batata refogada ao molho shoyu, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">01 PESSOA R$ 41,98 <br>
+              <br> 02 PESSOAS R$ 59,98 <br>
+              <br> 04 PESSOAS R$ 99,98</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">CARNE SUPREMA</span>
+              <p>Fatias de carne, cebolinha verde, molho de churrasco oriental, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">01 PESSOAS R$ 42,98 <br>
+              <br> 02 PESSOAS R$ 62,98 <br>
+              <br> 04 PESSOAS R$ 105,98</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">CARNE ACEBOLADA</span>
+              <p>Fatias de carne, cebola desfiada, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">01 PESSOA R$ 41,98 <br>
+              <br> 02 PESSOAS 59,98 04 <br>
+              <br> PESSOAS R$ 99,98</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item"> CARNE SEM LEGUMES</span>
+              <p>Fatias de carne ao molho shoyu, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">01 PESSOA R$ 43,98 <br>
+              <br> 02 PESSOAS R$ 63,98 <br>
+              <br> 04 PESSOAS R$ 105,98</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">CARNE AO MOLHO DE TOMATE</span>
+              <p>Fatias de carne, tomate, cebola ao molho de tomate, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">01 PESSOA R$ 41,98 <br>
+              <br> 02 PESSOAS R$ 59,98 <br>
+              <br> 04 PESSOAS R$ 99,98</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">CARNE COM LEGUMES VARIADOS</span>
+              <p>Fatias de carne, cebola, pimentão, canoura, brócolis e champion, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">01 PESSOA R$ 41,98 <br>
+              <br> 02 PESSOAS R$ 59,98 <br>
+              <br> 04 PESSOAS R$ 99,88</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">CARNE COM BRÓCOLIS</span>
+              <p>Fatias de carne com brócolis ao molho shoyu, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">01 PESSOA R$ 41,98 <br>
+              <br> 02 PESSOAS R$ 59,98 <br>
+              <br> 04 PESSOAS R$ 99,88</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">CARNE AO MOLHO CURRY</span>
+              <p>Fatias de carne, pimentão, cebola, cenoura ao molho curry, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">01 PESSOA R$ 41,98 <br>
+              <br> 02 PESSOAS R$ 59,98 <br>
+              <br> 04 PESSOAS R$ 99,88</span>
+            </li>
+        </ul>
+      </li>
+      <li>
+        <button class="secao" onclick="toggleSublista(6)">Camarão</button>
+        <ul class="sublista" id="sublista6">
+          <li>
+            <div class="info-item">
+              <span class="nome-item">CAMARÃO AO MOLHO DE TOMATE</span>
+              <p>Filé de camarão ao molho de tomate com pedaços de tomate e cebola, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">01 PESSOA R$ 59,90 <br>
+              <br> 02 PESSOAS R$ 89,90 <br>
+              <br> 04 PESSOAS R$ 169,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">CAMARÃO AO MOLHO SHOYU</span>
+              <p>Filé de camarão, acelga, champion, cenoura e brócolis, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">01 PESSOA R$ 59,90 <br>
+              <br> 02 PESSOAS R$ 89,90 <br>
+              <br> 04 PESSOAS R$ 169,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">CAMARÃO ALHO E ÓLEO</span>
+              <p>Camarão inteiro  frito puxado no alho e cebola picada, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">04 PESSOAS R$ 139,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">CAMARÃO EMPANADO</span>
+              <p>Filé de camarão com calda, empanado em massa fina feito com farinha de trigo, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">04 PESSOAS R$ 139,98</span>
+            </li>
+        </ul>
+      </li>
+      <li>
+        <button class="secao" onclick="toggleSublista(7)">Peixe</button>
+        <ul class="sublista" id="sublista7">
+          <li>
+            <div class="info-item">
+              <span class="nome-item">PEIXE AO MOLHO DE TOMATE</span>
+              <p>Filé de peixe ao molho de tomate com cebola e tomate fatiado, acompanha arrroz e fritas.</p>
+            </div>
+            <span class="preco">02 PESSOAS R$ 69,90 <br>
+              <br> 04 PESSOAS R$ 119,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">PEIXE AO MOLHO SHOYU</span>
+              <p>Filé de peixe ao molho shoyu com legumes fatiados, acelga, cenoura, brócolis e champion, acomapnha arroz e fritas.</p>
+            </div>
+            <span class="preco">02 PESSOAS R$ 79,90 <br>
+              <br> 04 PESSOAS R$ 119,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">PEIXE FRITO</span>
+              <p>Filé de peixe frito, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">02 PESSOAS R$ 79,90 <br>
+              <br> 04 PESSOAS R$ 119,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">PEIXE EMPANADO</span>
+              <p>Bastões de filé de peixe empanado em massa fina feito na farinha de trigo, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">04 PESSOAS R$ 119,90</span>
+            </li>
+        </ul>
+      </li>
+      <li>
+        <button class="secao" onclick="toggleSublista(8)">Chapas</button>
+        <ul class="sublista" id="sublista8">
+          <li>
+            <div class="info-item">
+              <span class="nome-item">FILÉ NA CHAPA</span>
+              <p>Filé mignon grelhados na chapa ao molho misto, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">R$ 149,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">FILÉ DE FRANGO NA CHAPA</span>
+              <p>Filé de frango grelhado na chapa ao molho misto, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">R$ 99,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">CHAPA SUPREMO ORIENTE</span>
+              <p>Filé de camarão, fatias de carne, cubos de frango, legumes fatiados, acelga, cenoura, brócolis, ovos de codorna e presunto, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">R$ 119,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">CAMARÃO AO ALHO E ÓLEO NA CHAPA</span>
+              <p>Camarão inteiro frito com alho e cebola.</p>
+            </div>
+            <span class="preco">R$ 139,90</span>
+            </li>
+        </ul>
+      </li>
+      <li>
+        <button class="secao" onclick="toggleSublista(9)">Arroz</button>
+        <ul class="sublista" id="sublista9">
+          <li>
+            <div class="info-item">
+              <span class="nome-item">ARROZ ESPECIAL</span>
+              <p>Arroz, tiras de frango, tias de carne, filé de camarão, presunto, ovos e ervilhas.</p>
+            </div>
+            <span class="preco">R$ 41,98</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">ARROZ DE CAMARÃO</span>
+              <p>Arroz, filé de camarão, presunto, ovos e ervilhas.</p>
+            </div>
+            <span class="preco">R$ 39,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">ARROZ DE FRANGO</span>
+              <p>Arroz, tiras de frango, presunto, ovos e ervilhas.</p>
+            </div>
+            <span class="preco">R$ 36,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">ARROZ DE CARNE</span>
+              <p>Arroz, tiras de carne, presunto, ovos e ervilhas.</p>
+            </div>
+            <span class="preco">R$ 38,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">ARROZ CHOP-SUEY</span>
+              <p>Arroz, presunto, ovos e ervilhas.</p>
+            </div>
+            <span class="preco">R$ 31,98</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">ARROZ BRANCO</span>
+              <p></p>
+            </div>
+            <span class="preco">R$ 19,99</span>
+            </li>
+        </ul>
+      </li>
+      <li>
+        <button class="secao" onclick="toggleSublista(10)">Familia Feliz</button>
+        <ul class="sublista" id="sublista10">
+          <li>
+            <div class="info-item">
+              <span class="nome-item">fAMILIA FELIZ COMPLETA</span>
+              <p>Fatias de carne, cubos de frango, filé de camarão, presunto, legumes fatiados, acelga, cenoura e brócolis, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">01 PESSOA R$ 44,98 <br>
+              <br> 02 PESSOAS R$ 69,98 <br>
+              <br> 04 PESSOAS R$ 129,98</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">FAMILLIA FELIZ SEM LEGUMES</span>
+              <p>Fatias de carne, cubos de frango, filé de camarão, fatias de presunto, acompanha arroz e fritas.</p>
+            </div>
+            <span class="preco">01 PESSOA R$ 49,98 <br>
+              <br> 02 PESSOAS R$ 79,98 <br>
+              <br> 04 PESSOAS 139,98</span>
+            </li>
+        </ul>
+      </li>
+      <li>
+        <button class="secao" onclick="toggleSublista(11)">Temakis</button>
+        <ul class="sublista" id="sublista11">
+          <li>
+            <div>
+              <p class="desc">Todo temaki acompanha: Arroz japonês, Cream cheese polengrinho, cebolinha verde, mais proteína.</p>
+            </div>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">TEMAKI DE SALMÃO FRESCO</span>
+              <p>Apenas salmão.</p>
+            </div>
+            <span class="preco">R$ 39,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">TEMAKI DE SALMÃO EMPANADO</span>
+              <p>Apenas o salmão empanado.</p>
+            </div>
+            <span class="preco">R$ 38,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">TEMAKI DE SALMÃO FLAMBADO</span>
+              <p>Apenas o salmão flambado.</p>
+            </div>
+            <span class="preco">R$ 39,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">TEMAKI FILADELFIA</span>
+              <p>Pasta de salmão grelhado.</p>
+            </div>
+            <span class="preco">R$ 29,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">TEMAKI SKIN</span>
+              <p>Pele de salmão selecionada e empanada.</p>
+            </div>
+            <span class="preco">R$ 21,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">TEMAKI DE KANI FRESCO</span>
+              <p>Apenas o kani.</p>
+            </div>
+            <span class="preco">R$ 19,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">TEMAKI DE KANI EMPANADO</span>
+              <p>Apenas kani empanado.</p>
+            </div>
+            <span class="preco">R$ 21,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">TEMAKI DE ATUM FRESCO</span>
+              <p>Apenas o atum.</p>
+            </div>
+            <span class="preco">R$ 31,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">TEMAKI DE PEIXE BRANCO FRESCO</span>
+              <p>Apenas o peixe branco.</p>
+            </div>
+            <span class="preco">R$ 39,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">TEMAKI DE CAMARÃO COZIDO</span>
+              <p>Apenas o camarão.</p>
+            </div>
+            <span class="preco">R$ 31,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">TEMAKI EBITEM</span>
+              <p>Recheio de camarão empanado.</p>
+            </div>
+            <span class="preco">R$ 31,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">TEMAKI EBISAKE</span>
+              <p>Recheio de camarão cozido e salmão fresco.</p>
+            </div>
+            <span class="preco">R$ 39,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">TEMAKI DE POLVO</span>
+              <p>Apenas o polvo.</p>
+            </div>
+            <span class="preco">R$ 39,90</span>
+            </li>
+        </ul>
+      </li>
+      <li>
+        <button class="secao" onclick="toggleSublista(12)">Temakis Especiais</button>
+        <ul class="sublista" id="sublista12">
+          <li>
+            <div class="info-item">
+              <span class="nome-item">TEMAKI JHOW</span>
+              <p>(SALMÃO, CAMARÃO COZIDO ou KANI) <br><br>
+              Acompanha cream cheese polengrinho, arroz japonês, enrolado com lâmina de salmão flambado mais a proteína.</p>
+            </div>
+            <span class="preco">R$ 69,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <p class="desc">EMPANE SEU TEMAKI</p>
+            </div>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">EMPANE SEU TEMAKI</span>
+              <p>(CADA)</p>
+            </div>
+            <span class="preco">R$ 4,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">RETIRE O ARROZ DO SEU TEMAKI</span>
+              <p>(CADA)</p>
+            </div>
+            <span class="preco">R$ 9,99</span>
+            </li>
+        </ul>
+      </li>
+      <li>
+        <button class="secao" onclick="toggleSublista(13)">Sushi Burguer</button>
+        <ul class="sublista" id="sublista13">
+          <li>
+            <div class="info-item">
+              <p class="desc">PÃO ARTESANAL DE ARROZ EMPANADO E FRITO.</p>
+            </div>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">UMA PROTEÍNA</span>
+            </div>
+            <span class="preco">R$ 24,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">DUAS PROTEÍNAS</span>
+            </div>
+            <span class="preco">R$ 27,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">TRÊS PROTEÍNAS</span>
+            </div>
+            <span class="preco">R$ 29,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <p class="desc">ESCOLHIDO ENTRE:</p>
+              <p class="desc">Salmão fresco, salmão empanado, Salmão flambado, camarão cozido, camarão empanado, arum fresco, peixe branco, polvo ou kani fresco.</p>
+            </div>
+            </li>
+        </ul>
+      </li>
+      <li>
+        <button class="secao" onclick="toggleSublista(14)">Sushi Dog</button>
+        <ul class="sublista" id="sublista14">
+          <li>
+            <div class="info-item">
+              <p class="desc">PÃO ARTESANAL DE ARROZ EMPANADO E FRITO.</p>
+            </div>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">UMA PROTEÍNA</span>
+              <p></p>
+            </div>
+            <span class="preco">R$ 29,90</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">DUAS PROTEÍNAS</span>
+              <p></p>
+            </div>
+            <span class="preco">R$ 35,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">TRÊS PROTEÍNAS</span>
+              <p></p>
+            </div>
+            <span class="preco">R$ 39,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <p class="desc">ESCOLHIDO ENTRE:</p>
+              <p class="desc">Salmão fresco, salmão empanado, Salmão flambado, camarão cozido, camarão empanado, arum fresco, peixe branco, polvo ou kani fresco.</p>
+            </div>
+            </li>
+        </ul>
+      </li>
+      <li>
+        <button class="secao" onclick="toggleSublista(15)">Bebidas</button>
+        <ul class="sublista" id="sublista15">
+          <li>
+            <div class="info-item">
+              <p class="desc">REFRIGERANTES</p>
+            </div>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">LIMONETO</span>
+            </div>
+            <span class="preco">R$ 8,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">COCA COLA</span>
+            </div>
+            <span class="preco">R$ 6,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">COCA COLA ZERO</span>
+            </div>
+            <span class="preco">R$ 6,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">SPRITE</span>
+            </div>
+            <span class="preco">R$ 6,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">FANTA</span>
+            </div>
+            <span class="preco">R$ 6,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">SCHWEEPPES</span>
+            </div>
+            <span class="preco">R$ 6,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">GUARANÁ</span>
+            </div>
+            <span class="preco">R$ 6,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">GUARANÁ ZERO</span>
+            </div>
+            <span class="preco">R$ 6,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <p class="desc">ENERGÉTICOS</p>
+            </div>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">REDBULL</span>
+            </div>
+            <span class="preco">R$ 12,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+            <p class="desc">CERVEJAS (LONGNECK)</p>
+            </div>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">BUDWEISER</span>
+            </div>
+            <span class="preco">R$ 11,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">HEINEKEN</span>
+            </div>
+            <span class="preco">R$ 13,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">CORONA</span>
+            </div>
+            <span class="preco">R$ 14,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <p class="desc"> OUTROS</p>
+            </div>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">SHOT DE LIMÃO</span>
+              <p></p>
+            </div>
+            <span class="preco">R$ 3,00</span>
+            </li>
+        </ul>
+      </li>
+      <li>
+        <button class="secao" onclick="toggleSublista(16)">Sucos</button>
+        <ul class="sublista" id="sublista16">
+          <li>
+            <div class="info-item">
+              <span class="nome-item">LIMÃO</span>
+              <p></p>
+            </div>
+            <span class="preco">COPO R$ 7,99 <br>
+            <br>JARRA R$ 19,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">LARANJA</span>
+              <p></p>
+            </div>
+            <span class="preco">COPO R$ 7,99 <br>
+            <br>JARRA R$ 19,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">ABACAXI</span>
+              <p></p>
+            </div>
+            <span class="preco">COPO R$ 7,99 <br>
+            <br>JARRA R$ 19,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">MORANGO</span>
+              <p></p>
+            </div>
+            <span class="preco">COPO R$ 7,99 <br>
+            <br>JARRA R$ 19,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">LARANJA C/ MORANGO</span>
+              <p></p>
+            </div>
+            <span class="preco">JARRA R$ 19,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">LIMONADA CHINESA</span>
+              <p></p>
+            </div>
+            <span class="preco">JARRA R$ 19,99</span>
+            </li>
+          <li>
+            <div class="info-item">
+              <span class="nome-item">LIMONADA SUIÇA</span>
+              <p></p>
+            </div>
+            <span class="preco">JARRA R$ 19,99</span>
+            </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+<!-- Botão Voltar ao Topo -->
+  <button id="btn-topo" aria-label="Voltar ao topo">
+  <i class="fas fa-arrow-up"></i>
+    </button>
+  <script src="script.js"></script>
+<!-- Desenvolvido por faeldev-ux 🦊 -->
+</body>
+</html>
