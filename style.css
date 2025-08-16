@@ -389,3 +389,86 @@ h1 {
     font-size: 2em;
   }
 }
+/* ==================================== */
+/* Estilos para o Header */
+/* ==================================== */
+
+/* Estilos para o Header Rotativo */
+.header-rotativo {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background-color: #333;
+  padding: 10px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.header-container {
+  display: flex;
+  justify-content: flex-start;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 0 20px;
+}
+
+.header-container a {
+  flex: 0 0 auto;
+  display: inline-block;
+  padding: 8px 15px;
+  color: #fff;
+  text-decoration: none;
+  font-family: 'ZCOOL XiaoWei', sans-serif;
+  font-size: 1em;
+  margin-right: 10px;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+}
+
+.header-container a:hover {
+  background-color: black;
+  color: #fff;
+}
+
+/* Esconde a barra de rolagem horizontal */
+.header-container::-webkit-scrollbar {
+  display: none;
+}
+
+.header-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Ajuste no body para evitar que o header cubra o conteúdo */
+body {
+  padding-top: 60px; /* Adiciona espaço no topo da página igual à altura do header */
+}
+
+/* Estilos para o modo escuro */
+@media (prefers-color-scheme: dark) {
+  .header-rotativo {
+    background-color: black; /* Cor de fundo mais escura para o header no modo escuro */
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+  }
+
+  .header-container a:hover {
+    background-color: #444;
+  }
+
+  .footer-rotativo {
+    background-color: black;
+  }
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 600px) {
+  .header-rotativo {
+    padding: 8px 0;
+  }
+
+  .header-container a {
+    padding: 6px 12px;
+    font-size: 0.9em;
+    margin-right: 8px;
+  }
