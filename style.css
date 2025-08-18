@@ -445,34 +445,6 @@ body {
   padding-top: 60px; /* Adiciona espaço no topo da página igual à altura do header */
 }
 
-/* Estilos para o modo escuro */
-@media (prefers-color-scheme: dark) {
-  .header-rotativo {
-    background-color: black; /* Cor de fundo mais escura para o header no modo escuro */
-    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
-  }
-
-  .header-container a:hover {
-    background-color: #444;
-  }
-
-  .footer-rotativo {
-    background-color: black;
-  }
-}
-
-/* Responsividade para dispositivos móveis */
-@media (max-width: 600px) {
-  .header-rotativo {
-    padding: 8px 0;
-  }
-
-  .header-container a {
-    padding: 6px 12px;
-    font-size: 0.9em;
-    margin-right: 8px;
-  }
-  
   /* Estilos do Pop-up */
 .popup-container {
     display: none; /* Inicia escondido */
@@ -555,4 +527,32 @@ body {
     from { opacity: 1; transform: scale(1); }
     to { opacity: 0; transform: scale(0.9); }
 }
+
+/* Estilos para o modo escuro */
+@media (prefers-color-scheme: dark) {
+  .header-rotativo {
+    background-color: black; /* Cor de fundo mais escura para o header no modo escuro */
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+  }
+
+  .header-container a:hover {
+    background-color: #444;
+  }
+
+  .footer-rotativo {
+    background-color: black;
+  }
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 600px) {
+  .header-rotativo {
+    padding: 8px 0;
+  }
+
+  .header-container a {
+    padding: 6px 12px;
+    font-size: 0.9em;
+    margin-right: 8px;
+  }
 }
