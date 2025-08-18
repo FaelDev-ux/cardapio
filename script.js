@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // --- LÓGICA DO CARDÁPIO (Aprimorada) ---
+  // --- LÓGICA DO CARDÁPIO ---
 
   // Seleciona todas as seções que podem ser expandidas/recolhidas
   const secoes = document.querySelectorAll('.secao');
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  // --- LÓGICA DO POP-UP (NOVA) ---
+  // --- LÓGICA DO POP-UP ---
 
   const popupContainer = document.getElementById('popup-container');
   const closeBtn = document.querySelector('.close-btn');
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  // --- OUTRAS FUNÇÕES DO SEU CÓDIGO ORIGINAL (Mantidas) ---
+  // --- OUTRAS FUNÇÕES DO CÓDIGO ---
 
   function trocarLogoPorTema() {
     const logo = document.getElementById('logo');
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- LÓGICA DO CABEÇALHO ROTATIVO (Sticky) ---
+  // --- LÓGICA DO CABEÇALHO ROTATIVO ---
   const headerLinks = document.querySelectorAll('.header-rotativo a');
 
   headerLinks.forEach(link => {
