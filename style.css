@@ -440,6 +440,8 @@ h1 {
   color: #fff; /* Texto branco no hover */
 }
 
+
+
 /* Estilos para o modo escuro */
 @media (prefers-color-scheme: dark) {
   .header-rotativo {
