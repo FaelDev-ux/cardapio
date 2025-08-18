@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- LÓGICA DO POP-UP ---
+    // --- LÓGICA DO POP-UP (APARECE UMA ÚNICA VEZ) ---
 
     const popupContainer = document.getElementById('popup-container');
     const closeBtn = document.querySelector('.close-btn');
@@ -39,11 +39,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const headerRotativo = document.querySelector('.header-rotativo');
     const headerHeight = headerRotativo ? headerRotativo.offsetHeight : 0;
 
-    setTimeout(() => {
-        if (popupContainer) {
-            popupContainer.style.display = 'flex';
-        }
-    }, 1000);
+    // AQUI ESTÁ A LÓGICA DO POP-UP ÚNICO
+    const popupFoiVisto = localStorage.getItem('popupFoiVisto');
+    if (!popupFoiVisto) {
+        setTimeout(() => {
+            if (popupContainer) {
+                popupContainer.style.display = 'flex';
+            }
+        }, 1000);
+    }
 
     function closePopup() {
         if (popupContainer) {
@@ -53,6 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 popupContainer.classList.remove('popup-hide');
             }, 500);
         }
+        // Salva a flag no localStorage para não mostrar novamente
+        localStorage.setItem('popupFoiVisto', 'true');
     }
 
     if (closeBtn) {
@@ -82,7 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
             closePopup();
         }
     });
-
 
     // --- OUTRAS FUNÇÕES DO CÓDIGO ---
 
@@ -149,8 +154,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 secoes.forEach(secao => secao.style.display = 'block');
 
                 todosItens.forEach(item => {
-                    const nomeItem = item.querySelector('.nome-item').textContent.toLowerCase();
-                    const descItem = item.querySelector('.desc') ? item.querySelector('.desc').textContent.toLowerCase() : '';
+                    const nomeItemEl = item.querySelector('.nome-item');
+                    const descItemEl = item.querySelector('.desc');
+                    
+                    const nomeItem = nomeItemEl ? nomeItemEl.textContent.toLowerCase() : '';
+                    const descItem = descItemEl ? descItemEl.textContent.toLowerCase() : '';
 
                     if (nomeItem.includes(termoBusca) || descItem.includes(termoBusca)) {
                         item.style.display = 'flex';
@@ -271,9 +279,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnWhatsapp = document.getElementById('btn-whatsapp');
     const btnCancelar = document.getElementById('btn-cancelar');
     const numeroWhatsApp = '5583988627070';
-
+    
+    // VARIÁVEL QUE VAI ARMAZENAR O CARRINHO
     let carrinho = [];
 
+    // FUNÇÕES PARA SALVAR E CARREGAR DO LOCAL STORAGE
+    function salvarCarrinho() {
+        localStorage.setItem('carrinhoSalvo', JSON.stringify(carrinho));
+    }
+
+    function carregarCarrinho() {
+        const carrinhoSalvo = localStorage.getItem('carrinhoSalvo');
+        if (carrinhoSalvo) {
+            carrinho = JSON.parse(carrinhoSalvo);
+            atualizarCarrinho();
+            if (localStorage.getItem('exibirVisualizacao')) {
+                exibirVisualizacaoPedido();
+            }
+        }
+    }
+
+    // FUNÇÃO QUE ATUALIZA O CARRINHO E É CHAMADA EM VÁRIOS LUGARES
     function atualizarCarrinho() {
         listaPedidoEl.innerHTML = '';
         let total = 0;
@@ -281,6 +307,8 @@ document.addEventListener('DOMContentLoaded', () => {
             listaPedidoEl.innerHTML = '<p>Seu pedido está vazio.</p>';
             contadorCarrinho.style.display = 'none';
             totalPedidoEl.textContent = 'Total: R$ 0,00';
+            localStorage.removeItem('carrinhoSalvo');
+            localStorage.removeItem('exibirVisualizacao');
         } else {
             carrinho.forEach((item, index) => {
                 const li = document.createElement('li');
@@ -302,12 +330,85 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.addEventListener('click', (event) => {
                     const indexParaRemover = parseInt(event.target.dataset.index);
                     carrinho.splice(indexParaRemover, 1);
+                    salvarCarrinho();
                     atualizarCarrinho();
                 });
             });
         }
     }
 
+    // LÓGICA DE EXIBIR O POP-UP DE VISUALIZAÇÃO DO PEDIDO
+    function exibirVisualizacaoPedido() {
+        const pedidoCompleto = listaPedidoEl.cloneNode(true);
+        const totalCompleto = totalPedidoEl.cloneNode(true);
+        const visualizacaoPedido = document.createElement('div');
+        visualizacaoPedido.classList.add('visualizacao-pedido');
+        const fecharVisualizacao = document.createElement('span');
+        fecharVisualizacao.textContent = '×';
+        fecharVisualizacao.classList.add('fechar');
+        fecharVisualizacao.addEventListener('click', () => {
+            visualizacaoPedido.remove();
+            carrinho = [];
+            localStorage.removeItem('carrinhoSalvo');
+            localStorage.removeItem('exibirVisualizacao');
+            atualizarCarrinho();
+        });
+
+        visualizacaoPedido.innerHTML = `
+            <h2>Seu Pedido</h2>
+        `;
+        visualizacaoPedido.appendChild(pedidoCompleto);
+        visualizacaoPedido.appendChild(totalCompleto);
+        visualizacaoPedido.appendChild(fecharVisualizacao);
+        document.body.appendChild(visualizacaoPedido);
+        visualizacaoPedido.style.display = 'flex';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Evento para o botão "Fazer Pedido"
+    if (btnFazerPedido) {
+        btnFazerPedido.addEventListener('click', () => {
+            if (carrinho.length > 0) {
+                modalOpcoesPedido.style.display = 'flex';
+                modalCarrinho.style.display = 'none';
+            } else {
+                alert("Adicione itens ao seu pedido primeiro!");
+            }
+        });
+    }
+
+    // Evento para o botão "Estou no restaurante"
+    btnGarcom.addEventListener('click', () => {
+        modalOpcoesPedido.style.display = 'none';
+        localStorage.setItem('exibirVisualizacao', 'true');
+        salvarCarrinho();
+        exibirVisualizacaoPedido();
+    });
+
+    // Evento para o botão "Pedido para entrega (WhatsApp)"
+    btnWhatsapp.addEventListener('click', () => {
+        modalOpcoesPedido.style.display = 'none';
+        let mensagem = 'Olá, gostaria de fazer o seguinte pedido:\n\n';
+        let total = 0;
+        carrinho.forEach(item => {
+            mensagem += `- ${item.nome} (R$ ${item.preco.toFixed(2).replace('.', ',')})\n`;
+            total += item.preco;
+        });
+        mensagem += `\nTotal: R$ ${total.toFixed(2).replace('.', ',')}`;
+        const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+        window.open(url, '_blank');
+        
+        carrinho = [];
+        localStorage.removeItem('carrinhoSalvo');
+        localStorage.removeItem('exibirVisualizacao');
+        atualizarCarrinho();
+    });
+
+    // Evento para o botão "Cancelar"
+    btnCancelar.addEventListener('click', () => {
+        modalOpcoesPedido.style.display = 'none';
+    });
+    
     btnCarrinho.addEventListener('click', () => {
         modalCarrinho.style.display = 'flex';
         atualizarCarrinho();
@@ -336,89 +437,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                // Pega o nome do item principal
                 const itemPai = precoBtnContainer.closest('li');
-                const nomeItemPrincipal = itemPai.querySelector('.nome-item').textContent.trim();
-                
-                // Pega a descrição da porção e o preço do botão clicado
-                const descricaoPorcao = precoBtnContainer.querySelector('span:first-of-type').textContent.trim();
+                const nomeItemPrincipal = itemPai.querySelector('.nome-item')?.textContent.trim() || itemPai.querySelector('.desc')?.textContent.trim();
+                const descricaoPorcao = precoBtnContainer.querySelector('span:first-of-type')?.textContent.trim() || '';
                 const precoTexto = precoBtnContainer.querySelector('.preco-valor').textContent;
-                
-                // Formata o preço para um número
                 const precoNumerico = parseFloat(precoTexto.replace('R$', '').replace(',', '.').trim());
+                
+                let nomeCompleto = nomeItemPrincipal;
+                if(descricaoPorcao) {
+                    nomeCompleto += ` - ${descricaoPorcao}`;
+                }
 
-                // Combina o nome do item com a descrição da porção
-                const nomeCompleto = `${nomeItemPrincipal} - ${descricaoPorcao}`;
-        
                 carrinho.push({ nome: nomeCompleto, preco: precoNumerico });
+                salvarCarrinho();
                 atualizarCarrinho();
                 btnCarrinho.style.display = 'flex';
                 console.log('Item adicionado:', nomeCompleto);
             });
         });
-    } else {
-        console.log('Nenhum botão de adicionar encontrado. Verifique se a classe .btn-adicionar está correta.');
     }
-    // -------- FIM DA LÓGICA ATUALIZADA --------
-    
-    // Lógica para o botão "Fazer Pedido"
-    btnFazerPedido.addEventListener('click', () => {
-        if (carrinho.length > 0) {
-            modalOpcoesPedido.style.display = 'flex';
-            modalCarrinho.style.display = 'none';
-        } else {
-            alert("Adicione itens ao seu pedido primeiro!");
-        }
-    });
-    
-    // Evento para o botão "Estou no restaurante"
-    btnGarcom.addEventListener('click', () => {
-        modalOpcoesPedido.style.display = 'none';
-        const pedidoCompleto = listaPedidoEl.cloneNode(true);
-        const totalCompleto = totalPedidoEl.cloneNode(true);
-        const visualizacaoPedido = document.createElement('div');
-        visualizacaoPedido.classList.add('visualizacao-pedido');
-        const fecharVisualizacao = document.createElement('span');
-        fecharVisualizacao.textContent = '×';
-        fecharVisualizacao.classList.add('fechar');
-        fecharVisualizacao.addEventListener('click', () => {
-            visualizacaoPedido.remove();
-            carrinho = [];
-            atualizarCarrinho();
-        });
-        visualizacaoPedido.innerHTML = `
-            <h2>Seu Pedido</h2>
-        `;
-        visualizacaoPedido.appendChild(pedidoCompleto);
-        visualizacaoPedido.appendChild(totalCompleto);
-        visualizacaoPedido.appendChild(fecharVisualizacao);
-        document.body.appendChild(visualizacaoPedido);
-        visualizacaoPedido.style.display = 'flex';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
 
-    // Evento para o botão "Pedido para entrega (WhatsApp)"
-    btnWhatsapp.addEventListener('click', () => {
-        modalOpcoesPedido.style.display = 'none';
-        let mensagem = 'Olá, gostaria de fazer o seguinte pedido:\n\n';
-        let total = 0;
-        carrinho.forEach(item => {
-            mensagem += `- ${item.nome} (R$ ${item.preco.toFixed(2).replace('.', ',')})\n`;
-            total += item.preco;
-        });
-        mensagem += `\nTotal: R$ ${total.toFixed(2).replace('.', ',')}`;
-        const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
-        window.open(url, '_blank');
-        carrinho = [];
-        atualizarCarrinho();
-    });
-
-    // Evento para o botão "Cancelar"
-    btnCancelar.addEventListener('click', () => {
-        modalOpcoesPedido.style.display = 'none';
-    });
-
-    btnCarrinho.style.display = 'none';
+    carregarCarrinho();
     atualizarCarrinho();
     
     console.log('%cDesenvolvido por faeldev-ux 🦊', 'color:#b30000;font-weight:bold;font-size:14px;');

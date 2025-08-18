@@ -799,6 +799,33 @@ h1 {
     .header-rotativo a:hover {
         background-color: #444;
     }
+
+    .total-pedido {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: right;
+    padding-top: 10px;
+    color: black;
+    }
+
+    .lista-pedido li {
+    list-style: none;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    color: black;
+  }
+  .modal-header h2 {
+    margin: 0;
+    color: black;
+  }
+  .modal-conteudo-opcoes h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: black; 
+  }
 }
 
 /* Ajuste no body para evitar que o header cubra o conteúdo */
