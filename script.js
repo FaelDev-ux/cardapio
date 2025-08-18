@@ -29,19 +29,17 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  // --- LÓGICA DO POP-UP (NOVA) ---
+   // --- LÓGICA DO POP-UP (NOVA) ---
 
   const popupContainer = document.getElementById('popup-container');
   const closeBtn = document.querySelector('.close-btn');
-  const hasSeenPopup = localStorage.getItem('hasSeenPopup');
 
-  if (hasSeenPopup !== 'true') {
-    setTimeout(() => {
-      if (popupContainer) {
-        popupContainer.style.display = 'flex';
-      }
-    }, 1000); // Atraso de 1 segundo
-  }
+  // Adiciona um pequeno atraso para a página carregar primeiro, exibindo o pop-up
+  setTimeout(() => {
+    if (popupContainer) {
+      popupContainer.style.display = 'flex';
+    }
+  }, 1000); // Atraso de 1 segundo
 
   function closePopup() {
     if (popupContainer) {
@@ -50,7 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
         popupContainer.style.display = 'none';
         popupContainer.classList.remove('popup-hide');
       }, 500);
-      localStorage.setItem('hasSeenPopup', 'true');
     }
   }
 
@@ -63,6 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
       closePopup();
     }
   });
+
+
 
 
   // --- OUTRAS FUNÇÕES DO SEU CÓDIGO ORIGINAL (Mantidas) ---
