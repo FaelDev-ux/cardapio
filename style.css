@@ -149,6 +149,7 @@ h1 {
   margin-top: 10px;
   transition: background-color 0.2s;
   user-select: none;
+  scroll-margin-top: 70px;
 }
 .secao:hover,
 .secao.ativa {
@@ -390,18 +391,20 @@ h1 {
   }
 }
 /* ==================================== */
-/* Estilos para o Header */
+/* Estilos para o Header Fixo (Sticky) */
 /* ==================================== */
-
-/* Estilos para o Header Rotativo */
 .header-rotativo {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 999; /* Garante que fique acima da barra de pesquisa */
   width: 100%;
-  background-color: #333;
   padding: 10px 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.85); /* Fundo branco semi-transparente */
+  backdrop-filter: blur(5px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  scroll-snap-type: x mandatory; /* Habilita o ajuste de rolagem no eixo X */
+  scroll-padding: 0 20px; /* Garante que os itens não fiquem colados nas bordas */
 }
 
 .header-container {
@@ -410,34 +413,64 @@ h1 {
   overflow-x: auto;
   white-space: nowrap;
   padding: 0 20px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-.header-container a {
-  flex: 0 0 auto;
-  display: inline-block;
-  padding: 8px 15px;
-  color: #fff;
-  text-decoration: none;
-  font-family: 'ZCOOL XiaoWei', sans-serif;
-  font-size: 1em;
-  margin-right: 10px;
-  transition: background-color 0.3s ease;
-  border-radius: 5px;
-}
-
-.header-container a:hover {
-  background-color: black;
-  color: #fff;
-}
-
-/* Esconde a barra de rolagem horizontal */
 .header-container::-webkit-scrollbar {
   display: none;
 }
 
-.header-container {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.header-rotativo a {
+  flex: 0 0 auto;
+  display: inline-block;
+  padding: 8px 15px;
+  color: #c00; /* Cor do texto no modo claro, como nos botões do cardápio */
+  text-decoration: none;
+  font-family: 'ZCOOL XiaoWei', sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  margin-right: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 5px;
+}
+
+.header-rotativo a:hover {
+  background-color: #f7a835; /* Fundo amarelo no hover, como o botão do pop-up */
+  color: #fff; /* Texto branco no hover */
+}
+
+/* Estilos para o modo escuro */
+@media (prefers-color-scheme: dark) {
+  .header-rotativo {
+    background-color: rgba(30, 30, 30, 0.85);
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+  }
+
+  .header-rotativo a {
+    color: #f0f0f0; /* Cor do texto no modo escuro */
+  }
+
+  .header-rotativo a:hover {
+    background-color: #990000; /* Cor escura no hover, combinando com o tema escuro */
+    color: #fff;
+  }
+}
+
+/* Estilos para o modo escuro */
+@media (prefers-color-scheme: dark) {
+  .header-rotativo {
+    background-color: rgba(30, 30, 30, 0.85);
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+  }
+
+  .header-rotativo a {
+    color: #f0f0f0; /* Cor do texto no modo escuro */
+  }
+
+  .header-rotativo a:hover {
+    background-color: #444;
+  }
 }
 
 /* Ajuste no body para evitar que o header cubra o conteúdo */

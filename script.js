@@ -6,21 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const secoes = document.querySelectorAll('.secao');
 
   secoes.forEach(secao => {
-    const sublista = secao.nextElementSibling; // Pega o próximo elemento, que é a sublista
+    const sublista = secao.nextElementSibling;
     
     if (sublista && sublista.classList.contains('sublista')) {
-      // Deixa todas as sublistas abertas por padrão e ajusta a altura
       sublista.classList.add('show');
       sublista.style.maxHeight = sublista.scrollHeight + 'px';
 
-      // Adiciona o evento de clique para expandir/recolher
       secao.addEventListener('click', () => {
         if (sublista.style.maxHeight) {
-          // Se tem uma altura definida (está aberto), fecha a sublista
           sublista.style.maxHeight = null;
           sublista.classList.remove('show');
         } else {
-          // Se não tem (está fechado), abre
           sublista.style.maxHeight = sublista.scrollHeight + 'px';
           sublista.classList.add('show');
         }
@@ -29,17 +25,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-   // --- LÓGICA DO POP-UP (NOVA) ---
+  // --- LÓGICA DO POP-UP (NOVA) ---
 
   const popupContainer = document.getElementById('popup-container');
   const closeBtn = document.querySelector('.close-btn');
+  const popupLinks = document.querySelectorAll('.popup-link');
 
-  // Adiciona um pequeno atraso para a página carregar primeiro, exibindo o pop-up
+  // Seleciona o cabeçalho para obter a altura
+  const headerRotativo = document.querySelector('.header-rotativo');
+  const headerHeight = headerRotativo ? headerRotativo.offsetHeight : 0;
+
+
   setTimeout(() => {
     if (popupContainer) {
       popupContainer.style.display = 'flex';
     }
-  }, 1000); // Atraso de 1 segundo
+  }, 1000);
 
   function closePopup() {
     if (popupContainer) {
@@ -55,13 +56,31 @@ document.addEventListener('DOMContentLoaded', () => {
     closeBtn.addEventListener('click', closePopup);
   }
 
+  if (popupLinks.length > 0) {
+      popupLinks.forEach(link => {
+          link.addEventListener('click', (event) => {
+              event.preventDefault();
+              closePopup();
+
+              const targetId = link.getAttribute('href');
+              const targetElement = document.querySelector(targetId);
+
+              if (targetElement) {
+                  const offsetTop = targetElement.offsetTop - headerHeight;
+                  window.scrollTo({
+                      top: offsetTop,
+                      behavior: 'smooth'
+                  });
+              }
+          });
+      });
+  }
+
   window.addEventListener('click', (e) => {
     if (e.target === popupContainer) {
       closePopup();
     }
   });
-
-
 
 
   // --- OUTRAS FUNÇÕES DO SEU CÓDIGO ORIGINAL (Mantidas) ---
@@ -92,6 +111,26 @@ document.addEventListener('DOMContentLoaded', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
+
+  // --- LÓGICA DO CABEÇALHO ROTATIVO (Sticky) ---
+  const headerLinks = document.querySelectorAll('.header-rotativo a');
+
+  headerLinks.forEach(link => {
+      link.addEventListener('click', (event) => {
+          event.preventDefault();
+
+          const targetId = link.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+
+          if (targetElement) {
+              const offsetTop = targetElement.offsetTop - headerHeight;
+              window.scrollTo({
+                  top: offsetTop,
+                  behavior: 'smooth'
+              });
+          }
+      });
+  });
 
   const searchInput = document.getElementById('searchInput');
   const buscaDestaque = document.getElementById('busca-destaque');
