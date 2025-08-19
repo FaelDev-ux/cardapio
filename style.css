@@ -442,6 +442,9 @@ h1 {
     width: 90%;
     max-width: 500px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    max-height: 80vh;
 }
 
 .modal-header {
@@ -450,6 +453,19 @@ h1 {
     align-items: center;
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
+    flex-shrink: 0;
+}
+
+.modal-body {
+    flex-grow: 1; /* Faz com que esta seção preencha o espaço vertical disponível */
+    overflow-y: auto; /* Permite a rolagem vertical */
+    padding: 10px 0;
+}
+
+.modal-footer {
+    flex-shrink: 0; /* Impede o rodapé de encolher */
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
 }
 
 .modal-header h2 {
@@ -466,6 +482,13 @@ h1 {
 
 .fechar-carrinho:hover {
     color: black;
+}
+
+.lista-pedido {
+    flex-grow: 1; /* Faz com que esta lista preencha o espaço vertical disponível */
+    overflow-y: auto; /* A mágica da rolagem vertical */
+    padding: 0 5px; /* Adiciona um espaço interno para a barra de rolagem */
+    margin: 10px 0; /* Espaço entre o cabeçalho e o rodapé */
 }
 
 .lista-pedido li {
@@ -510,6 +533,11 @@ h1 {
     font-weight: bold;
     text-align: right;
     padding-top: 10px;
+}
+
+.total-pedido,
+.btn-fazer-pedido {
+    flex-shrink: 0; 
 }
 
 .btn-fazer-pedido {
