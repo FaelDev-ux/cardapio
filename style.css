@@ -29,6 +29,7 @@ body {
     max-width: 100vw;
     position: relative;
     z-index: 0;
+    padding-top: 60px; /* Adicionado para compensar o header fixo */
 }
 
 body::before {
@@ -187,13 +188,12 @@ h1 {
 }
 
 .sublista.show {
-    max-height: 1000px; /* Isso deve ser ajustado no seu JS para ter a altura correta */
+    max-height: 1000px;
     padding: 8px 20px;
     opacity: 1;
     pointer-events: auto;
 }
 
-/* --- NOVO ESTILO PARA CORRIGIR O LAYOUT --- */
 .sublista li {
     list-style: none;
     padding: 10px 0;
@@ -223,20 +223,17 @@ h1 {
     display: block;
 }
 
-/* --- ESTILOS ATUALIZADOS PARA O CONTAINER DE PREÇOS E BOTÕES --- */
-/* CONTAINER PAI das opções de preço, alinha as opções em coluna */
 .preco-opcoes {
   color: red;
     display: flex;
     flex-direction: column;
-    align-items: flex-end; /* Alinha tudo à direita */
+    align-items: flex-end;
     flex-shrink: 0;
     min-width: 150px;
     margin-top: 10px;
-    margin-left: 10px; /* Espaço entre o nome do item e os preços */
+    margin-left: 10px;
 }
 
-/* CONTAINER de cada linha de preço e botão */
 .preco-btn-container {
     display: flex;
     align-items: center;
@@ -246,18 +243,17 @@ h1 {
 
 .preco {
     font-weight: bold;
-    color: #f50000; /* Mudado para a cor vermelha da sua imagem */
+    color: #f50000;
     white-space: nowrap;
     font-size: 0.95em;
 }
 
-/* Estilo para o botão de adicionar */
 .btn-adicionar {
     background-color: #f7a835;
     color: white;
     border: none;
     border-radius: 50%;
-    width: 25px; /* Aumentado um pouco para se assemelhar à imagem */
+    width: 25px;
     height: 25px;
     font-size: 1.2em;
     font-weight: bold;
@@ -676,9 +672,6 @@ h1 {
     .info-item span {
         font-size: 0.98em;
     }
-    /* Estilo de preço para mobile:
-    a flex-direction: column alinha o preço
-    em uma linha abaixo do botão em telas pequenas */
     .preco-opcoes {
         flex-direction: column;
         align-items: flex-end;
@@ -828,11 +821,6 @@ h1 {
   }
 }
 
-/* Ajuste no body para evitar que o header cubra o conteúdo */
-body {
-    padding-top: 60px;
-}
-
 /* Estilos do Pop-up */
 .popup-container {
     display: none;
@@ -942,5 +930,34 @@ body {
         padding: 6px 12px;
         font-size: 0.9em;
         margin-right: 8px;
+    }
+}
+
+/* --- CORREÇÃO DO CARRINHO PARA MOBILE --- */
+@media (max-width: 600px) {
+    .lista-pedido li {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 16px;
+        padding: 8px 0;
+    }
+    
+    .item-info-carrinho {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-left: 0;
+        margin-top: 5px;
+    }
+
+    .item-info-carrinho span {
+        font-size: 16px;
+    }
+
+    .btn-remover {
+        width: 25px;
+        height: 25px;
     }
 }
