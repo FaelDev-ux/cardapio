@@ -2,21 +2,23 @@
 // ADMIN.JS - VISUALIZAÇÃO DE DADOS EM TEMPO REAL
 // =========================================================
 
-// Importa as funções necessárias do Firebase
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue, remove } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Sua configuração do Firebase (COPIE E COLE A SUA CONFIGURAÇÃO AQUI)
+// Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "SUA_API_KEY_AQUI",
-    authDomain: "SEU_DOMINIO_AQUI",
-    projectId: "SEU_PROJECT_ID_AQUI",
-    storageBucket: "SEU_STORAGE_BUCKET_AQUI",
-    messagingSenderId: "SEU_MESSAGING_SENDER_ID_AQUI",
-    appId: "SEU_APP_ID_AQUI"
+  apiKey: "AIzaSyDsflRlDu2Zkoab40bB6C5mXc_y2LmS420",
+  authDomain: "supremo-oriente-chat.firebaseapp.com",
+  projectId: "supremo-oriente-chat",
+  storageBucket: "supremo-oriente-chat.firebasestorage.app",
+  messagingSenderId: "897375368955",
+  appId: "1:897375368955:web:486c54475de7e916f0a25e"
 };
 
-// Inicializa o Firebase
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
