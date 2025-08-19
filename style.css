@@ -485,28 +485,32 @@ h1 {
 }
 
 .lista-pedido {
-    flex-grow: 1; /* Faz com que esta lista preencha o espaço vertical disponível */
-    overflow-y: auto; /* A mágica da rolagem vertical */
-    padding: 0 5px; /* Adiciona um espaço interno para a barra de rolagem */
-    margin: 10px 0; /* Espaço entre o cabeçalho e o rodapé */
+    flex-grow: 1;
+    overflow-y: auto; 
+    padding: 0 5px;
+    margin: 10px 0; 
 }
 
-.lista-pedido li {
-    list-style: none;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    justify-content: space-between;
-    font-size: 20px;
-}
+    .lista-pedido li {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 16px;
+        padding: 8px 0;
+    }
+    
+    .item-info-carrinho {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-left: 0;
+        margin-top: 5px;
+    }
 
-.item-info-carrinho {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-left: 10px;
-    font-size: 20px;
-}
+    .item-info-carrinho span {
+        font-size: 15px;
+    }
 
 .btn-remover {
     background-color: #c00;
