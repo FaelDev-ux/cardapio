@@ -16,6 +16,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <script src="script.js" type="module"></script>
 </head>
 <body class="fundo-carregado">
   <div id="popup-container" class="popup-container">
@@ -1840,7 +1842,6 @@
   <button id="btn-topo" aria-label="Voltar ao topo">
     <i class="fas fa-arrow-up"></i>
   </button>
-  <script src="script.js"></script>
   <div id="btn-carrinho" class="btn-carrinho">
   <i class="fas fa-shopping-cart"></i>
   <span id="contador-carrinho" class="contador-carrinho">0</span>
@@ -1869,6 +1870,11 @@
     <button id="btn-whatsapp" class="btn-opcoes">Pedido para entrega (WhatsApp)</button>
     <button id="btn-cancelar" class="btn-opcoes btn-cancelar">Cancelar</button>
   </div>
+</div>
+<div class="chat-container">
+    <div id="chat-messages"></div>
+    <input type="text" id="chat-input" placeholder="Digite sua mensagem...">
+    <button id="chat-send">Enviar</button>
 </div>
   </body>
 </html>

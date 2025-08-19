@@ -1,4 +1,33 @@
+// =========================================================
+// SCRIPT.JS - VERSÃO COMPLETA E CORRIGIDA COM FIREBASE
+// =========================================================
+
+// Importa todas as funções necessárias do Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+
 document.addEventListener('DOMContentLoaded', () => {
+
+    // =========================================================
+    // INICIALIZAÇÃO DO FIREBASE
+    // =========================================================
+    // Seu objeto de configuração do Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyDsflR1Du2Zkoab40Bb6c5mXc_y2LMS420",
+        authDomain: "supremo-oriente-chat.firebaseapp.com",
+        projectId: "supremo-oriente-chat",
+        storageBucket: "supremo-oriente-chat.firebaseapp.com",
+        messagingSenderId: "897375368955",
+        appId: "1:897375368955:web:486c54475de7e916f0a25e"
+    };
+    // Inicializa o app e o banco de dados
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const ordersRef = ref(database, 'pedidos');
+    const messagesRef = ref(database, 'messages');
+    // =========================================================
+    // FIM DA INICIALIZAÇÃO
+    // =========================================================
 
     // --- LÓGICA DO CARDÁPIO (INICIA ABERTO) ---
     const secoes = document.querySelectorAll('.secao');
@@ -7,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const sublista = secao.nextElementSibling;
         
         if (sublista && sublista.classList.contains('sublista')) {
-            // Este setTimeout abre todas as listas ao carregar a página
             setTimeout(() => {
                 sublista.classList.add('show');
                 sublista.style.maxHeight = sublista.scrollHeight + 'px';
@@ -20,12 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     sublista.style.maxHeight = '0px';
                     sublista.classList.remove('show');
                 } else {
-                    // CÓDIGO REMOVIDO: ANTES, ESTE CÓDIGO FECHAVA TODAS AS OUTRAS LISTAS
-                    // document.querySelectorAll('.sublista.show').forEach(openSublist => {
-                    //     openSublist.style.maxHeight = '0px';
-                    //     openSublist.classList.remove('show');
-                    // });
-                    
                     sublista.classList.add('show');
                     sublista.style.maxHeight = sublista.scrollHeight + 'px';
                 }
@@ -451,4 +473,91 @@ document.addEventListener('DOMContentLoaded', () => {
     atualizarCarrinho();
     
     console.log('%cDesenvolvido por faeldev-ux 🦊', 'color:#b30000;font-weight:bold;font-size:14px;');
+
+    // =========================================================
+    // LÓGICA DO CHAT E ENVIO DE PEDIDOS PARA O FIREBASE
+    // =========================================================
+
+    // Referências para os elementos do chat
+    const chatToggleBtn = document.getElementById('chat-toggle-btn');
+    const chatContainer = document.getElementById('chat-container');
+    const chatCloseBtn = document.getElementById('chat-close-btn');
+    const chatMessages = document.getElementById('chat-messages');
+    const chatInput = document.getElementById('chat-input');
+    const chatSendBtn = document.getElementById('chat-send-btn');
+
+    // Substitui a lógica de 'Fazer Pedido' para enviar para o Firebase
+    if (btnFazerPedido) {
+        btnFazerPedido.addEventListener('click', () => {
+            if (carrinho.length > 0) {
+                const pedidoDetalhes = carrinho.map(item => `- ${item.nome} (R$ ${item.preco.toFixed(2).replace('.', ',')})`);
+                const total = carrinho.reduce((sum, item) => sum + item.preco, 0);
+
+                const pedidoCompleto = {
+                    itens: pedidoDetalhes,
+                    total: `R$ ${total.toFixed(2).replace('.', ',')}`,
+                    data: new Date().toLocaleString('pt-BR')
+                };
+
+                push(ordersRef, pedidoCompleto);
+
+                alert("Seu pedido foi enviado! Em breve alguém entrará em contato.");
+
+                carrinho = [];
+                localStorage.removeItem('carrinhoSalvo');
+                localStorage.removeItem('exibirVisualizacao');
+                atualizarCarrinho();
+                modalCarrinho.style.display = 'none';
+
+            } else {
+                alert("Adicione itens ao seu pedido primeiro!");
+            }
+        });
+    }
+
+    // Lógica para a interface do chat em tempo real
+    if (chatToggleBtn && chatContainer && chatCloseBtn && chatMessages && chatInput && chatSendBtn) {
+        chatToggleBtn.addEventListener('click', () => {
+            chatContainer.classList.toggle('hidden');
+        });
+
+        chatCloseBtn.addEventListener('click', () => {
+            chatContainer.classList.add('hidden');
+        });
+
+        function sendMessage() {
+            const messageText = chatInput.value.trim();
+            if (messageText !== '') {
+                const now = new Date();
+                const timestamp = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+                
+                push(messagesRef, {
+                    text: messageText,
+                    timestamp: timestamp,
+                    sender: 'user' // Identifica a origem da mensagem
+                });
+                chatInput.value = '';
+            }
+        }
+
+        chatSendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        onValue(messagesRef, (snapshot) => {
+            chatMessages.innerHTML = '';
+            snapshot.forEach((childSnapshot) => {
+                const message = childSnapshot.val();
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('chat-message');
+                messageElement.classList.add(message.sender === 'user' ? 'sent' : 'received');
+                messageElement.innerHTML = `<p>${message.text}</p><span class="timestamp">${message.timestamp}</span>`;
+                chatMessages.appendChild(messageElement);
+            });
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        });
+    }
 });
