@@ -388,7 +388,6 @@ document.addEventListener('DOMContentLoaded', () => {
             mensagem += `- ${item.nome} (R$ ${item.preco.toFixed(2).replace('.', ',')})\n`;
             total += item.preco;
         });
-        mensagem += `\nTotal: R$ ${total.toFixed(2).replace('.', ',')}`;
         const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
         window.open(url, '_blank');
         
