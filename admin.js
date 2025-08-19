@@ -1,115 +1,76 @@
-// =========================================================
-// ADMIN.JS - VISUALIZAÇÃO DE DADOS EM TEMPO REAL
-// =========================================================
-
-// Import the functions you need from the SDKs you need
+// Importe as funções necessárias do Firebase SDKs que você precisa
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, onValue, remove } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getDatabase, ref, onValue } from "firebase/database";
 
-// Your web app's Firebase configuration
+// Sua configuração do Firebase
+// SUBSTITUA PELAS SUAS PRÓPRIAS CREDENCIAIS
 const firebaseConfig = {
-  apiKey: "AIzaSyDsflRlDu2Zkoab40bB6C5mXc_y2LmS420",
+  apiKey: "AIzaSyDsflR1Du2Zkoab40bB6C5mxc_y2LMS420",
   authDomain: "supremo-oriente-chat.firebaseapp.com",
   projectId: "supremo-oriente-chat",
-  storageBucket: "supremo-oriente-chat.firebasestorage.app",
+  storageBucket: "supremo-oriente-chat.appspot.com",
   messagingSenderId: "897375368955",
   appId: "1:897375368955:web:486c54475de7e916f0a25e"
 };
 
-// Initialize Firebase
+// Inicialize o Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Referências para os caminhos dos dados no banco de dados
+// Referência para os dados no banco de dados
 const ordersRef = ref(database, 'pedidos');
-const messagesRef = ref(database, 'messages');
 
 // Referências para os elementos HTML
 const ordersList = document.getElementById('orders-list');
-const chatList = document.getElementById('chat-list');
 
 // Escuta e exibe os pedidos em tempo real
 onValue(ordersRef, (snapshot) => {
-    ordersList.innerHTML = ''; // Limpa a lista antes de atualizar
-    if (snapshot.exists()) {
-        const orders = snapshot.val();
-        
-        // Converte o objeto de pedidos em um array e reverte para mostrar o mais recente primeiro
-        const orderKeys = Object.keys(orders).reverse();
-        
-        orderKeys.forEach(key => {
-            const order = orders[key];
-            const orderItem = document.createElement('div');
-            orderItem.classList.add('order-item');
-            
-            let itemsHtml = order.itens.map(item => `<li>${item}</li>`).join('');
-            
-            // Adicionamos o botão de apagar e um data-key para referenciar o pedido
-            orderItem.innerHTML = `
-                <div class="order-header">
-                    <span>Pedido de <strong>R$ ${order.total}</strong></span>
-                    <button class="delete-btn" data-key="${key}">Apagar</button>
-                    <span class="order-date">${order.data}</span>
-                </div>
-                <div class="order-details">
-                    <ul>${itemsHtml}</ul>
-                </div>
-            `;
-            ordersList.appendChild(orderItem);
+  ordersList.innerHTML = ''; // Limpa a lista antes de atualizar
+
+  if (snapshot.exists()) {
+    const orders = snapshot.val();
+    
+    // Converte o objeto de pedidos em um array e reverte para mostrar o mais recente primeiro
+    const ordersArray = Object.keys(orders).map(key => ({
+      ...orders[key],
+      id: key
+    })).reverse();
+
+    ordersArray.forEach((order) => {
+      const orderItem = document.createElement('div');
+      orderItem.classList.add('order-item');
+      
+      const orderHeader = document.createElement('div');
+      orderHeader.classList.add('order-header');
+      orderHeader.innerHTML = `Pedido #${order.id.slice(0, 5)}`;
+      
+      const orderDate = document.createElement('span');
+      orderDate.classList.add('order-date');
+      orderDate.textContent = order.data;
+      
+      const orderDetails = document.createElement('div');
+      orderDetails.classList.add('order-details');
+      
+      const itemList = document.createElement('ul');
+      if (order.itens && Array.isArray(order.itens)) {
+        order.itens.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = `${item.quantidade}x ${item.nome} - R$ ${item.preco.toFixed(2)}`;
+          itemList.appendChild(li);
         });
+      }
 
-        // Adicionamos um ouvinte de evento para todos os botões de apagar
-        document.querySelectorAll('.delete-btn').forEach(button => {
-            button.addEventListener('click', (event) => {
-                const orderKey = event.target.dataset.key;
-                const orderRefToDelete = ref(database, `pedidos/${orderKey}`);
-                
-                if (confirm('Tem certeza que deseja apagar este pedido?')) {
-                    remove(orderRefToDelete)
-                        .then(() => {
-                            console.log('Pedido apagado com sucesso!');
-                        })
-                        .catch((error) => {
-                            console.error('Erro ao apagar o pedido:', error);
-                        });
-                }
-            });
-        });
-
-    } else {
-        ordersList.innerHTML = '<p>Nenhum pedido novo.</p>';
-    }
-});
-
-// Escuta e exibe as mensagens do chat em tempo real
-onValue(messagesRef, (snapshot) => {
-    chatList.innerHTML = ''; // Limpa a lista antes de atualizar
-    if (snapshot.exists()) {
-        const messages = snapshot.val();
-        
-        // Converte o objeto de mensagens em um array
-        const messageKeys = Object.keys(messages);
-
-        messageKeys.forEach(key => {
-            const message = messages[key];
-            const messageItem = document.createElement('div');
-            messageItem.classList.add('chat-message-admin');
-            
-            // Adiciona classe para diferenciar mensagens do usuário
-            if (message.sender === 'user') {
-                messageItem.classList.add('user');
-            }
-            
-            messageItem.innerHTML = `
-                <span>${message.text}</span>
-                <span class="chat-date">${message.timestamp}</span>
-            `;
-            chatList.appendChild(messageItem);
-        });
-        chatList.scrollTop = chatList.scrollHeight; // Rola para o final da lista
-    } else {
-        chatList.innerHTML = '<p>Nenhuma mensagem nova.</p>';
-    }
+      const total = document.createElement('p');
+      total.textContent = `Total: R$ ${order.total.toFixed(2)}`;
+      
+      orderItem.appendChild(orderHeader);
+      orderHeader.appendChild(orderDate);
+      orderDetails.appendChild(itemList);
+      orderDetails.appendChild(total);
+      orderItem.appendChild(orderDetails);
+      ordersList.appendChild(orderItem);
+    });
+  } else {
+    ordersList.innerHTML = '<p>Nenhum pedido novo.</p>';
+  }
 });
