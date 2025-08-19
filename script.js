@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const sublista = secao.nextElementSibling;
         
         if (sublista && sublista.classList.contains('sublista')) {
+            // Este setTimeout abre todas as listas ao carregar a página
             setTimeout(() => {
                 sublista.classList.add('show');
                 sublista.style.maxHeight = sublista.scrollHeight + 'px';
@@ -19,10 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     sublista.style.maxHeight = '0px';
                     sublista.classList.remove('show');
                 } else {
-                    document.querySelectorAll('.sublista.show').forEach(openSublist => {
-                        openSublist.style.maxHeight = '0px';
-                        openSublist.classList.remove('show');
-                    });
+                    // CÓDIGO REMOVIDO: ANTES, ESTE CÓDIGO FECHAVA TODAS AS OUTRAS LISTAS
+                    // document.querySelectorAll('.sublista.show').forEach(openSublist => {
+                    //     openSublist.style.maxHeight = '0px';
+                    //     openSublist.classList.remove('show');
+                    // });
                     
                     sublista.classList.add('show');
                     sublista.style.maxHeight = sublista.scrollHeight + 'px';
@@ -32,14 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- LÓGICA DO POP-UP (APARECE UMA ÚNICA VEZ) ---
-
     const popupContainer = document.getElementById('popup-container');
     const closeBtn = document.querySelector('.close-btn');
     const popupLinks = document.querySelectorAll('.popup-link');
     const headerRotativo = document.querySelector('.header-rotativo');
     const headerHeight = headerRotativo ? headerRotativo.offsetHeight : 0;
 
-    // AQUI ESTÁ A LÓGICA DO POP-UP ÚNICO
     const popupFoiVisto = localStorage.getItem('popupFoiVisto');
     if (!popupFoiVisto) {
         setTimeout(() => {
@@ -57,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 popupContainer.classList.remove('popup-hide');
             }, 500);
         }
-        // Salva a flag no localStorage para não mostrar novamente
         localStorage.setItem('popupFoiVisto', 'true');
     }
 
@@ -90,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- OUTRAS FUNÇÕES DO CÓDIGO ---
-
     function trocarLogoPorTema() {
         const logo = document.getElementById('logo');
         if (!logo) return;
@@ -237,7 +235,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- LÓGICA DE DESTAQUE DA SEÇÃO ATIVA ---
-
     const secoesComID = document.querySelectorAll('.secao[id]');
 
     const observerOptions = {
@@ -365,7 +362,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Evento para o botão "Fazer Pedido"
     if (btnFazerPedido) {
         btnFazerPedido.addEventListener('click', () => {
             if (carrinho.length > 0) {
@@ -377,7 +373,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Evento para o botão "Estou no restaurante"
     btnGarcom.addEventListener('click', () => {
         modalOpcoesPedido.style.display = 'none';
         localStorage.setItem('exibirVisualizacao', 'true');
@@ -385,7 +380,6 @@ document.addEventListener('DOMContentLoaded', () => {
         exibirVisualizacaoPedido();
     });
 
-    // Evento para o botão "Pedido para entrega (WhatsApp)"
     btnWhatsapp.addEventListener('click', () => {
         modalOpcoesPedido.style.display = 'none';
         let mensagem = 'Olá, gostaria de fazer o seguinte pedido:\n\n';
@@ -404,7 +398,6 @@ document.addEventListener('DOMContentLoaded', () => {
         atualizarCarrinho();
     });
 
-    // Evento para o botão "Cancelar"
     btnCancelar.addEventListener('click', () => {
         modalOpcoesPedido.style.display = 'none';
     });
@@ -424,9 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // -------- LÓGICA ATUALIZADA PARA ADICIONAR AO CARRINHO --------
     const botoesAdicionar = document.querySelectorAll('.btn-adicionar');
-
     if (botoesAdicionar.length > 0) {
         console.log('Encontrei ' + botoesAdicionar.length + ' botões de adicionar. Adicionando eventos...');
         botoesAdicionar.forEach(btn => {
