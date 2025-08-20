@@ -971,8 +971,7 @@ h1 {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        font-size: 16px;
-        padding: 8px 0;
+        font-size: 15px;
     }
     
     .item-info-carrinho {
@@ -985,7 +984,7 @@ h1 {
     }
 
     .item-info-carrinho span {
-        font-size: 16px;
+        font-size: 17px;
     }
 
     .btn-remover {
