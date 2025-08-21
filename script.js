@@ -1,5 +1,5 @@
 // =========================================================
-// SCRIPT.JS - VERSÃO FINALMENTE CORRIGIDA
+// SCRIPT.JS - VERSÃO ATUALIZADA E CORRIGIDA
 // =========================================================
 
 // Importa todas as funções necessárias do Firebase
@@ -60,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const nomeClienteInput = document.getElementById('nome-cliente');
     const enderecoClienteInput = document.getElementById('endereco-cliente');
     const telefoneClienteInput = document.getElementById('telefone-cliente');
-    // O campo de e-mail não está no seu HTML, então será removido do código de validação
     
     // Referências para o novo modal de escolha
     const modalEscolha = document.getElementById('modal-escolha');
@@ -308,7 +307,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (formDadosCliente) {
         formDadosCliente.addEventListener('submit', (e) => {
             e.preventDefault();
-            console.log('Evento de submit do formulário acionado.');
 
             const nome = nomeClienteInput.value.trim();
             const telefone = telefoneClienteInput.value.trim();
@@ -321,33 +319,27 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Validação dos campos obrigatórios
             if (!nome || !telefone || (!isRetirada && !endereco)) {
-                console.log('Validação falhou. Campos obrigatórios não preenchidos.');
                 alert("Por favor, preencha todos os campos obrigatórios.");
                 return;
             }
 
-            const email = ''; // Campo de email foi removido do HTML
             const dataPedido = new Date().toLocaleString('pt-BR');
-            const total = carrinho.reduce((sum, item) => sum + item.preco, 0);
-
-            const cliente = { nome, endereco, telefone, email };
+            const cliente = { nome, endereco, telefone };
             
-            // Constrói o pedido para o Firebase
+            // Constrói o pedido para o Firebase (sem total e email)
             const pedidoCompleto = {
                 cliente: cliente,
                 itens: carrinho,
-                total: `R$ ${total.toFixed(2).replace('.', ',')}`,
                 data: dataPedido,
                 status: 'pendente',
                 finalizacao: 'whatsapp'
             };
 
-            console.log('Pedido a ser enviado:', pedidoCompleto);
-
-            // Constrói a mensagem do WhatsApp
+            // Constrói a mensagem do WhatsApp (sem total)
             const saudacao = `Olá, gostaria de fazer o meu pedido. Seguem os detalhes:\n\n`;
             const dadosCliente = `*Dados do Cliente:*\nNome: ${cliente.nome}\nEndereço: ${cliente.endereco}\nTelefone: ${cliente.telefone}\n\n`;
-            const itensPedido = `*Itens do Pedido:*\n${carrinho.map(item => `- ${item.nome} - R$ ${item.preco.toFixed(2).replace('.', ',')}`).join('\n')}\n\n`;
+            // Formata a lista de itens para a mensagem do WhatsApp
+            const itensPedido = `*Itens do Pedido:*\n${carrinho.map(item => `- ${item.nome}`).join('\n')}\n\n`;
             const mensagemFinal = `Obrigado!`;
 
             const mensagemCompleta = `${saudacao}${dadosCliente}${itensPedido}${mensagemFinal}`;
@@ -357,11 +349,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Envia o pedido para o Firebase
             push(ordersRef, pedidoCompleto)
                 .then(() => {
-                    console.log('Pedido enviado com sucesso para o Firebase.');
-
-                    // Após o sucesso do envio:
-                    modalDadosCliente.style.display = 'none'; // Fecha o modal de dados
-                    modalConfirmacao.style.display = 'flex'; // Exibe o modal de confirmação
+                    modalDadosCliente.style.display = 'none';
+                    modalConfirmacao.style.display = 'flex';
 
                     // Limpa o carrinho
                     carrinho = [];
@@ -377,10 +366,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Abre o WhatsApp em uma nova aba
                     window.open(urlWhatsapp, '_blank');
-                    console.log('WhatsApp aberto.');
                 })
                 .catch((error) => {
-                    // Se houver erro no envio, exibe um alerta
                     console.error("Erro ao enviar pedido para o Firebase: ", error);
                     alert("Ocorreu um erro ao enviar seu pedido. Tente novamente.");
                 });
@@ -681,12 +668,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         const pedidoId = e.target.dataset.id;
                         const pedidoRef = ref(database, 'pedidos/' + pedidoId);
                         
-                        remove(pedidoRef)
+                        // Atualiza o status para 'pronto' para acionar a Cloud Function
+                        // Esta é a parte que se conecta com o seu código de e-mail!
+                        push(pedidoRef, { status: 'pronto' })
                             .then(() => {
-                                console.log("Pedido removido com sucesso!");
+                                console.log("Status do pedido atualizado para 'pronto'!");
                             })
                             .catch((error) => {
-                                console.error("Erro ao remover pedido: ", error);
+                                console.error("Erro ao atualizar status do pedido: ", error);
                             });
                     });
                 });
