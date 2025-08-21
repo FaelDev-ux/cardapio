@@ -6,7 +6,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import { getDatabase, ref, onValue, remove } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
 
-// Sua configuração do Firebase (COPIE E COLE A SUA CONFIGURAÇÃO AQUI)
+// Configuração do Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyAn9EvaVb-GLvh4-60B4oKKQznuJteM_do",
     authDomain: "supremo-oriente-chat-45c03.firebaseapp.com",
@@ -54,15 +54,33 @@ onValue(ordersRef, (snapshot) => {
             const orderItem = document.createElement('div');
             orderItem.classList.add('order-item');
             
-            let itemsHtml = order.itens.map(item => `<li>${item}</li>`).join('');
-            
-            // Adiciona o botão "Pronto" com o ID do pedido
+            // Lógica para renderizar a lista de itens do pedido
+            let itemsHtml = '';
+            if (Array.isArray(order.itens) && order.itens.length > 0 && typeof order.itens[0] === 'object') {
+                itemsHtml = order.itens.map(item => `<li>${item.nome} - R$ ${item.preco.toFixed(2).replace('.', ',')}</li>`).join('');
+            } else if (Array.isArray(order.itens)) {
+                itemsHtml = order.itens.map(item => `<li>${item}</li>`).join('');
+            } else {
+                itemsHtml = `<li>${order.itens}</li>`;
+            }
+
+            // Lógica para adicionar as informações do cliente
+            const clienteInfo = order.cliente || { nome: 'Não informado', endereco: 'Não informado', telefone: 'Não informado' };
+
+            // Formata o número de telefone para o link do WhatsApp
+            const telefoneFormatado = clienteInfo.telefone ? clienteInfo.telefone.replace(/\D/g, '') : '';
+            const whatsappLink = `https://wa.me/${telefoneFormatado}`;
+
+            // Adiciona o botão "Pronto" e o link do WhatsApp
             orderItem.innerHTML = `
                 <div class="order-header">
                     <span>Pedido de <strong>R$ ${order.total}</strong></span>
                     <span class="order-date">${order.data}</span>
                 </div>
                 <div class="order-details">
+                    <p><strong>Nome:</strong> ${clienteInfo.nome}</p>
+                    <p><strong>Endereço:</strong> ${clienteInfo.endereco}</p>
+                    <p><strong>Telefone:</strong> ${clienteInfo.telefone} <a href="${whatsappLink}" target="_blank" class="whatsapp-btn">Abrir WhatsApp</a></p>
                     <ul>${itemsHtml}</ul>
                 </div>
                 <div class="order-actions">

@@ -1074,3 +1074,114 @@ h1 {
     from { transform: translateY(-50px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
+
+/* ========================================================= */
+/* ESTILOS PARA O MODAL DE DADOS DO CLIENTE */
+/* ========================================================= */
+
+/* Fundo do modal (simulando a sobreposição na imagem) */
+#modal-dados-cliente.modal {
+    display: none; /* Inicia oculto */
+    position: fixed;
+    z-index: 1000; /* Garante que fique acima de outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo preto semi-transparente */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Conteúdo central do modal */
+#modal-dados-cliente .modal-content {
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo semi-transparente para o conteúdo */
+    padding: 30px;
+    border-radius: 15px;
+    position: relative;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    color: #fff; /* Cor do texto branco */
+    backdrop-filter: blur(5px); /* Efeito de desfoque, se o navegador suportar */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Título e botão de fechar */
+#modal-dados-cliente h2 {
+    color: #fff;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+#modal-dados-cliente .fechar-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+#modal-dados-cliente .fechar-modal:hover,
+#modal-dados-cliente .fechar-modal:focus {
+    color: #f50000;
+}
+
+/* Estilo do formulário para alinhar os campos como na imagem */
+#form-dados-cliente {
+    display: grid;
+    grid-template-columns: auto 1fr; /* Alinha labels e inputs em duas colunas */
+    gap: 15px; /* Espaço entre os elementos */
+    align-items: center; /* Alinha verticalmente */
+}
+
+#form-dados-cliente label {
+    text-align: right;
+    font-weight: bold;
+    color: #ccc;
+    white-space: nowrap; /* Impede que a label quebre a linha */
+}
+
+#form-dados-cliente input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2); /* Fundo semi-transparente */
+    color: #fff;
+    font-size: 1rem;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+#form-dados-cliente input:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+#form-dados-cliente input::placeholder {
+    color: #aaa;
+}
+
+/* Estilo do botão de finalizar pedido */
+#btn-finalizar-pedido-dados {
+    grid-column: 1 / -1; /* Ocupa as duas colunas */
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f50000; /* Cor do botão personalizada */
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#btn-finalizar-pedido-dados:hover {
+    background-color: #d40000;
+}
