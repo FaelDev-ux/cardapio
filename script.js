@@ -13,12 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================================
     // Seu objeto de configuração do Firebase
 const firebaseConfig = {
-    apiKey: "AIzaSyAwLbwSrwBVvJYZSANOApaTj5bSmp1SRWQ",
-    authDomain: "supremo-oriente-chat-c2953.firebaseapp.com",
-    projectId: "supremo-oriente-chat-c2953",
-    storageBucket: "supremo-oriente-chat-c2953.firebasestorage.app",
-    messagingSenderId: "646547146390",
-    appId: "1:646547146390:web:54f66c4829748cf01764b7"
+    apiKey: "AIzaSyAn9EvaVb-GLvh4-60B4oKKQznuJteM_do",
+    authDomain: "supremo-oriente-chat-45c03.firebaseapp.com",
+    projectId: "supremo-oriente-chat-45c03",
+    storageBucket: "supremo-oriente-chat-45c03.firebasestorage.app",
+    messagingSenderId: "246020177422",
+    appId: "1:246020177422:web:8108b666088f15b26c465f"
   };
     // Inicializa o app e o banco de dados
     const app = initializeApp(firebaseConfig);
