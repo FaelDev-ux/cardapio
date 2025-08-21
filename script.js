@@ -1,5 +1,5 @@
 // =========================================================
-// SCRIPT.JS - VERSÃO ATUALIZADA E CORRIGIDA
+// SCRIPT.JS - VERSÃO ATUALIZADA E CORRIGIDA PARA O CARDÁPIO
 // =========================================================
 
 // Importa todas as funções necessárias do Firebase
@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- VARIÁVEIS DO DOM ---
     const secoes = document.querySelectorAll('.secao');
+    const sublistas = document.querySelectorAll('.sublista');
     const popupContainer = document.getElementById('popup-container');
     const closeBtn = document.querySelector('.close-btn');
     const popupLinks = document.querySelectorAll('.popup-link');
@@ -73,7 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Referência para o contêiner de mensagens do pedido no painel de admin
     const mensagensPedido = document.getElementById('mensagens-pedido');
+
+    // NOVO: Variáveis para o modal do garçom
+    const modalResumoGarcom = document.getElementById('modal-resumo-garcom');
+    const fecharResumoGarcomBtn = document.getElementById('fechar-resumo-garcom');
     const resumoPedidoContainer = document.getElementById('resumo-pedido-container');
+    const btnFinalizarGarcom = document.getElementById('btn-finalizar-garcom');
 
     // Variável global para armazenar temporariamente os dados do pedido
     let pedidoTemp = {};
@@ -81,14 +87,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- VARIÁVEL QUE VAI ARMAZENAR O CARRINHO ---
     let carrinho = [];
 
-    // --- LÓGICA DO CARDÁPIO (INICIA ABERTO) ---
+    // =========================================================
+    // LÓGICA DO CARDÁPIO (CORRIGIDA)
+    // =========================================================
+    sublistas.forEach(sublista => {
+        sublista.classList.add('show');
+        sublista.style.maxHeight = sublista.scrollHeight + 'px';
+    });
+
     secoes.forEach(secao => {
         const sublista = secao.nextElementSibling;
         if (sublista && sublista.classList.contains('sublista')) {
-            setTimeout(() => {
-                sublista.classList.add('show');
-                sublista.style.maxHeight = sublista.scrollHeight + 'px';
-            }, 100);
             secao.addEventListener('click', () => {
                 const isSublistaOpen = sublista.classList.contains('show');
                 if (isSublistaOpen) {
@@ -180,6 +189,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target === modalEscolha) {
             modalEscolha.style.display = 'none';
         }
+        // NOVO: Fechar o modal do garçom
+        if (event.target === modalResumoGarcom) {
+            modalResumoGarcom.style.display = 'none';
+        }
     });
 
     if (fecharConfirmacaoBtn) {
@@ -218,6 +231,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (fecharDadosClienteBtn) {
         fecharDadosClienteBtn.addEventListener('click', () => {
             modalDadosCliente.style.display = 'none';
+        });
+    }
+    
+    // NOVO: Eventos para fechar o modal do garçom
+    if (fecharResumoGarcomBtn) {
+        fecharResumoGarcomBtn.addEventListener('click', () => {
+            modalResumoGarcom.style.display = 'none';
+        });
+    }
+    if (btnFinalizarGarcom) {
+        btnFinalizarGarcom.addEventListener('click', () => {
+            modalResumoGarcom.style.display = 'none';
         });
     }
 
@@ -271,14 +296,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (resumoPedidoDiv) {
                         const itensHtml = carrinho.map(item => `<li>${item.nome} - R$ ${item.preco.toFixed(2).replace('.', ',')}</li>`).join('');
                         resumoPedidoDiv.innerHTML = `
-                            <h3 class="resumo-title">Resumo do Pedido</h3>
-                            <p class="resumo-message">Mostre esta tela para o garçom.</p>
                             <h4>Itens:</h4>
                             <ul>${itensHtml}</ul>
                             <p class="resumo-total"><strong>Total:</strong> R$ ${total.toFixed(2).replace('.', ',')}</p>
                         `;
-                        resumoPedidoDiv.style.display = 'block';
                     }
+                    // Exibe o novo modal do garçom
+                    modalResumoGarcom.style.display = 'flex';
 
                     // Limpa o carrinho
                     carrinho = [];
@@ -324,12 +348,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const dataPedido = new Date().toLocaleString('pt-BR');
+            const total = carrinho.reduce((sum, item) => sum + item.preco, 0);
             const cliente = { nome, endereco, telefone };
             
-            // Constrói o pedido para o Firebase (sem total e email)
+            // Constrói o pedido para o Firebase (incluindo total para o painel de admin)
             const pedidoCompleto = {
                 cliente: cliente,
                 itens: carrinho,
+                total: `R$ ${total.toFixed(2).replace('.', ',')}`,
                 data: dataPedido,
                 status: 'pendente',
                 finalizacao: 'whatsapp'
@@ -338,12 +364,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // Constrói a mensagem do WhatsApp (sem total)
             const saudacao = `Olá, gostaria de fazer o meu pedido. Seguem os detalhes:\n\n`;
             const dadosCliente = `*Dados do Cliente:*\nNome: ${cliente.nome}\nEndereço: ${cliente.endereco}\nTelefone: ${cliente.telefone}\n\n`;
-            // Formata a lista de itens para a mensagem do WhatsApp
             const itensPedido = `*Itens do Pedido:*\n${carrinho.map(item => `- ${item.nome}`).join('\n')}\n\n`;
             const mensagemFinal = `Obrigado!`;
 
             const mensagemCompleta = `${saudacao}${dadosCliente}${itensPedido}${mensagemFinal}`;
-            const telefoneRestaurante = "5583988627070";
+            const telefoneRestaurante = "5583999999999"; // SUBSTITUA PELO SEU NÚMERO DE TELEFONE
             const urlWhatsapp = `https://api.whatsapp.com/send?phone=${telefoneRestaurante}&text=${encodeURIComponent(mensagemCompleta)}`;
 
             // Envia o pedido para o Firebase
@@ -374,7 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     // =========================================================
-    // LÓGICA DO FORMULÁRIO DE DADOS DO CLIENTE
+    // FIM DA LÓGICA CORRIGIDA
     // =========================================================
 
     // --- LÓGICA DE ADICIONAR ITEM AO CARRINHO ---
@@ -668,8 +693,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         const pedidoId = e.target.dataset.id;
                         const pedidoRef = ref(database, 'pedidos/' + pedidoId);
                         
-                        // Atualiza o status para 'pronto' para acionar a Cloud Function
-                        // Esta é a parte que se conecta com o seu código de e-mail!
                         push(pedidoRef, { status: 'pronto' })
                             .then(() => {
                                 console.log("Status do pedido atualizado para 'pronto'!");
@@ -687,4 +710,4 @@ document.addEventListener('DOMContentLoaded', () => {
     atualizarCarrinho();
     
     console.log('%cDesenvolvido por faeldev-ux 🦊', 'color:#b30000;font-weight:bold;font-size:14px;');
-});
+}); 

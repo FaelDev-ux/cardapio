@@ -784,6 +784,8 @@ h1 {
     color: #fff;
 }
 
+
+
 /* ==================================== */
 /* Estilos para a Seção Ativa no Header */
 /* ==================================== */
@@ -1313,4 +1315,44 @@ h1 {
 #btn-escolha-restaurante:hover {
     background-color: #c51162;
     transform: translateY(-2px);
+}
+
+/* ESTILO DO MODAL DE RESUMO PARA O GARÇOM */
+#modal-resumo-garcom .modal-content {
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+}
+
+.resumo-title {
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+
+.resumo-message {
+    font-size: 1em;
+    font-style: italic;
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+#resumo-pedido-container ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+#resumo-pedido-container li {
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+}
+
+.resumo-total {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: right;
+    color: var(--accent-color);
 }
