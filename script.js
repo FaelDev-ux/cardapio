@@ -110,6 +110,142 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
+    
+    // =========================================================
+    // NOVO: LÓGICA DO MODAL DE OPÇÕES DO PRATO
+    // =========================================================
+
+    // Referências para os novos elementos do modal de prato
+    const modalPrato = document.getElementById('modal-prato');
+    const fecharPratoBtn = document.getElementById('fechar-prato');
+    const pratoTituloEl = document.getElementById('prato-titulo');
+    const pratoDescEl = document.getElementById('prato-descricao');
+    const pratoTamanhosEl = document.getElementById('prato-tamanhos');
+    const pratoObservacoesEl = document.getElementById('prato-observacoes');
+    const btnAdicionarPrato = document.getElementById('btn-adicionar-prato');
+
+    // Adicionamos a nova função para abrir o modal do prato
+    function abrirModalPrato(nomePrato, descricaoPrato, precos, observacoesAnteriores = '') {
+        pratoTituloEl.textContent = nomePrato;
+        pratoDescEl.textContent = descricaoPrato;
+        pratoObservacoesEl.value = observacoesAnteriores;
+        pratoTamanhosEl.innerHTML = ''; // Limpa as opções anteriores
+
+        // Preenche as opções de tamanho e preço
+        precos.forEach(opcao => {
+            const radio = document.createElement('input');
+            radio.type = 'radio';
+            radio.name = 'tamanho';
+            radio.value = `${opcao.descricao}`;
+            radio.dataset.preco = opcao.preco;
+            radio.id = `tamanho-${opcao.descricao}`;
+            
+            const label = document.createElement('label');
+            label.htmlFor = `tamanho-${opcao.descricao}`;
+            label.innerHTML = `
+                <span>${opcao.descricao}</span>
+                <span class="preco-valor-popup">R$ ${opcao.preco.toFixed(2).replace('.', ',')}</span>
+            `;
+            
+            const div = document.createElement('div');
+            div.classList.add('opcao-tamanho');
+            div.appendChild(radio);
+            div.appendChild(label);
+            pratoTamanhosEl.appendChild(div);
+        });
+
+        // Seleciona a primeira opção por padrão
+        const primeiroTamanho = pratoTamanhosEl.querySelector('input[type="radio"]');
+        if (primeiroTamanho) {
+            primeiroTamanho.checked = true;
+        }
+
+        modalPrato.style.display = 'flex';
+    }
+
+    // Evento de clique no item do cardápio para abrir o modal
+    // Esta é uma alternativa à lógica de botões 'btn-adicionar'
+    const itensCardapio = document.querySelectorAll('.item-cardapio'); // Use uma classe em cada item do seu cardápio
+    if (itensCardapio.length > 0) {
+        itensCardapio.forEach(item => {
+            item.addEventListener('click', () => {
+                const nomeItem = item.querySelector('.nome-item').textContent.trim();
+                const descItem = item.querySelector('.desc').textContent.trim();
+                
+                // Pega os preços e descrições diretamente do HTML do item
+                const precosElement = item.querySelectorAll('.preco-btn-container');
+                const precos = Array.from(precosElement).map(p => {
+                    const desc = p.querySelector('span:first-of-type').textContent.trim();
+                    const preco = parseFloat(p.querySelector('.preco-valor').textContent.replace('R$', '').replace(',', '.').trim());
+                    return { descricao: desc, preco: preco };
+                });
+                
+                // Abre o modal com os dados do prato
+                abrirModalPrato(nomeItem, descItem, precos);
+            });
+        });
+    }
+
+    // Evento para fechar o modal do prato
+    if (fecharPratoBtn) {
+        fecharPratoBtn.addEventListener('click', () => {
+            modalPrato.style.display = 'none';
+        });
+    }
+
+    // Evento para adicionar o item ao carrinho a partir do modal
+    if (btnAdicionarPrato) {
+        btnAdicionarPrato.addEventListener('click', () => {
+            const nomePrato = pratoTituloEl.textContent;
+            const observacoes = pratoObservacoesEl.value.trim();
+            const tamanhoSelecionado = pratoTamanhosEl.querySelector('input[name="tamanho"]:checked');
+
+            if (tamanhoSelecionado) {
+                const descricaoTamanho = tamanhoSelecionado.value;
+                const precoTamanho = parseFloat(tamanhoSelecionado.dataset.preco);
+                
+                let nomeCompleto = `${nomePrato} (${descricaoTamanho})`;
+                if (observacoes) {
+                    nomeCompleto += ` - Obs: ${observacoes}`;
+                }
+
+                carrinho.push({ nome: nomeCompleto, preco: precoTamanho });
+                salvarCarrinho();
+                atualizarCarrinho();
+                modalPrato.style.display = 'none';
+                btnCarrinho.style.display = 'flex';
+            } else {
+                alert('Por favor, selecione um tamanho para o prato.');
+            }
+        });
+    }
+
+    // Adiciona o novo modal à lógica de fechar ao clicar fora
+    window.addEventListener('click', (event) => {
+        if (event.target === modalPrato) {
+            modalPrato.style.display = 'none';
+        }
+        // ... sua lógica existente ...
+        if (event.target === modalCarrinho) {
+            modalCarrinho.style.display = 'none';
+        }
+        if (event.target === modalDadosCliente) {
+            modalDadosCliente.style.display = 'none';
+        }
+        if (event.target === modalConfirmacao) {
+            modalConfirmacao.style.display = 'none';
+        }
+        if (event.target === modalEscolha) {
+            modalEscolha.style.display = 'none';
+        }
+        if (event.target === modalResumoGarcom) {
+            modalResumoGarcom.style.display = 'none';
+        }
+    });
+
+    // =========================================================
+    // FIM DA NOVA LÓGICA
+    // =========================================================
 
     // --- FUNÇÕES PARA SALVAR E CARREGAR DO LOCAL STORAGE ---
     function salvarCarrinho() {
@@ -174,26 +310,6 @@ document.addEventListener('DOMContentLoaded', () => {
             modalCarrinho.style.display = 'none';
         });
     }
-
-    // LÓGICA PARA FECHAR TODOS OS MODAIS AO CLICAR FORA
-    window.addEventListener('click', (event) => {
-        if (event.target === modalCarrinho) {
-            modalCarrinho.style.display = 'none';
-        }
-        if (event.target === modalDadosCliente) {
-            modalDadosCliente.style.display = 'none';
-        }
-        if (event.target === modalConfirmacao) {
-            modalConfirmacao.style.display = 'none';
-        }
-        if (event.target === modalEscolha) {
-            modalEscolha.style.display = 'none';
-        }
-        // NOVO: Fechar o modal do garçom
-        if (event.target === modalResumoGarcom) {
-            modalResumoGarcom.style.display = 'none';
-        }
-    });
 
     if (fecharConfirmacaoBtn) {
         fecharConfirmacaoBtn.addEventListener('click', () => {
@@ -402,32 +518,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // FIM DA LÓGICA CORRIGIDA
     // =========================================================
 
-    // --- LÓGICA DE ADICIONAR ITEM AO CARRINHO ---
-    const botoesAdicionar = document.querySelectorAll('.btn-adicionar');
-    if (botoesAdicionar.length > 0) {
-        botoesAdicionar.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const precoBtnContainer = btn.closest('.preco-btn-container');
-                if (!precoBtnContainer) {
-                    return;
-                }
-                const itemPai = precoBtnContainer.closest('li');
-                const nomeItemPrincipal = itemPai.querySelector('.nome-item')?.textContent.trim() || itemPai.querySelector('.desc')?.textContent.trim();
-                const descricaoPorcao = precoBtnContainer.querySelector('span:first-of-type')?.textContent.trim() || '';
-                const precoTexto = precoBtnContainer.querySelector('.preco-valor').textContent;
-                const precoNumerico = parseFloat(precoTexto.replace('R$', '').replace(',', '.').trim());
-                
-                let nomeCompleto = nomeItemPrincipal;
-                if(descricaoPorcao) {
-                    nomeCompleto += ` - ${descricaoPorcao}`;
-                }
-                carrinho.push({ nome: nomeCompleto, preco: precoNumerico });
-                salvarCarrinho();
-                atualizarCarrinho();
-                btnCarrinho.style.display = 'flex';
-            });
-        });
-    }
+    // --- REMOÇÃO DA LÓGICA DE ADICIONAR ITEM AO CARRINHO (AGORA USAMOS O POPUP) ---
+    // A lógica anterior foi substituída pela função 'abrirModalPrato' e o evento do botão 'btnAdicionarPrato'
 
     // --- OUTRAS FUNÇÕES DO CÓDIGO ---
     function trocarLogoPorTema() {
@@ -710,4 +802,4 @@ document.addEventListener('DOMContentLoaded', () => {
     atualizarCarrinho();
     
     console.log('%cDesenvolvido por faeldev-ux 🦊', 'color:#b30000;font-weight:bold;font-size:14px;');
-}); 
+});
