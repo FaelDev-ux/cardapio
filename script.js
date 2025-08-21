@@ -12,18 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // INICIALIZAÇÃO DO FIREBASE
     // =========================================================
     // Seu objeto de configuração do Firebase
-const firebaseConfig = {
-    apiKey: "AIzaSyAn9EvaVb-GLvh4-60B4oKKQznuJteM_do",
-    authDomain: "supremo-oriente-chat-45c03.firebaseapp.com",
-    projectId: "supremo-oriente-chat-45c03",
-    storageBucket: "supremo-oriente-chat-45c03.firebasestorage.app",
-    messagingSenderId: "246020177422",
-    appId: "1:246020177422:web:8108b666088f15b26c465f"
-  };
+    const firebaseConfig = {
+        apiKey: "AIzaSyAn9EvaVb-GLvh4-60B4oKKQznuJteM_do",
+        authDomain: "supremo-oriente-chat-45c03.firebaseapp.com",
+        projectId: "supremo-oriente-chat-45c03",
+        storageBucket: "supremo-oriente-chat-45c03.firebasestorage.app",
+        messagingSenderId: "246020177422",
+        appId: "1:246020177422:web:8108b666088f15b26c465f"
+    };
     // Inicializa o app e o banco de dados
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
     const ordersRef = ref(database, 'pedidos');
+    // CORRIGIDO: A linha abaixo estava com um erro de sintaxe.
     const messagesRef = ref(database, 'messages');
     // =========================================================
     // FIM DA INICIALIZAÇÃO
@@ -292,12 +293,10 @@ const firebaseConfig = {
     const totalPedidoEl = document.getElementById('total-pedido');
     const btnFazerPedido = document.getElementById('btn-fazer-pedido');
 
-    // Novos elementos do pop-up de opções
-    const modalOpcoesPedido = document.getElementById('modal-opcoes-pedido');
-    const btnGarcom = document.getElementById('btn-garcom');
-    const btnWhatsapp = document.getElementById('btn-whatsapp');
-    const btnCancelar = document.getElementById('btn-cancelar');
-    const numeroWhatsApp = '5583988627070';
+    // Referências para o novo modal de confirmação
+    const modalConfirmacao = document.getElementById('modal-confirmacao');
+    const fecharConfirmacaoBtn = document.getElementById('fechar-confirmacao');
+    const okBtn = document.getElementById('ok-btn');
     
     // VARIÁVEL QUE VAI ARMAZENAR O CARRINHO
     let carrinho = [];
@@ -312,9 +311,6 @@ const firebaseConfig = {
         if (carrinhoSalvo) {
             carrinho = JSON.parse(carrinhoSalvo);
             atualizarCarrinho();
-            if (localStorage.getItem('exibirVisualizacao')) {
-                exibirVisualizacaoPedido();
-            }
         }
     }
 
@@ -327,7 +323,6 @@ const firebaseConfig = {
             contadorCarrinho.style.display = 'none';
             totalPedidoEl.textContent = 'Total: R$ 0,00';
             localStorage.removeItem('carrinhoSalvo');
-            localStorage.removeItem('exibirVisualizacao');
         } else {
             carrinho.forEach((item, index) => {
                 const li = document.createElement('li');
@@ -356,88 +351,36 @@ const firebaseConfig = {
         }
     }
 
-    // LÓGICA DE EXIBIR O POP-UP DE VISUALIZAÇÃO DO PEDIDO
-    function exibirVisualizacaoPedido() {
-        const pedidoCompleto = listaPedidoEl.cloneNode(true);
-        const totalCompleto = totalPedidoEl.cloneNode(true);
-        const visualizacaoPedido = document.createElement('div');
-        visualizacaoPedido.classList.add('visualizacao-pedido');
-        const fecharVisualizacao = document.createElement('span');
-        fecharVisualizacao.textContent = '×';
-        fecharVisualizacao.classList.add('fechar');
-        fecharVisualizacao.addEventListener('click', () => {
-            visualizacaoPedido.remove();
-            carrinho = [];
-            localStorage.removeItem('carrinhoSalvo');
-            localStorage.removeItem('exibirVisualizacao');
+    if (btnCarrinho) {
+        btnCarrinho.addEventListener('click', () => {
+            modalCarrinho.style.display = 'flex';
             atualizarCarrinho();
         });
-
-        visualizacaoPedido.innerHTML = `
-            <h2>Seu Pedido</h2>
-        `;
-        visualizacaoPedido.appendChild(pedidoCompleto);
-        visualizacaoPedido.appendChild(totalCompleto);
-        visualizacaoPedido.appendChild(fecharVisualizacao);
-        document.body.appendChild(visualizacaoPedido);
-        visualizacaoPedido.style.display = 'flex';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    if (btnFazerPedido) {
-        btnFazerPedido.addEventListener('click', () => {
-            if (carrinho.length > 0) {
-                modalOpcoesPedido.style.display = 'flex';
-                modalCarrinho.style.display = 'none';
-            } else {
-                alert("Adicione itens ao seu pedido primeiro!");
-            }
+    if (fecharCarrinhoBtn) {
+        fecharCarrinhoBtn.addEventListener('click', () => {
+            modalCarrinho.style.display = 'none';
         });
     }
-
-    btnGarcom.addEventListener('click', () => {
-        modalOpcoesPedido.style.display = 'none';
-        localStorage.setItem('exibirVisualizacao', 'true');
-        salvarCarrinho();
-        exibirVisualizacaoPedido();
-    });
-
-    btnWhatsapp.addEventListener('click', () => {
-        modalOpcoesPedido.style.display = 'none';
-        let mensagem = 'Olá, gostaria de fazer o seguinte pedido:\n\n';
-        let total = 0;
-        carrinho.forEach(item => {
-            mensagem += `- ${item.nome} (R$ ${item.preco.toFixed(2).replace('.', ',')})\n`;
-            total += item.preco;
-        });
-        mensagem += `\nTotal: R$ ${total.toFixed(2).replace('.', ',')}`;
-        const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
-        window.open(url, '_blank');
-        
-        carrinho = [];
-        localStorage.removeItem('carrinhoSalvo');
-        localStorage.removeItem('exibirVisualizacao');
-        atualizarCarrinho();
-    });
-
-    btnCancelar.addEventListener('click', () => {
-        modalOpcoesPedido.style.display = 'none';
-    });
-    
-    btnCarrinho.addEventListener('click', () => {
-        modalCarrinho.style.display = 'flex';
-        atualizarCarrinho();
-    });
-
-    fecharCarrinhoBtn.addEventListener('click', () => {
-        modalCarrinho.style.display = 'none';
-    });
 
     window.addEventListener('click', (event) => {
         if (event.target === modalCarrinho) {
             modalCarrinho.style.display = 'none';
         }
     });
+    
+    // Evento de clique para os botões "OK" e "fechar" do novo modal
+    if (fecharConfirmacaoBtn) {
+        fecharConfirmacaoBtn.addEventListener('click', () => {
+            modalConfirmacao.style.display = 'none';
+        });
+    }
+    if (okBtn) {
+        okBtn.addEventListener('click', () => {
+            modalConfirmacao.style.display = 'none';
+        });
+    }
 
     const botoesAdicionar = document.querySelectorAll('.btn-adicionar');
     if (botoesAdicionar.length > 0) {
@@ -487,11 +430,11 @@ const firebaseConfig = {
     const chatInput = document.getElementById('chat-input');
     const chatSendBtn = document.getElementById('chat-send-btn');
 
-    // Substitui a lógica de 'Fazer Pedido' para enviar para o Firebase
+    // Lógica principal: Envia o pedido para o Firebase e fecha o modal.
     if (btnFazerPedido) {
         btnFazerPedido.addEventListener('click', () => {
             if (carrinho.length > 0) {
-                const pedidoDetalhes = carrinho.map(item => `- ${item.nome} (R$ ${item.preco.toFixed(2).replace('.', ',')})`);
+                const pedidoDetalhes = carrinho.map(item => `${item.nome} (R$ ${item.preco.toFixed(2).replace('.', ',')})`);
                 const total = carrinho.reduce((sum, item) => sum + item.preco, 0);
 
                 const pedidoCompleto = {
@@ -500,17 +443,25 @@ const firebaseConfig = {
                     data: new Date().toLocaleString('pt-BR')
                 };
 
-                push(ordersRef, pedidoCompleto);
+                push(ordersRef, pedidoCompleto)
+                    .then(() => {
+                        // Mostra o novo pop-up de confirmação
+                        if (modalConfirmacao) {
+                            modalConfirmacao.style.display = 'flex';
+                        }
 
-                alert("Seu pedido foi enviado! Em breve alguém entrará em contato.");
-
-                carrinho = [];
-                localStorage.removeItem('carrinhoSalvo');
-                localStorage.removeItem('exibirVisualizacao');
-                atualizarCarrinho();
-                modalCarrinho.style.display = 'none';
-
+                        // Limpa o carrinho
+                        carrinho = [];
+                        localStorage.removeItem('carrinhoSalvo');
+                        atualizarCarrinho();
+                        modalCarrinho.style.display = 'none';
+                    })
+                    .catch((error) => {
+                        console.error("Erro ao enviar pedido: ", error);
+                        alert("Ocorreu um erro ao enviar seu pedido. Tente novamente.");
+                    });
             } else {
+                // Alerta caso o carrinho esteja vazio
                 alert("Adicione itens ao seu pedido primeiro!");
             }
         });

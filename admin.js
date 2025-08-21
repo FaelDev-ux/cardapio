@@ -1,10 +1,10 @@
 // =========================================================
-// ADMIN.JS - VISUALIZAÇÃO DE DADOS EM TEMPO REAL
+// ADMIN.JS - VISUALIZAÇÃO DE DADOS EM TEMPO REAL E EXCLUSÃO
 // =========================================================
 
-// Importa as funções necessárias do Firebase
+// Importa as funções necessárias do Firebase, incluindo 'remove'
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+import { getDatabase, ref, onValue, remove } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
 
 // Sua configuração do Firebase (COPIE E COLE A SUA CONFIGURAÇÃO AQUI)
 const firebaseConfig = {
@@ -14,7 +14,7 @@ const firebaseConfig = {
     storageBucket: "supremo-oriente-chat-45c03.firebasestorage.app",
     messagingSenderId: "246020177422",
     appId: "1:246020177422:web:8108b666088f15b26c465f"
-  };
+};
 
 // Inicializa o Firebase
 const app = initializeApp(firebaseConfig);
@@ -27,6 +27,18 @@ const messagesRef = ref(database, 'messages');
 // Referências para os elementos HTML
 const ordersList = document.getElementById('orders-list');
 const chatList = document.getElementById('chat-list');
+
+// Função para remover um pedido do banco de dados
+function removeOrder(orderId) {
+    const orderRef = ref(database, `pedidos/${orderId}`);
+    remove(orderRef)
+        .then(() => {
+            console.log("Pedido removido com sucesso!");
+        })
+        .catch((error) => {
+            console.error("Erro ao remover pedido: ", error);
+        });
+}
 
 // Escuta e exibe os pedidos em tempo real
 onValue(ordersRef, (snapshot) => {
@@ -44,6 +56,7 @@ onValue(ordersRef, (snapshot) => {
             
             let itemsHtml = order.itens.map(item => `<li>${item}</li>`).join('');
             
+            // Adiciona o botão "Pronto" com o ID do pedido
             orderItem.innerHTML = `
                 <div class="order-header">
                     <span>Pedido de <strong>R$ ${order.total}</strong></span>
@@ -52,9 +65,23 @@ onValue(ordersRef, (snapshot) => {
                 <div class="order-details">
                     <ul>${itemsHtml}</ul>
                 </div>
+                <div class="order-actions">
+                    <button class="btn-ready" data-order-id="${key}">Pronto</button>
+                </div>
             `;
             ordersList.appendChild(orderItem);
         });
+
+        // Adiciona um "ouvinte" de eventos para os botões "Pronto"
+        document.querySelectorAll('.btn-ready').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const orderId = event.target.dataset.orderId;
+                if (confirm("Tem certeza que deseja marcar este pedido como pronto?")) {
+                    removeOrder(orderId);
+                }
+            });
+        });
+
     } else {
         ordersList.innerHTML = '<p>Nenhum pedido novo.</p>';
     }
