@@ -289,7 +289,6 @@ h1 {
 @media (prefers-color-scheme: dark) {
     body {
         background: rgba(0, 0, 0, 1) url('01.jpg') center/cover no-repeat fixed;
-        color: #f0f0f0;
     }
     .logo {
         border-radius: 100px;
@@ -317,6 +316,21 @@ h1 {
     }
     .busca-destaque-popup li:hover {
         background: #af0d0d7e;
+    }
+    #prato-titulo {
+    color: black;
+    font-size: 24px;
+    margin-bottom: 10px;
+    }
+    .opcao-tamanho {
+        color: black;
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+    .prato-observacoes {
+        color: black;
+        font-size: 16px;
+        margin-bottom: 10px;
     }
 }
 
