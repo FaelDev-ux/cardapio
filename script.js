@@ -1,10 +1,10 @@
 // =========================================================
-// SCRIPT.JS - VERSÃO COMPLETA E CORRIGIDA COM FIREBASE
+// SCRIPT.JS - VERSÃO FINALMENTE CORRIGIDA
 // =========================================================
 
 // Importa todas as funções necessárias do Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -51,13 +51,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const fecharConfirmacaoBtn = document.getElementById('fechar-confirmacao');
     const okBtn = document.getElementById('ok-btn');
 
-    // NOVO: Referências para o modal de dados do cliente
+    // Referências para o modal de dados do cliente (para pedidos WhatsApp)
     const modalDadosCliente = document.getElementById('modal-dados-cliente');
     const fecharDadosClienteBtn = document.getElementById('fechar-dados-cliente');
     const formDadosCliente = document.getElementById('form-dados-cliente');
+    
+    // VARIÁVEIS AJUSTADAS PARA CORRESPONDER AO SEU HTML
     const nomeClienteInput = document.getElementById('nome-cliente');
     const enderecoClienteInput = document.getElementById('endereco-cliente');
     const telefoneClienteInput = document.getElementById('telefone-cliente');
+    // O campo de e-mail não está no seu HTML, então será removido do código de validação
+    
+    // Referências para o novo modal de escolha
+    const modalEscolha = document.getElementById('modal-escolha');
+    const fecharEscolhaBtn = document.getElementById('fechar-escolha');
+    const btnEscolhaWpp = document.getElementById('btn-escolha-wpp');
+    const btnEscolhaRestaurante = document.getElementById('btn-escolha-restaurante');
+
+    // Checkbox de Retirada e Container do Endereço
+    const retiradaCheckbox = document.getElementById('retirada-local');
+    const enderecoContainer = document.getElementById('endereco-container');
+
+    // Referência para o contêiner de mensagens do pedido no painel de admin
+    const mensagensPedido = document.getElementById('mensagens-pedido');
+    const resumoPedidoContainer = document.getElementById('resumo-pedido-container');
+
+    // Variável global para armazenar temporariamente os dados do pedido
+    let pedidoTemp = {};
 
     // --- VARIÁVEL QUE VAI ARMAZENAR O CARRINHO ---
     let carrinho = [];
@@ -147,6 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // LÓGICA PARA FECHAR TODOS OS MODAIS AO CLICAR FORA
     window.addEventListener('click', (event) => {
         if (event.target === modalCarrinho) {
             modalCarrinho.style.display = 'none';
@@ -156,6 +177,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (event.target === modalConfirmacao) {
             modalConfirmacao.style.display = 'none';
+        }
+        if (event.target === modalEscolha) {
+            modalEscolha.style.display = 'none';
         }
     });
 
@@ -170,67 +194,97 @@ document.addEventListener('DOMContentLoaded', () => {
             modalConfirmacao.style.display = 'none';
         });
     }
+    
+    // Evento para fechar o modal de escolha
+    if(fecharEscolhaBtn) {
+        fecharEscolhaBtn.addEventListener('click', () => {
+            modalEscolha.style.display = 'none';
+        });
+    }
 
-    // NOVO: Evento para abrir o modal de dados do cliente ao clicar em "Fazer Pedido"
+    // Evento para abrir o NOVO modal de escolha ao clicar em "Fazer Pedido"
     if (btnFazerPedido) {
         btnFazerPedido.addEventListener('click', () => {
             if (carrinho.length > 0) {
+                // Esconde o modal do carrinho e mostra o modal de escolha
                 modalCarrinho.style.display = 'none';
-                modalDadosCliente.style.display = 'flex';
+                modalEscolha.style.display = 'flex';
             } else {
                 alert("Adicione itens ao seu pedido primeiro!");
             }
         });
     }
-    
-    // NOVO: Evento para fechar o modal de dados do cliente
+
+    // Evento para fechar o modal de dados do cliente
     if (fecharDadosClienteBtn) {
         fecharDadosClienteBtn.addEventListener('click', () => {
             modalDadosCliente.style.display = 'none';
         });
     }
 
-    // NOVO: Evento de submit do formulário para enviar o pedido completo
-    if (formDadosCliente) {
-        formDadosCliente.addEventListener('submit', (e) => {
-            e.preventDefault();
+    // LÓGICA DE MOSTRAR/OCULTAR CAMPO DE ENDEREÇO COM O CHECKBOX
+    if (retiradaCheckbox && enderecoContainer) {
+        retiradaCheckbox.addEventListener('change', () => {
+            if (retiradaCheckbox.checked) {
+                enderecoContainer.style.display = 'none';
+            } else {
+                enderecoContainer.style.display = 'flex';
+            }
+        });
+    }
 
+    // --- LÓGICA DOS BOTÕES DO NOVO MODAL DE ESCOLHA ---
+
+    // Botão "Estou no Restaurante"
+    if (btnEscolhaRestaurante) {
+        btnEscolhaRestaurante.addEventListener('click', () => {
             if (carrinho.length === 0) {
-                alert("O carrinho está vazio. Adicione itens antes de enviar o pedido.");
+                alert("O carrinho está vazio.");
+                modalEscolha.style.display = 'none';
                 return;
             }
 
-            const nomeCliente = nomeClienteInput.value;
-            const enderecoCliente = enderecoClienteInput.value;
-            const telefoneCliente = telefoneClienteInput.value;
             const dataPedido = new Date().toLocaleString('pt-BR');
             const total = carrinho.reduce((sum, item) => sum + item.preco, 0);
-
+            
+            // Cria um pedido sem dados de cliente, com status "no local"
             const pedidoCompleto = {
                 cliente: {
-                    nome: nomeCliente,
-                    endereco: enderecoCliente,
-                    telefone: telefoneCliente
+                    nome: 'Cliente no Local',
+                    endereco: 'Retirada no Local',
+                    telefone: 'N/A',
+                    email: ''
                 },
                 itens: carrinho,
                 total: `R$ ${total.toFixed(2).replace('.', ',')}`,
                 data: dataPedido,
-                status: 'pendente'
+                status: 'pendente',
+                finalizacao: 'estabelecimento'
             };
 
+            // Envia para o Firebase
             push(ordersRef, pedidoCompleto)
                 .then(() => {
-                    modalDadosCliente.style.display = 'none';
-                    modalConfirmacao.style.display = 'flex';
+                    modalEscolha.style.display = 'none';
+                    
+                    // Exibe o resumo do pedido na tela para o garçom
+                    const resumoPedidoDiv = document.getElementById('resumo-pedido-container');
+                    if (resumoPedidoDiv) {
+                        const itensHtml = carrinho.map(item => `<li>${item.nome} - R$ ${item.preco.toFixed(2).replace('.', ',')}</li>`).join('');
+                        resumoPedidoDiv.innerHTML = `
+                            <h3 class="resumo-title">Resumo do Pedido</h3>
+                            <p class="resumo-message">Mostre esta tela para o garçom.</p>
+                            <h4>Itens:</h4>
+                            <ul>${itensHtml}</ul>
+                            <p class="resumo-total"><strong>Total:</strong> R$ ${total.toFixed(2).replace('.', ',')}</p>
+                        `;
+                        resumoPedidoDiv.style.display = 'block';
+                    }
 
+                    // Limpa o carrinho
                     carrinho = [];
                     localStorage.removeItem('carrinhoSalvo');
                     atualizarCarrinho();
-                    
-                    // Opcional: Limpar os campos do formulário
-                    nomeClienteInput.value = '';
-                    enderecoClienteInput.value = '';
-                    telefoneClienteInput.value = '';
                 })
                 .catch((error) => {
                     console.error("Erro ao enviar pedido: ", error);
@@ -238,16 +292,111 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
         });
     }
-    
+
+    // Botão "Enviar por WhatsApp"
+    if (btnEscolhaWpp) {
+        btnEscolhaWpp.addEventListener('click', () => {
+            // Esconde o modal de escolha e mostra o modal de dados do cliente
+            modalEscolha.style.display = 'none';
+            modalDadosCliente.style.display = 'flex';
+        });
+    }
+
+    // =========================================================
+    // LÓGICA CORRIGIDA DO FORMULÁRIO DE DADOS DO CLIENTE
+    // =========================================================
+    if (formDadosCliente) {
+        formDadosCliente.addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log('Evento de submit do formulário acionado.');
+
+            const nome = nomeClienteInput.value.trim();
+            const telefone = telefoneClienteInput.value.trim();
+            const isRetirada = retiradaCheckbox.checked;
+
+            let endereco = 'Retirada no Local';
+            if (!isRetirada) {
+                endereco = enderecoClienteInput.value.trim();
+            }
+            
+            // Validação dos campos obrigatórios
+            if (!nome || !telefone || (!isRetirada && !endereco)) {
+                console.log('Validação falhou. Campos obrigatórios não preenchidos.');
+                alert("Por favor, preencha todos os campos obrigatórios.");
+                return;
+            }
+
+            const email = ''; // Campo de email foi removido do HTML
+            const dataPedido = new Date().toLocaleString('pt-BR');
+            const total = carrinho.reduce((sum, item) => sum + item.preco, 0);
+
+            const cliente = { nome, endereco, telefone, email };
+            
+            // Constrói o pedido para o Firebase
+            const pedidoCompleto = {
+                cliente: cliente,
+                itens: carrinho,
+                total: `R$ ${total.toFixed(2).replace('.', ',')}`,
+                data: dataPedido,
+                status: 'pendente',
+                finalizacao: 'whatsapp'
+            };
+
+            console.log('Pedido a ser enviado:', pedidoCompleto);
+
+            // Constrói a mensagem do WhatsApp
+            const saudacao = `Olá, gostaria de fazer o meu pedido. Seguem os detalhes:\n\n`;
+            const dadosCliente = `*Dados do Cliente:*\nNome: ${cliente.nome}\nEndereço: ${cliente.endereco}\nTelefone: ${cliente.telefone}\n\n`;
+            const itensPedido = `*Itens do Pedido:*\n${carrinho.map(item => `- ${item.nome} - R$ ${item.preco.toFixed(2).replace('.', ',')}`).join('\n')}\n\n`;
+            const mensagemFinal = `Obrigado!`;
+
+            const mensagemCompleta = `${saudacao}${dadosCliente}${itensPedido}${mensagemFinal}`;
+            const telefoneRestaurante = "5583988627070"; // SUBSTITUA PELO SEU NÚMERO DE TELEFONE
+            const urlWhatsapp = `https://api.whatsapp.com/send?phone=${telefoneRestaurante}&text=${encodeURIComponent(mensagemCompleta)}`;
+
+            // Envia o pedido para o Firebase
+            push(ordersRef, pedidoCompleto)
+                .then(() => {
+                    console.log('Pedido enviado com sucesso para o Firebase.');
+
+                    // Após o sucesso do envio:
+                    modalDadosCliente.style.display = 'none'; // Fecha o modal de dados
+                    modalConfirmacao.style.display = 'flex'; // Exibe o modal de confirmação
+
+                    // Limpa o carrinho
+                    carrinho = [];
+                    localStorage.removeItem('carrinhoSalvo');
+                    atualizarCarrinho();
+                    
+                    // Limpar os campos do formulário para o próximo uso
+                    nomeClienteInput.value = '';
+                    enderecoClienteInput.value = '';
+                    telefoneClienteInput.value = '';
+                    retiradaCheckbox.checked = false;
+                    enderecoContainer.style.display = 'flex';
+
+                    // Abre o WhatsApp em uma nova aba
+                    window.open(urlWhatsapp, '_blank');
+                    console.log('WhatsApp aberto.');
+                })
+                .catch((error) => {
+                    // Se houver erro no envio, exibe um alerta
+                    console.error("Erro ao enviar pedido para o Firebase: ", error);
+                    alert("Ocorreu um erro ao enviar seu pedido. Tente novamente.");
+                });
+        });
+    }
+    // =========================================================
+    // FIM DA LÓGICA CORRIGIDA
+    // =========================================================
+
     // --- LÓGICA DE ADICIONAR ITEM AO CARRINHO ---
     const botoesAdicionar = document.querySelectorAll('.btn-adicionar');
     if (botoesAdicionar.length > 0) {
-        console.log('Encontrei ' + botoesAdicionar.length + ' botões de adicionar. Adicionando eventos...');
         botoesAdicionar.forEach(btn => {
             btn.addEventListener('click', () => {
                 const precoBtnContainer = btn.closest('.preco-btn-container');
                 if (!precoBtnContainer) {
-                    console.error('Botão de adicionar não está dentro de um .preco-btn-container. Verifique a estrutura HTML.');
                     return;
                 }
                 const itemPai = precoBtnContainer.closest('li');
@@ -264,7 +413,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 salvarCarrinho();
                 atualizarCarrinho();
                 btnCarrinho.style.display = 'flex';
-                console.log('Item adicionado:', nomeCompleto);
             });
         });
     }
@@ -472,6 +620,77 @@ document.addEventListener('DOMContentLoaded', () => {
                 chatMessages.appendChild(messageElement);
             });
             chatMessages.scrollTop = chatMessages.scrollHeight;
+        });
+    }
+    
+    // =========================================================
+    // LÓGICA PERSONALIZADA DO PAINEL DE PEDIDOS RECEBIDOS
+    // =========================================================
+    if (mensagensPedido) {
+        onValue(ordersRef, (snapshot) => {
+            const pedidos = [];
+            snapshot.forEach((childSnapshot) => {
+                pedidos.push({
+                    id: childSnapshot.key,
+                    ...childSnapshot.val()
+                });
+            });
+
+            mensagensPedido.innerHTML = '';
+            
+            if (pedidos.length === 0) {
+                mensagensPedido.innerHTML = '<p class="msg-sem-pedidos">Nenhum pedido recebido ainda.</p>';
+            } else {
+                pedidos.reverse().forEach(pedido => {
+                    const pedidoDiv = document.createElement('div');
+                    pedidoDiv.classList.add('pedido-item');
+
+                    const isWhatsapp = pedido.finalizacao === 'whatsapp';
+                    const telefone = pedido.cliente.telefone;
+                    const endereco = pedido.cliente.endereco;
+                    
+                    // Constrói a lista de itens do pedido
+                    const listaItensHtml = pedido.itens.map(item => `
+                        <li>${item.nome} <span class="item-preco">R$ ${item.preco.toFixed(2).replace('.', ',')}</span></li>
+                    `).join('');
+
+                    pedidoDiv.innerHTML = `
+                        <div class="pedido-header">
+                            <span class="pedido-total-valor">Total: ${pedido.total}</span>
+                            <span class="pedido-data">${pedido.data}</span>
+                        </div>
+                        <div class="pedido-detalhes">
+                            <p><strong>Cliente:</strong> ${pedido.cliente.nome}</p>
+                            ${endereco ? `<p><strong>Endereço:</strong> ${endereco}</p>` : ''}
+                            ${telefone ? `<p><strong>Telefone:</strong> ${telefone} ${isWhatsapp ? `<a href="https://api.whatsapp.com/send?phone=55${telefone}&text=Ol%C3%A1%20${pedido.cliente.nome}%2C%20recebemos%20seu%20pedido!" target="_blank" class="abrir-wpp-link">Abrir WhatsApp</a>` : ''}</p>` : ''}
+                        </div>
+                        <div class="pedido-lista-itens">
+                            <p><strong>Itens:</strong></p>
+                            <ul>
+                                ${listaItensHtml}
+                            </ul>
+                        </div>
+                        <button class="btn-pedido-pronto" data-id="${pedido.id}">Pronto</button>
+                    `;
+                    mensagensPedido.appendChild(pedidoDiv);
+                });
+
+                // Adiciona o evento de clique para os botões "Pronto"
+                document.querySelectorAll('.btn-pedido-pronto').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const pedidoId = e.target.dataset.id;
+                        const pedidoRef = ref(database, 'pedidos/' + pedidoId);
+                        
+                        remove(pedidoRef)
+                            .then(() => {
+                                console.log("Pedido removido com sucesso!");
+                            })
+                            .catch((error) => {
+                                console.error("Erro ao remover pedido: ", error);
+                            });
+                    });
+                });
+            }
         });
     }
 

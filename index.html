@@ -1891,16 +1891,33 @@
         <h2>Dados para o Pedido</h2>
         <form id="form-dados-cliente">
             <label for="nome-cliente">Nome:</label>
-            <input type="text" id="nome-cliente" required>
+            <input type="text" id="nome-cliente" placeholder="Seu nome completo" required>
 
-            <label for="endereco-cliente">Endereço:</label>
-            <input type="text" id="endereco-cliente" required>
+            <div class="opcao-retirada">
+                <input type="checkbox" id="retirada-local">
+                <label for="retirada-local">Retirar no local</label>
+            </div>
+
+            <div id="endereco-container">
+                <label for="endereco-cliente">Endereço:</label>
+                <input type="text" id="endereco-cliente" placeholder="Rua, Número, Bairro">
+            </div>
 
             <label for="telefone-cliente">Telefone:</label>
-            <input type="tel" id="telefone-cliente" required>
+            <input type="tel" id="telefone-cliente" placeholder="(DDD) 9xxxx-xxxx" required>
 
-            <button type="submit" id="btn-finalizar-pedido-dados">Finalizar Pedido</button>
+            <button type="submit" class="btn-finalizar">Finalizar Pedido</button>
         </form>
+    </div>
+</div>
+<div id="modal-escolha" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" id="fechar-escolha">&times;</span>
+        <h2>Como você quer finalizar o pedido?</h2>
+        <div class="opcoes-buttons">
+            <button id="btn-escolha-wpp">Enviar por WhatsApp</button>
+            <button id="btn-escolha-restaurante">Estou no Restaurante</button>
+        </div>
     </div>
 </div>
   </body>

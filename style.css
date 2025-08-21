@@ -1130,10 +1130,10 @@ h1 {
     color: #f50000;
 }
 
-/* Estilo do formulário para alinhar os campos como na imagem */
+/* Estilo do formulário para alinhar os campos */
 #form-dados-cliente {
     display: grid;
-    grid-template-columns: auto 1fr; /* Alinha labels e inputs em duas colunas */
+    grid-template-columns: auto 1fr; /* Alinha labels e inputs */
     gap: 15px; /* Espaço entre os elementos */
     align-items: center; /* Alinha verticalmente */
 }
@@ -1145,12 +1145,39 @@ h1 {
     white-space: nowrap; /* Impede que a label quebre a linha */
 }
 
+/* Estilos específicos para a opção de retirada */
+.opcao-retirada {
+    grid-column: 1 / -1; /* Ocupa a largura total */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centraliza horizontalmente */
+    gap: 15px; /* Aumenta o espaço entre o checkbox e o texto */
+    margin: 10px 0;
+}
+
+.opcao-retirada input[type="checkbox"] {
+    width: auto;
+    /* --- MÁGICA PARA AUMENTAR O TAMANHO E REMOVER O CONTORNO BRANCO --- */
+    transform: scale(1.5);
+    margin: 0; /* Remove margens que podem bagunçar o alinhamento */
+    accent-color: #f50000;
+    outline: none; /* Remove a sombra/contorno ao clicar */
+    /* ------------------------------------------------------------------- */
+}
+
+/* Oculta o label de retirada, já que o texto está junto do input */
+.opcao-retirada label {
+    text-align: left;
+    font-size: 1rem;
+    color: #fff;
+}
+
 #form-dados-cliente input {
     width: 100%;
     padding: 10px;
     border: none;
     border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.2); /* Fundo semi-transparente */
+    background-color: rgba(255, 255, 255, 0.2);
     color: #fff;
     font-size: 1rem;
     transition: background-color 0.3s, box-shadow 0.3s;
@@ -1167,7 +1194,7 @@ h1 {
 }
 
 /* Estilo do botão de finalizar pedido */
-#btn-finalizar-pedido-dados {
+.btn-finalizar {
     grid-column: 1 / -1; /* Ocupa as duas colunas */
     width: 100%;
     padding: 15px;
@@ -1182,6 +1209,108 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
-#btn-finalizar-pedido-dados:hover {
+.btn-finalizar:hover {
     background-color: #d40000;
+}
+
+/* Garante que o container do endereço se ajuste ao layout */
+#endereco-container {
+    grid-column: 1 / -1; /* Ocupa a largura total */
+    display: grid;
+    grid-template-columns: subgrid;
+    gap: 15px;
+    width: 100%;
+}
+
+/* ========================================================= */
+/* CSS para o Modal de Escolha (Opções de Finalização) */
+/* ========================================================= */
+
+#modal-escolha {
+    display: none; /* Inicia oculto */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+}
+
+#modal-escolha .modal-content {
+    background-color: #1e1e1e;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    text-align: center;
+    border: 1px solid #333;
+}
+
+#modal-escolha h2 {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 25px;
+    font-size: 1.4em;
+}
+
+#modal-escolha .close-btn {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+#modal-escolha .close-btn:hover,
+#modal-escolha .close-btn:focus {
+    color: #fff;
+    text-decoration: none;
+}
+
+.opcoes-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#btn-escolha-wpp,
+#btn-escolha-restaurante {
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+#btn-escolha-wpp {
+    background-color: #25D366; /* Verde do WhatsApp */
+    color: white;
+}
+
+#btn-escolha-wpp:hover {
+    background-color: #128C7E;
+    transform: translateY(-2px);
+}
+
+#btn-escolha-restaurante {
+    background-color: #f50057; /* Vermelho destacado */
+    color: white;
+}
+
+#btn-escolha-restaurante:hover {
+    background-color: #c51162;
+    transform: translateY(-2px);
 }

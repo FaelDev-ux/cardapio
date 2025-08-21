@@ -54,6 +54,14 @@ onValue(ordersRef, (snapshot) => {
             const orderItem = document.createElement('div');
             orderItem.classList.add('order-item');
             
+            // Lógica para adicionar as informações do cliente
+            const clienteInfo = order.cliente || { nome: 'Não informado', endereco: 'Não informado', telefone: 'Não informado' };
+
+            // ADICIONA A CLASSE DE DESTAQUE AQUI
+            if (clienteInfo.endereco === "Retirada no Local") {
+                orderItem.classList.add('pedido-retirada');
+            }
+
             // Lógica para renderizar a lista de itens do pedido
             let itemsHtml = '';
             if (Array.isArray(order.itens) && order.itens.length > 0 && typeof order.itens[0] === 'object') {
@@ -64,12 +72,9 @@ onValue(ordersRef, (snapshot) => {
                 itemsHtml = `<li>${order.itens}</li>`;
             }
 
-            // Lógica para adicionar as informações do cliente
-            const clienteInfo = order.cliente || { nome: 'Não informado', endereco: 'Não informado', telefone: 'Não informado' };
-
             // Formata o número de telefone para o link do WhatsApp
             const telefoneFormatado = clienteInfo.telefone ? clienteInfo.telefone.replace(/\D/g, '') : '';
-            const whatsappLink = `https://wa.me/${telefoneFormatado}`;
+            const whatsappLink = `https://wa.me/55${telefoneFormatado}`; // Adicionado o código do país para o WhatsApp
 
             // Adiciona o botão "Pronto" e o link do WhatsApp
             orderItem.innerHTML = `
@@ -107,11 +112,10 @@ onValue(ordersRef, (snapshot) => {
 
 // Escuta e exibe as mensagens do chat em tempo real
 onValue(messagesRef, (snapshot) => {
-    chatList.innerHTML = ''; // Limpa a lista antes de atualizar
+    chatList.innerHTML = ''; 
     if (snapshot.exists()) {
         const messages = snapshot.val();
         
-        // Converte o objeto de mensagens em um array
         const messageKeys = Object.keys(messages);
 
         messageKeys.forEach(key => {
@@ -119,7 +123,6 @@ onValue(messagesRef, (snapshot) => {
             const messageItem = document.createElement('div');
             messageItem.classList.add('chat-message-admin');
             
-            // Adiciona classe para diferenciar mensagens do usuário
             if (message.sender === 'user') {
                 messageItem.classList.add('user');
             }
@@ -130,7 +133,7 @@ onValue(messagesRef, (snapshot) => {
             `;
             chatList.appendChild(messageItem);
         });
-        chatList.scrollTop = chatList.scrollHeight; // Rola para o final da lista
+        chatList.scrollTop = chatList.scrollHeight; 
     } else {
         chatList.innerHTML = '<p>Nenhuma mensagem nova.</p>';
     }
