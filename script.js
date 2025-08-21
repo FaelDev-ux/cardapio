@@ -343,7 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const mensagemFinal = `Obrigado!`;
 
             const mensagemCompleta = `${saudacao}${dadosCliente}${itensPedido}${mensagemFinal}`;
-            const telefoneRestaurante = "5583988627070"; // SUBSTITUA PELO SEU NÚMERO DE TELEFONE
+            const telefoneRestaurante = "5583988627070";
             const urlWhatsapp = `https://api.whatsapp.com/send?phone=${telefoneRestaurante}&text=${encodeURIComponent(mensagemCompleta)}`;
 
             // Envia o pedido para o Firebase
@@ -374,7 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     // =========================================================
-    // FIM DA LÓGICA CORRIGIDA
+    // LÓGICA DO FORMULÁRIO DE DADOS DO CLIENTE
     // =========================================================
 
     // --- LÓGICA DE ADICIONAR ITEM AO CARRINHO ---
