@@ -1612,3 +1612,69 @@ h1 {
 .btn-adicionar-prato:hover {
     background-color: #ff3333; 
 }
+
+#form-dados-cliente {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-family: Arial, sans-serif;
+    color: #fff;
+}
+
+/* Campos alinhados lado a lado */
+.form-group-inline {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Ajuste dos grupos */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+label {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+}
+
+input[type="text"],
+input[type="tel"] {
+    padding: 0.6rem;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+/* Checkbox alinhado */
+.opcao-retirada {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Botão de finalizar */
+.btn-finalizar {
+    background: #e50914;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    padding: 0.9rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.btn-finalizar:hover {
+    background: #c40811;
+}
+
+/* Caixa geral */
+#form-dados-cliente input {
+    background: #2a2a2a;
+    color: white;
+}
