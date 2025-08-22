@@ -1,5 +1,5 @@
 // =========================================================
-// SCRIPT.JS - VERSÃO ATUALIZADA E CORRIGIDA PARA O CARDÁPIO
+// SCRIPT.JS - VERSÃO ATUALIZADA COM TAXA POR BAIRRO
 // =========================================================
 
 // Importa todas as funções necessárias do Firebase
@@ -60,6 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // VARIÁVEIS AJUSTADAS PARA CORRESPONDER AO SEU HTML
     const nomeClienteInput = document.getElementById('nome-cliente');
     const enderecoClienteInput = document.getElementById('endereco-cliente');
+    const bairroClienteInput = document.getElementById('bairro-cliente'); // NOVO: Campo do bairro
+    const complementoClienteInput = document.getElementById('complemento-cliente'); // NOVO: Campo do complemento
     const telefoneClienteInput = document.getElementById('telefone-cliente');
     
     // Referências para o novo modal de escolha
@@ -87,11 +89,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- VARIÁVEL QUE VAI ARMAZENAR O CARRINHO ---
     let carrinho = [];
 
-    // NOVO: Variáveis para o cálculo de taxa de entrega
-    // Encontre no seu HTML o elemento onde o valor da taxa será exibido
+    // MODIFICADO: Objeto com as taxas de entrega por bairro
+    // ATENÇÃO: Os nomes dos bairros devem ser exatos e em letras minúsculas!
+    const TAXAS_POR_BAIRRO = {
+        'centro': 5.00,
+        'bancarios': 8.00,
+        'mangabeira': 10.00,
+        'bessa': 7.00,
+        'treze de maio': 6.00,
+        // Adicione mais bairros e suas taxas aqui
+    };
+    
     const taxaEntregaEl = document.getElementById('taxa-entrega');
-    // NOVO: Defina o valor da taxa aqui (ajuste conforme necessário)
-    const VALOR_TAXA_ENTREGA = 5.00; // Exemplo: R$ 5,00
 
     // =========================================================
     // LÓGICA DO CARDÁPIO (CORRIGIDA)
@@ -270,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function atualizarCarrinho() {
         listaPedidoEl.innerHTML = '';
         let total = 0;
-        let taxa = 0; // NOVO: Variável para a taxa de entrega
+        let taxa = 0; // MODIFICADO: Variável para a taxa de entrega
 
         if (carrinho.length === 0) {
             listaPedidoEl.innerHTML = '<p>Seu pedido está vazio.</p>';
@@ -293,22 +302,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 total += item.preco;
             });
 
-            // NOVO: Adiciona a taxa de entrega se a retirada não estiver marcada
+            // MODIFICADO: Lógica para pegar a taxa baseada no bairro
             const isRetirada = retiradaCheckbox.checked;
-            if (!isRetirada) {
-                taxa = VALOR_TAXA_ENTREGA;
+            if (!isRetirada && bairroClienteInput) {
+                const bairroDigitado = bairroClienteInput.value.toLowerCase().trim();
+                taxa = TAXAS_POR_BAIRRO[bairroDigitado] || 0; // Se o bairro não for encontrado, a taxa é 0
             }
 
-            // NOVO: Atualiza a exibição da taxa e do total
+            // MODIFICADO: Atualiza a exibição da taxa e do total
             if (taxaEntregaEl) {
-                taxaEntregaEl.innerHTML = `
-                    <span>Taxa de Entrega:</span>
-                    <span>R$ ${taxa.toFixed(2).replace('.', ',')}</span>
-                `;
-                taxaEntregaEl.style.display = 'flex';
+                if (taxa > 0) {
+                    taxaEntregaEl.innerHTML = `
+                        <span>Taxa de Entrega:</span>
+                        <span>R$ ${taxa.toFixed(2).replace('.', ',')}</span>
+                    `;
+                    taxaEntregaEl.style.display = 'flex';
+                } else {
+                    taxaEntregaEl.style.display = 'none';
+                }
             }
             
-            // NOVO: Calcula o total final (com ou sem a taxa)
             const totalFinal = total + taxa;
 
             totalPedidoEl.textContent = `Total: R$ ${totalFinal.toFixed(2).replace('.', ',')}`;
@@ -392,20 +405,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // LÓGICA DE MOSTRAR/OCULTAR CAMPO DE ENDEREÇO COM O CHECKBOX
-    if (retiradaCheckbox && enderecoContainer) {
-        retiradaCheckbox.addEventListener('change', () => {
-            if (retiradaCheckbox.checked) {
-                enderecoContainer.style.display = 'none';
-                // NOVO: Atualiza o carrinho para remover a taxa quando o checkbox é marcado
-                atualizarCarrinho();
-            } else {
-                enderecoContainer.style.display = 'flex';
-                // NOVO: Atualiza o carrinho para adicionar a taxa quando o checkbox é desmarcado
-                atualizarCarrinho();
-            }
-        });
-    }
+    // LÓGICA DE MOSTRAR/OCULTAR CAMPO DE ENDEREÇO COM O CHECKBOX (MODIFICADA)
+    if (retiradaCheckbox && enderecoContainer && bairroClienteInput) {
+        retiradaCheckbox.addEventListener('change', () => {
+            if (retiradaCheckbox.checked) {
+                enderecoContainer.style.display = 'none';
+            } else {
+                enderecoContainer.style.display = 'flex';
+            }
+            atualizarCarrinho();
+        });
+        
+        // NOVO: Atualiza a taxa de entrega em tempo real enquanto o cliente digita o bairro
+        bairroClienteInput.addEventListener('input', atualizarCarrinho);
+    }
+
 
     // --- LÓGICA DOS BOTÕES DO NOVO MODAL DE ESCOLHA ---
 
@@ -485,14 +499,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const nome = nomeClienteInput.value.trim();
             const telefone = telefoneClienteInput.value.trim();
             const isRetirada = retiradaCheckbox.checked;
+            const bairro = bairroClienteInput.value.trim(); // NOVO: Pega o valor do bairro
+            const complemento = complementoClienteInput.value.trim(); // NOVO: Pega o valor do complemento
 
-            let endereco = 'Retirada no Local';
+            let enderecoCompleto = 'Retirada no Local';
             if (!isRetirada) {
-                endereco = enderecoClienteInput.value.trim();
+                const endereco = enderecoClienteInput.value.trim();
+                enderecoCompleto = `${endereco}, ${bairro}${complemento ? `, ${complemento}` : ''}`; // MODIFICADO: Concatena o endereço
             }
             
             // Validação dos campos obrigatórios
-            if (!nome || !telefone || (!isRetirada && !endereco)) {
+            if (!nome || !telefone || (!isRetirada && (!enderecoClienteInput.value.trim() || !bairro))) {
                 alert("Por favor, preencha todos os campos obrigatórios.");
                 return;
             }
@@ -500,14 +517,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const dataPedido = new Date().toLocaleString('pt-BR');
             const totalItens = carrinho.reduce((sum, item) => sum + item.preco, 0);
 
-            // NOVO: Define a taxa de entrega e o total final
+            // MODIFICADO: Define a taxa de entrega baseada no bairro
             let taxa = 0;
             if (!isRetirada) {
-                taxa = VALOR_TAXA_ENTREGA;
+                const bairroLowerCase = bairro.toLowerCase();
+                taxa = TAXAS_POR_BAIRRO[bairroLowerCase] || 0; // Se o bairro não for encontrado, a taxa é 0
             }
             const totalFinal = totalItens + taxa;
             
-            const cliente = { nome, endereco, telefone };
+            const cliente = { nome, endereco: enderecoCompleto, telefone, bairro }; // NOVO: Adiciona o bairro ao objeto do cliente
             
             // Constrói o pedido para o Firebase (incluindo total para o painel de admin)
             const pedidoCompleto = {
@@ -548,6 +566,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Limpar os campos do formulário para o próximo uso
                     nomeClienteInput.value = '';
                     enderecoClienteInput.value = '';
+                    bairroClienteInput.value = ''; // NOVO: Limpa o campo do bairro
+                    complementoClienteInput.value = ''; // NOVO: Limpa o campo do complemento
                     telefoneClienteInput.value = '';
                     retiradaCheckbox.checked = false;
                     enderecoContainer.style.display = 'flex';
@@ -818,13 +838,13 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${endereco ? `<p><strong>Endereço:</strong> ${endereco}</p>` : ''}
                             ${telefone ? `<p><strong>Telefone:</strong> ${telefone} ${isWhatsapp ? `<a href="https://api.whatsapp.com/send?phone=55${telefone}&text=Ol%C3%A1%20${pedido.cliente.nome}%2C%20recebemos%20seu%20pedido!" target="_blank" class="abrir-wpp-link">Abrir WhatsApp</a>` : ''}</p>` : ''}
                         </div>
+                        ${taxaHtml}
                         <div class="pedido-lista-itens">
                             <p><strong>Itens:</strong></p>
                             <ul>
                                 ${listaItensHtml}
                             </ul>
                         </div>
-                        ${taxaHtml}
                         <button class="btn-pedido-pronto" data-id="${pedido.id}">Pronto</button>
                     `;
                     mensagensPedido.appendChild(pedidoDiv);
