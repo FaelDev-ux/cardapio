@@ -1778,6 +1778,7 @@
       <h2>Seu Pedido</h2>
       <button id="fechar-carrinho" class="fechar-carrinho">&times;</button>
     </div>
+    
     <div class="modal-body">
       <ul id="lista-pedido" class="lista-pedido">
         </ul>
@@ -1814,30 +1815,43 @@
     <div class="modal-content">
         <span id="fechar-dados-cliente" class="fechar-modal">&times;</span>
         <h2>Dados para o Pedido</h2>
-        <form id="form-dados-cliente">
+<form id="form-dados-cliente">
+    <div class="form-group-inline top-fields">
+        <div class="form-group">
             <label for="nome-cliente">Nome:</label>
             <input type="text" id="nome-cliente" placeholder="Seu nome completo" required>
+        </div>
+        <div class="opcao-retirada">
+            <input type="checkbox" id="retirada-local">
+            <label for="retirada-local">Retirar no local</label>
+        </div>
+    </div>
 
-            <div class="opcao-retirada">
-                <input type="checkbox" id="retirada-local">
-                <label for="retirada-local">Retirar no local</label>
+    <div id="endereco-completo-container">
+        <div class="form-group">
+            <label for="endereco-cliente">Endereço:</label>
+            <input type="text" id="endereco-cliente" placeholder="Rua, Número, Bairro">
+        </div>
+
+        <div class="form-group-inline">
+            <div class="form-group">
+                <label for="bairro-cliente">Bairro:</label>
+                <input type="text" id="bairro-cliente" placeholder="Ex: Centro" autocomplete="address-level2">
             </div>
-
-            <div id="endereco-container">
-                <label for="endereco-cliente">Endereço:</label>
-                <input type="text" id="endereco-cliente" placeholder="Rua, Número, Bairro">
+            <div class="form-group">
+                <label for="complemento-cliente">Complemento:</label>
+                <input type="text" id="complemento-cliente" placeholder="Apto, bloco, etc.">
             </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="telefone-cliente">Telefone:</label>
+        <input type="tel" id="telefone-cliente" placeholder="(DDD) 9xxxx-xxxx" required>
+    </div>
 
-            <div id="endereco-container">
-                <label for="endereco-cliente">Complemento:</label>
-                <input type="text" id="endereco-cliente" placeholder="Apto, bloco, etc.">
-            </div>
-
-            <label for="telefone-cliente">Telefone:</label>
-            <input type="tel" id="telefone-cliente" placeholder="(DDD) 9xxxx-xxxx" required>
-
-            <button type="submit" class="btn-finalizar">Finalizar Pedido</button>
-        </form>
+    <button type="submit" class="btn-finalizar">Finalizar Pedido</button>
+</form>
     </div>
 </div>
 <div id="modal-escolha" class="modal">
