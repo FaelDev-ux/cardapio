@@ -454,35 +454,71 @@ document.addEventListener('DOMContentLoaded', () => {
         bairroClienteInput.addEventListener('input', atualizarCarrinho);
     }
 
-    if (btnEscolhaRestaurante) {
-        btnEscolhaRestaurante.addEventListener('click', () => {
-            if (carrinho.length === 0) {
-                alert("O carrinho está vazio.");
-                modalEscolha.style.display = 'none';
-                return;
-            }
-
+    // Remova o código antigo da função btnEscolhaRestaurante
+if (btnEscolhaRestaurante) {
+    btnEscolhaRestaurante.addEventListener('click', () => {
+        if (carrinho.length === 0) {
+            alert("O carrinho está vazio.");
             modalEscolha.style.display = 'none';
-            modalPagamento.style.display = 'flex';
+            return;
+        }
 
-            const total = carrinho.reduce((sum, item) => sum + item.preco, 0);
+        // NOVO CÓDIGO AQUI
+        modalEscolha.style.display = 'none';
 
-            pedidoTemp = {
-                cliente: {
-                    nome: 'Cliente no Local',
-                    endereco: 'Retirada no Local',
-                    telefone: 'N/A',
-                    email: ''
-                },
-                itens: carrinho,
-                total: total,
-                data: new Date().toLocaleString('pt-BR'),
-                status: 'pendente',
-                finalizacao: 'estabelecimento',
-                taxaEntrega: 0
-            };
-        });
-    }
+        const total = carrinho.reduce((sum, item) => sum + item.preco, 0);
+
+        pedidoTemp = {
+            cliente: {
+                nome: 'Cliente no Local',
+                endereco: 'Retirada no Local',
+                telefone: 'N/A',
+                email: ''
+            },
+            itens: carrinho,
+            total: total,
+            data: new Date().toLocaleString('pt-BR'),
+            status: 'pendente',
+            finalizacao: 'estabelecimento',
+            taxaEntrega: 0
+        };
+
+        // Exibe o resumo diretamente para o garçom
+        const resumoPedidoDiv = document.getElementById('resumo-pedido-container');
+        if (resumoPedidoDiv) {
+            const itensHtml = carrinho.map(item => `<li>${item.nome} - R$ ${item.preco.toFixed(2).replace('.', ',')}</li>`).join('');
+
+            resumoPedidoDiv.innerHTML = `
+                <h4>Itens:</h4>
+                <ul>${itensHtml}</ul>
+                <p class="resumo-total"><strong>Total:</strong> R$ ${pedidoTemp.total.toFixed(2).replace('.', ',')}</p>
+            `;
+            if (modalResumoGarcom) {
+                modalResumoGarcom.style.display = 'flex';
+            }
+        }
+
+        // NOVO CÓDIGO AQUI
+        // Formata o total para ser enviado ao Firebase
+        const pedidoFinal = { ...pedidoTemp };
+        pedidoFinal.total = `R$ ${pedidoFinal.total.toFixed(2).replace('.', ',')}`;
+
+        push(ordersRef, pedidoFinal)
+            .then(() => {
+                console.log("Pedido enviado para o Firebase com sucesso!");
+            })
+            .catch((error) => {
+                console.error("Erro ao enviar pedido para o Firebase: ", error);
+                alert("Ocorreu um erro ao enviar seu pedido. Tente novamente.");
+            });
+
+        // Limpa o carrinho após o pedido
+        carrinho = [];
+        pedidoTemp = {};
+        localStorage.removeItem('carrinhoSalvo');
+        atualizarCarrinho();
+    });
+}
 
     if (btnEscolhaWpp) {
         btnEscolhaWpp.addEventListener('click', () => {
