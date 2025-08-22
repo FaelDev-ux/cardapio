@@ -40,6 +40,106 @@ function removeOrder(orderId) {
         });
 }
 
+// --- NOVO: Função para imprimir um pedido ---
+// --- NOVO: Função para imprimir um pedido ---
+function printOrder(order) {
+    if (!order) {
+        alert("Não há pedido para imprimir.");
+        return;
+    }
+    
+    // Converte os itens para HTML
+    const itensHtml = order.itens.map(item => {
+        // Verifica se o item é um objeto com nome e preço
+        if (typeof item === 'object' && item.nome && item.preco) {
+            return `<li>${item.nome} &nbsp; &nbsp; &nbsp; &nbsp; R$ ${item.preco.toFixed(2).replace('.', ',')}</li>`;
+        } else {
+            // Se não for, assume que é uma string simples
+            return `<li>${item}</li>`;
+        }
+    }).join('');
+
+    // Prepara o conteúdo do troco
+    const trocoHtml = order.formaPagamento === 'Dinheiro' ? `
+        <p><strong>Troco para:</strong> ${order.troco}</p>
+        <p><strong>Troco devido:</strong> ${order.trocoDevido}</p>
+    ` : '';
+    
+    // Prepara o conteúdo da taxa de entrega
+    const taxaHtml = (order.taxaEntrega > 0) ? `
+        <p><strong>Taxa de Entrega:</strong> R$ ${order.taxaEntrega.toFixed(2).replace('.', ',')}</p>
+    ` : '';
+
+    // Cria o conteúdo HTML completo para impressão
+    const conteudoImpressao = `
+        <style>
+            body { 
+                font-family: 'Courier New', Courier, monospace; 
+                font-size: 20px; 
+                color: black;
+            }
+            .recibo { 
+                width: 300px; 
+                margin: 0 auto; 
+                padding: 10px; 
+                border: 1px solid black; 
+            }
+            h3 { 
+                text-align: center; 
+                margin-bottom: 5px;
+            }
+            .linha { 
+                border-bottom: 1px dashed black; 
+                margin: 10px 0;
+            }
+            ul { 
+                list-style: none; 
+                padding: 0; 
+                margin: 0; 
+            }
+            li { 
+                margin-bottom: 5px; 
+            }
+            .total { 
+                font-weight: bold;
+                text-align: right; 
+            }
+            p { 
+                margin: 5px 0; 
+            }
+            p strong {
+                font-weight: bold;
+            }
+        </style>
+        <div class="recibo">
+            <h3>Recibo do Pedido</h3>
+            <p><strong>Data:</strong> ${order.data}</p>
+            <div class="linha"></div>
+            <p><strong>Cliente:</strong> ${order.cliente.nome}</p>
+            <p><strong>Endereço:</strong> ${order.cliente.endereco}</p>
+            <p><strong>Telefone:</strong> ${order.cliente.telefone}</p>
+            <div class="linha"></div>
+            <p><strong>Itens:</strong></p>
+            <ul>
+                ${itensHtml}
+            </ul>
+            <div class="linha"></div>
+            <p><strong>Subtotal:</strong> R$ ${order.itens.reduce((sum, item) => sum + (typeof item === 'object' && item.preco ? item.preco : 0), 0).toFixed(2).replace('.', ',')}</p>
+            ${taxaHtml}
+            <p><strong>Forma de Pagamento:</strong> ${order.formaPagamento}</p>
+            ${trocoHtml}
+            <div class="linha"></div>
+            <p class="total"><strong>TOTAL:</strong> R$ ${typeof order.total === 'number' ? order.total.toFixed(2).replace('.', ',') : order.total}</p>
+        </div>
+    `;
+
+    // Abre uma nova janela, escreve o conteúdo e imprime
+    const janelaImpressao = window.open('', '_blank');
+    janelaImpressao.document.write(conteudoImpressao);
+    janelaImpressao.document.close();
+    janelaImpressao.print();
+}
+
 // Escuta e exibe os pedidos em tempo real
 onValue(ordersRef, (snapshot) => {
     ordersList.innerHTML = ''; // Limpa a lista antes de atualizar
@@ -76,20 +176,26 @@ onValue(ordersRef, (snapshot) => {
             const telefoneFormatado = clienteInfo.telefone ? clienteInfo.telefone.replace(/\D/g, '') : '';
             const whatsappLink = `https://wa.me/55${telefoneFormatado}`; // Adicionado o código do país para o WhatsApp
 
+            // Prepara o conteúdo do troco para exibição
+            const trocoHtml = order.formaPagamento === 'Dinheiro' ? `<p><strong>Troco para:</strong> ${order.troco}</p><p><strong>Troco devido:</strong> ${order.trocoDevido}</p>` : '';
+            
             // Adiciona o botão "Pronto" e o link do WhatsApp
             orderItem.innerHTML = `
                 <div class="order-header">
-                    <span>Pedido de <strong>R$ ${order.total}</strong></span>
+                    <span>Pedido de <strong>${order.total}</strong></span>
                     <span class="order-date">${order.data}</span>
                 </div>
                 <div class="order-details">
                     <p><strong>Nome:</strong> ${clienteInfo.nome}</p>
                     <p><strong>Endereço:</strong> ${clienteInfo.endereco}</p>
                     <p><strong>Telefone:</strong> ${clienteInfo.telefone} <a href="${whatsappLink}" target="_blank" class="whatsapp-btn">Abrir WhatsApp</a></p>
+                    <p><strong>Pagamento:</strong> ${order.formaPagamento}</p>
+                    ${trocoHtml}
                     <ul>${itemsHtml}</ul>
                 </div>
                 <div class="order-actions">
                     <button class="btn-ready" data-order-id="${key}">Pronto</button>
+                    <button class="btn-print" data-order-id="${key}">Imprimir</button>
                 </div>
             `;
             ordersList.appendChild(orderItem);
@@ -102,6 +208,15 @@ onValue(ordersRef, (snapshot) => {
                 if (confirm("Tem certeza que deseja marcar este pedido como pronto?")) {
                     removeOrder(orderId);
                 }
+            });
+        });
+        
+        // --- NOVO: Adiciona um ouvinte para o botão "Imprimir" ---
+        document.querySelectorAll('.btn-print').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const orderId = event.target.dataset.orderId;
+                const orderToPrint = orders[orderId];
+                printOrder(orderToPrint);
             });
         });
 
