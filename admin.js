@@ -83,8 +83,7 @@ function printOrder(order) {
   const conteudoImpressao = `
         <style>
             body {
-                font-family: 'Courier New', Courier, monospace;
-                font-size: 20px;
+                font-family: sans-serif; padding: 20px;
                 color: black;
             }
             .recibo {
