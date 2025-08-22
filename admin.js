@@ -24,8 +24,10 @@ const messagesRef = ref(database, 'messages');
 const ordersList = document.getElementById('orders-list');
 const chatList = document.getElementById('chat-list');
 
+// Variáveis para a notificação sonora
 let lastOrderCount = 0;
-const notificationSound = new Audio('ding.mp3');
+// A linha abaixo foi atualizada com o nome do seu arquivo de som
+const notificationSound = new Audio('ding-sound-effect_2.mp3');
 
 function removeOrder(orderId) {
     const orderRef = ref(database, `pedidos/${orderId}`);
@@ -43,7 +45,7 @@ function printOrder(order) {
         alert("Não há pedido para imprimir.");
         return;
     }
-
+    
     const itensHtml = order.itens.map(item => {
         if (typeof item === 'object' && item.nome && item.preco) {
             return `<li>${item.nome} &nbsp; &nbsp; &nbsp; &nbsp; R$ ${item.preco.toFixed(2).replace('.', ',')}</li>`;
@@ -56,7 +58,7 @@ function printOrder(order) {
         <p><strong>Troco para:</strong> ${order.troco}</p>
         <p><strong>Troco devido:</strong> ${order.trocoDevido}</p>
     ` : '';
-
+    
     const taxaHtml = (order.taxaEntrega > 0) ? `
         <p><strong>Taxa de Entrega:</strong> R$ ${order.taxaEntrega.toFixed(2).replace('.', ',')}</p>
     ` : '';
@@ -132,7 +134,7 @@ function printOrder(order) {
     };
 }
 
-// --- NOVA FUNÇÃO PARA ENVIAR MENSAGEM VIA WHATSAPP ---
+// --- FUNÇÃO PARA ENVIAR MENSAGEM VIA WHATSAPP ---
 function sendWhatsAppMessage(order) {
     if (!order || !order.cliente.telefone) {
         alert("Informações do cliente ausentes para enviar mensagem.");
@@ -152,7 +154,8 @@ onValue(ordersRef, (snapshot) => {
     ordersList.innerHTML = '';
     if (snapshot.exists()) {
         const orders = snapshot.val();
-
+        
+        // Lógica do som de notificação
         const currentOrderCount = Object.keys(orders).length;
         if (currentOrderCount > lastOrderCount && lastOrderCount !== 0) {
             notificationSound.play().catch(error => {
@@ -162,12 +165,12 @@ onValue(ordersRef, (snapshot) => {
         lastOrderCount = currentOrderCount;
 
         const orderKeys = Object.keys(orders).reverse();
-
+        
         orderKeys.forEach(key => {
             const order = orders[key];
             const orderItem = document.createElement('div');
             orderItem.classList.add('order-item');
-
+            
             const clienteInfo = order.cliente || { nome: 'Não informado', endereco: 'Não informado', telefone: 'Não informado' };
             if (clienteInfo.endereco === "Retirada no Local") {
                 orderItem.classList.add('pedido-retirada');
@@ -185,7 +188,7 @@ onValue(ordersRef, (snapshot) => {
             const telefoneFormatado = clienteInfo.telefone ? clienteInfo.telefone.replace(/\D/g, '') : '';
             const whatsappLink = `https://wa.me/55${telefoneFormatado}`;
             const trocoHtml = order.formaPagamento === 'Dinheiro' ? `<p><strong>Troco para:</strong> ${order.troco}</p><p><strong>Troco devido:</strong> ${order.trocoDevido}</p>` : '';
-
+            
             orderItem.innerHTML = `
                 <div class="order-header">
                     <span>Pedido de <strong>${order.total}</strong></span>
@@ -216,7 +219,7 @@ onValue(ordersRef, (snapshot) => {
                 }
             });
         });
-
+        
         document.querySelectorAll('.btn-print').forEach(button => {
             button.addEventListener('click', (event) => {
                 const orderId = event.target.dataset.orderId;
@@ -225,7 +228,6 @@ onValue(ordersRef, (snapshot) => {
             });
         });
 
-        // --- NOVO: Adiciona o ouvinte de evento para o novo botão ---
         document.querySelectorAll('.btn-whatsapp').forEach(button => {
             button.addEventListener('click', (event) => {
                 const orderId = event.target.dataset.orderId;
@@ -244,18 +246,18 @@ onValue(messagesRef, (snapshot) => {
     chatList.innerHTML = '';
     if (snapshot.exists()) {
         const messages = snapshot.val();
-
+        
         const messageKeys = Object.keys(messages);
 
         messageKeys.forEach(key => {
             const message = messages[key];
             const messageItem = document.createElement('div');
             messageItem.classList.add('chat-message-admin');
-
+            
             if (message.sender === 'user') {
                 messageItem.classList.add('user');
             }
-
+            
             messageItem.innerHTML = `
                 <span>${message.text}</span>
                 <span class="chat-date">${message.timestamp}</span>
