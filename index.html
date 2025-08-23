@@ -64,7 +64,7 @@
       <div class="barra-pesquisa">
         <input type="text" id="searchInput" placeholder="Buscar Item">
         
-        <div id="busca-destaque" class="busca-destaque-popup" style="display:none;"></div>
+      <div id="busca-destaque" class="busca-destaque-popup" style="display:none;"></div>
         <p id="msgBusca" style="display:none; color: red; font-weight: bold;">Nenhum item encontrado.</p>
       </div>
 <li id="entradas">
@@ -1650,7 +1650,7 @@
         <li class="item-cardapio">
             <div class="info-item descricao-container">
                 <span class="nome-item">CASAL GARCIA - VINHO VERDE</span>
-                <p class="desc">Descrição opcional do vinho tinto, como a uva ou a região.</p>
+                <p class="desc"></p>
             </div>
             <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
@@ -1662,7 +1662,7 @@
         <li class="item-cardapio">
             <div class="info-item descricao-container">
                 <span class="nome-item">STA HELENA - CABERNET SAUVIGNON</span>
-                <p class="desc">Descrição opcional do vinho branco, como a uva ou a região.</p>
+                <p class="desc"></p>
             </div>
             <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
@@ -1674,7 +1674,7 @@
         <li class="item-cardapio">
             <div class="info-item descricao-container">
                 <span class="nome-item">STA HELENA - MALBEC</span>
-                <p class="desc">Descrição opcional do vinho rosé, como a uva ou a região.</p>
+                <p class="desc"></p>
             </div>
             <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
@@ -1686,7 +1686,7 @@
         <li class="item-cardapio">
             <div class="info-item descricao-container">
                 <span class="nome-item">CAMPO LARGO - SUAVE TINTO</span>
-                <p class="desc">Descrição opcional do espumante, como brut ou demi-sec.</p>
+                <p class="desc"></p>
             </div>
             <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
@@ -1703,7 +1703,7 @@
         <li class="item-cardapio">
             <div class="info-item descricao-container">
                 <span class="nome-item">MOSCATEL BRANCO</span>
-                <p class="desc">Descrição opcional do vinho tinto, como a uva ou a região.</p>
+                <p class="desc"></p>
             </div>
             <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
@@ -1715,7 +1715,7 @@
         <li class="item-cardapio">
             <div class="info-item descricao-container">
                 <span class="nome-item">MOSCATEL ROSÉ</span>
-                <p class="desc">Descrição opcional do vinho branco, como a uva ou a região.</p>
+                <p class="desc"></p>
             </div>
             <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
@@ -1727,7 +1727,7 @@
         <li class="item-cardapio">
             <div class="info-item descricao-container">
                 <span class="nome-item">VERO BRUT</span>
-                <p class="desc">Descrição opcional do vinho rosé, como a uva ou a região.</p>
+                <p class="desc"></p>
             </div>
             <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
@@ -1739,7 +1739,7 @@
         <li class="item-cardapio">
             <div class="info-item descricao-container">
                 <span class="nome-item">BRUT 187ml</span>
-                <p class="desc">Descrição opcional do espumante, como brut ou demi-sec.</p>
+                <p class="desc"></p>
             </div>
             <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
@@ -1751,7 +1751,7 @@
         <li class="item-cardapio">
             <div class="info-item descricao-container">
                 <span class="nome-item">MOSCATEL 187ml</span>
-                <p class="desc">Descrição opcional do espumante, como brut ou demi-sec.</p>
+                <p class="desc"></p>
             </div>
             <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
@@ -1796,11 +1796,6 @@
     <button id="btn-whatsapp" class="btn-opcoes">Pedido para entrega (WhatsApp)</button>
     <button id="btn-cancelar" class="btn-opcoes btn-cancelar">Cancelar</button>
   </div>
-</div>
-<div class="chat-container">
-    <div id="chat-messages"></div>
-    <input type="text" id="chat-input" placeholder="Digite sua mensagem...">
-    <button id="chat-send">Enviar</button>
 </div>
 <div id="modal-confirmacao" class="modal">
     <div class="modal-content">
@@ -1850,7 +1845,7 @@
         <input type="tel" id="telefone-cliente" placeholder="(DDD) 9xxxx-xxxx" required>
     </div>
 
-    <button type="submit" class="btn-finalizar">Finalizar Pedido</button>
+    <button type="submit" id="btn-finalizar-dados" class="btn-finalizar">Finalizar Pedido</button>
 </form>
     </div>
 </div>
@@ -1892,5 +1887,34 @@
         <button id="btn-adicionar-prato" class="btn-adicionar-prato">Adicionar ao Carrinho</button>
     </div>
 </div>
-  </body>
+<div id="modal-confirmacao" class="modal">
+    </div>
+
+<div id="modal-pagamento" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" id="fechar-pagamento">&times;</span>
+        <h3>Como você gostaria de pagar?</h3>
+        <button id="btn-pagamento-dinheiro" class="btn-principal">
+            <i class="fas fa-money-bill-wave"></i> Dinheiro
+        </button>
+        <button id="btn-pagamento-cartao" class="btn-secundario">
+            <i class="fas fa-credit-card"></i> Cartão
+        </button>
+    </div>
+</div>
+<div id="modal-troco" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" id="fechar-troco">&times;</span>
+        <h3>Precisa de troco?</h3>
+        <p>Para quanto seria?</p>
+        <div class="form-group-troco">
+            <span>R$</span>
+            <input type="number" id="valor-troco-input" placeholder="00,00">
+        </div>
+        <button id="btn-confirmar-troco" class="btn-principal1">Confirmar</button>
+    </div>
+</div>
+
+<script src="script.js" type="module"></script>
+</body>
 </html>

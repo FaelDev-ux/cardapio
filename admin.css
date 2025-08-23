@@ -63,3 +63,53 @@ body {
     border-left: 5px solid #00b300; /* Borda verde à esquerda */
     background-color: #00b30030; /* Fundo verde claro semi-transparente */
 } 
+
+.btn-ready, .btn-print {
+    background-color: #f1f1f1; /* Cor de fundo padrão */
+    color: #333; /* Cor do texto */
+    border: 1px solid #ccc; /* Borda sutil */
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease; /* Transição suave para o hover */
+    margin-right: 8px; /* Espaço entre os botões */
+}
+
+.btn-ready {
+    background-color: #28a745; /* Verde para "Pronto" */
+    color: #fff;
+    border-color: #28a745;
+}
+
+.btn-ready:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.btn-print {
+    background-color: #17a2b8; /* Azul para "Imprimir" */
+    color: #fff;
+    border-color: #17a2b8;
+}
+
+.btn-print:hover {
+    background-color: #138496;
+    border-color: #117a8b;
+}
+
+/* Você já deve ter este estilo, mas adicionei para referência */
+.btn-whatsapp {
+    background-color: #25D366;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-whatsapp:hover {
+    background-color: #128C7E;
+}
