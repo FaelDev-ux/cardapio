@@ -276,6 +276,13 @@ h1 {
     font-weight: bold;
 }
 
+.desc1 {
+  font-size: 0.95em;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+
 .edit {
     color: #000;
 }

@@ -170,13 +170,30 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   const taxaEntregaEl = document.getElementById('taxa-entrega')
 
-  // --- LÓGICA ATUALIZADA PARA MANTER O CARDÁPIO ABERTO ---
-  // Apenas garante que as sublistas estão visíveis ao carregar a página
-  // A lógica de clique nas seções para expandir/recolher foi removida
+  // --- LÓGICA DO CARDÁPIO (SEÇÕES EXPANSÍVEIS) ---
+  // Quando a página carrega, todas as sublistas começam abertas
   sublistas.forEach(sublista => {
     sublista.classList.add('show')
     sublista.style.maxHeight = sublista.scrollHeight + 'px'
   })
+
+  // Toggle de abrir/fechar quando clicar na seção
+  secoes.forEach(secao => {
+    secao.addEventListener('click', () => {
+      const sublista = secao.nextElementSibling
+
+      if (sublista.classList.contains('show')) {
+        // Fecha
+        sublista.classList.remove('show')
+        sublista.style.maxHeight = null
+      } else {
+        // Abre
+        sublista.classList.add('show')
+        sublista.style.maxHeight = sublista.scrollHeight + 'px'
+      }
+    })
+  })
+  // --- FIM DA LÓGICA DO CARDÁPIO ---
 
   const modalPrato = document.getElementById('modal-prato')
   const fecharPratoBtn = document.getElementById('fechar-prato')
@@ -813,90 +830,112 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   })
 
-  /* Substitua a sua função de busca por esta: */
-  if (searchInput) {
-    let debounceTimer
-    searchInput.addEventListener('input', function () {
-      clearTimeout(debounceTimer)
-      debounceTimer = setTimeout(() => {
-        const termoBusca = this.value.toLowerCase().trim()
-        const todosItens = document.querySelectorAll('.sublista li')
+if (searchInput) {
+  let debounceTimer;
+  searchInput.addEventListener('input', function () {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      const termoBusca = this.value.toLowerCase().trim();
+      const todasSecoes = document.querySelectorAll('.secao');
+      const todosItens = document.querySelectorAll('.item-cardapio');
+      const msgBusca = document.getElementById('msgBusca');
+      const buscaDestaque = document.getElementById('busca-destaque');
 
-        let resultados = []
-        const msgBusca = document.getElementById('msgBusca')
+      // Remove qualquer destaque de buscas anteriores
+      todasSecoes.forEach(s => s.style.background = '');
+      todosItens.forEach(i => i.style.background = '');
 
-        if (termoBusca === '') {
-          // Se a busca estiver vazia, reexibe todos os itens e esconde a lista de destaque
-          todosItens.forEach(item => (item.style.display = 'flex'))
-          if (buscaDestaque) buscaDestaque.style.display = 'none'
-          if (msgBusca) msgBusca.style.display = 'none'
-        } else {
-          // Filtra os itens com base no termo de busca
-          todosItens.forEach(item => {
-            const nomeItemEl = item.querySelector('.nome-item')
-            const descItemEl = item.querySelector('.desc')
-            const nomeItem = nomeItemEl
-              ? nomeItemEl.textContent.toLowerCase()
-              : ''
-            const descItem = descItemEl
-              ? descItemEl.textContent.toLowerCase()
-              : ''
+      let resultados = [];
 
-            if (
-              nomeItem.includes(termoBusca) ||
-              descItem.includes(termoBusca)
-            ) {
-              item.style.display = 'flex' // Exibe o item
-              // Adiciona o item à lista de destaque
-              resultados.push(
-                `<li data-idx="${Array.from(todosItens).indexOf(item)}">
-                                <div style="display:flex;justify-content:space-between;align-items:center;gap:20px;">
-                                    <strong>${nomeItemEl.textContent}</strong>
-                                </div>
-                            </li>`
-              )
-            } else {
-              item.style.display = 'none' // Esconde o item
-            }
-          })
+      if (termoBusca === '') {
+        if (buscaDestaque) buscaDestaque.style.display = 'none';
+        if (msgBusca) msgBusca.style.display = 'none';
+        return;
+      }
 
-          // Lógica para a lista de destaque e mensagem de "não encontrado"
-          if (buscaDestaque) {
-            if (resultados.length > 0) {
-              buscaDestaque.innerHTML = `<ul>${resultados.join('')}</ul>`
-              buscaDestaque.style.display = 'block'
-              buscaDestaque.querySelectorAll('li').forEach(li => {
-                li.addEventListener('click', function () {
-                  const idx = this.getAttribute('data-idx')
-                  const item = todosItens[idx]
-                  if (item) {
-                    item.scrollIntoView({ behavior: 'smooth', block: 'center' })
-                    item.style.background = '#f500003f'
-                    setTimeout(() => {
-                      item.style.background = ''
-                    }, 1500)
-                  }
-                  buscaDestaque.style.display = 'none'
-                })
-              })
-            } else {
-              buscaDestaque.style.display = 'none'
-            }
-          }
-
-          if (msgBusca) {
-            msgBusca.style.display = resultados.length === 0 ? 'block' : 'none'
-          }
+      // Procura por Menus e Itens
+      // 1. Busca por Menus
+      todasSecoes.forEach((secao, index) => {
+        const nomeSecao = secao.textContent.toLowerCase();
+        if (nomeSecao.includes(termoBusca)) {
+          resultados.push(
+            `<li data-type="secao" data-idx="${index}">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:20px;">
+                <strong>Seção: ${secao.textContent}</strong>
+              </div>
+            </li>`
+          );
         }
-      }, 200)
-    })
+      });
+      
+      // 2. Busca por Itens
+      todosItens.forEach((item, index) => {
+        const nomeItemEl = item.querySelector('.nome-item');
+        const descItemEl = item.querySelector('.desc');
+        const nomeItem = nomeItemEl ? nomeItemEl.textContent.toLowerCase() : '';
+        const descItem = descItemEl ? descItemEl.textContent.toLowerCase() : '';
 
-    searchInput.addEventListener('blur', function () {
-      setTimeout(() => {
-        if (buscaDestaque) buscaDestaque.style.display = 'none'
-      }, 200)
-    })
-  }
+        if (nomeItem.includes(termoBusca) || descItem.includes(termoBusca)) {
+          resultados.push(
+            `<li data-type="item" data-idx="${index}">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:20px;">
+                <strong>Item: ${nomeItemEl.textContent}</strong>
+              </div>
+            </li>`
+          );
+        }
+      });
+      
+      // Lógica para a lista de destaque e mensagem de "não encontrado"
+      if (buscaDestaque) {
+        if (resultados.length > 0) {
+          buscaDestaque.innerHTML = `<ul>${resultados.join('')}</ul>`;
+          buscaDestaque.style.display = 'block';
+          if (msgBusca) msgBusca.style.display = 'none';
+
+          buscaDestaque.querySelectorAll('li').forEach(li => {
+            li.addEventListener('click', function () {
+              const tipo = this.getAttribute('data-type');
+              const idx = this.getAttribute('data-idx');
+              let elemento = (tipo === 'item') ? todosItens[idx] : todasSecoes[idx];
+
+              if (elemento) {
+                // Altera a lógica de rolagem para usar a variável headerHeight
+                const posicaoElemento = elemento.getBoundingClientRect().top + window.scrollY;
+                const posicaoAjustada = posicaoElemento - headerHeight;
+
+                window.scrollTo({
+                    top: posicaoAjustada,
+                    behavior: "smooth"
+                });
+
+                elemento.style.background = '#f500003f';
+                setTimeout(() => {
+                  elemento.style.background = '';
+                }, 1500);
+              }
+              buscaDestaque.style.display = 'none';
+            });
+          });
+        } else {
+          buscaDestaque.style.display = 'none';
+          if (msgBusca) msgBusca.style.display = 'block';
+        }
+      }
+      
+    }, 200);
+  });
+
+  searchInput.addEventListener('blur', function () {
+    setTimeout(() => {
+      if (buscaDestaque) {
+        buscaDestaque.style.display = 'none';
+      }
+    }, 200);
+  });
+}
+
+
 
   const secoesComID = document.querySelectorAll('.secao[id]')
   const observerOptions = {

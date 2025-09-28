@@ -1,1922 +1,2184 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <title>Cardápio - Supremo Oriente</title>
-  <meta name="description" content="Cardápio interativo do restaurante Supremo Oriente. Explore entradas, pratos, bebibas e muito mais.">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta charset="UTF-8">
-  <meta name="author" content="Supremo Oriente">
-  <meta name="keywords" content="cardápio, restaurante, comida oriental, Supremo Oriente, entradas, pratos">
-  <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cardápio - Supremo Oriente</title>
+    <meta
+      name="description"
+      content="Cardápio interativo do restaurante Supremo Oriente. Explore entradas, pratos, bebibas e muito mais."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <meta name="author" content="Supremo Oriente" />
+    <meta
+      name="keywords"
+      content="cardápio, restaurante, comida oriental, Supremo Oriente, entradas, pratos"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
 
     <script src="script.js" type="module"></script>
-</head>
-<body class="fundo-carregado">
-  <div id="popup-container" class="popup-container">
+  </head>
+  <body class="fundo-carregado">
+    <div id="popup-container" class="popup-container">
       <div class="popup-content">
-          <span class="close-btn">&times;</span>
-          <h2>Novidade! Vinhos e Espumantes</h2>
-          <p>Aproveite nossa nova carta de bebibas. Escolha o que deseja conferir:</p>
-          <a href="#Vinhos" class="popup-link">Vinhos</a>
-          <a href="#Espumantes" class="popup-link">Espumantes</a>
+        <span class="close-btn">&times;</span>
+        <h2>Novidade! Vinhos e Espumantes</h2>
+        <p>
+          Aproveite nossa nova carta de bebibas. Escolha o que deseja conferir:
+        </p>
+        <a href="#Vinhos" class="popup-link">Vinhos</a>
+        <a href="#Espumantes" class="popup-link">Espumantes</a>
       </div>
-  </div>
-  <header class="header-rotativo">
-    <nav class="header-container">
-      <a href="#entradas">Entradas</a>
-      <a href="#yakissoba-especial">Yakissoba Especial</a>
-      <a href="#bifum">Bifum</a>
-      <a href="#frango">Frango</a>
-      <a href="#carnes">Carnes</a>
-      <a href="#camarao">Camarão</a>
-      <a href="#peixe">Peixe</a>
-      <a href="#chapas">Chapas</a>
-      <a href="#arroz">Arroz</a>
-      <a href="#familia-feliz">Familia Feliz</a>
-      <a href="#temakis">Temakis</a>
-      <a href="#temakis-especiais">Temakis Especiais</a>
-      <a href="#sushi-burguer">Sushi Burguer</a>
-      <a href="#sushi-dog">Sushi Dog</a>
-      <a href="#bebidas">Bebidas</a>
-      <a href="#sucos">Sucos</a>
-      <a href="#Vinhos">Vinhos</a>
-      <a href="#Espumantes">Espumantes</a>
-    </nav>
-  </header> 
-  <div class="container">
-    <img id="logo" src="10.jpg" alt="Logo" class="logo" />
-    <h1>SUPREMO ORIENTE</h1>
-    <div class="social-links">
-      <a href="https://wa.me/+5583988627070" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-      </a>
-      <a href="https://www.instagram.com/supremooriente?igsh=cnRpamhzOTZnbGRl" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
     </div>
-    <ul class="menu">
-    <!--  <div class="barra-pesquisa">
-        <input type="text" id="searchInput" placeholder="Buscar Item"> -->
-        
-      <!--  <div id="busca-destaque" class="busca-destaque-popup" style="display:none;"></div> -->
-        <p id="msgBusca" style="display:none; color: red; font-weight: bold;">Nenhum item encontrado.</p>
+    <header class="header-rotativo">
+      <nav class="header-container">
+        <a href="#entradas">Entradas</a>
+        <a href="#yakissoba-especial">Yakissoba Especial</a>
+        <a href="#bifum">Bifum</a>
+        <a href="#frango">Frango</a>
+        <a href="#carnes">Carnes</a>
+        <a href="#camarao">Camarão</a>
+        <a href="#peixe">Peixe</a>
+        <a href="#chapas">Chapas</a>
+        <a href="#arroz">Arroz</a>
+        <a href="#familia-feliz">Familia Feliz</a>
+        <a href="#temakis">Temakis</a>
+        <a href="#temakis-especiais">Temakis Especiais</a>
+        <a href="#sushi-burguer">Sushi Burguer</a>
+        <a href="#sushi-dog">Sushi Dog</a>
+        <a href="#bebidas">Bebidas</a>
+        <a href="#sucos">Sucos</a>
+        <a href="#Vinhos">Vinhos</a>
+        <a href="#Espumantes">Espumantes</a>
+      </nav>
+    </header>
+    <div class="container">
+      <img id="logo" src="10.jpg" alt="Logo" class="logo" />
+      <h1>SUPREMO ORIENTE</h1>
+      <div class="social-links">
+        <a
+          href="https://wa.me/+5583988627070"
+          class="whatsapp-float"
+          target="_blank"
+          aria-label="WhatsApp"
+        >
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a
+          href="https://www.instagram.com/supremooriente?igsh=cnRpamhzOTZnbGRl"
+          target="_blank"
+          class="social-icon"
+          ><i class="fab fa-instagram"></i
+        ></a>
       </div>
-<li id="entradas">
-    <button class="secao" onclick="toggleSublista(1)">Entradas</button>
-    <ul class="sublista" id="sublista1">
-        <li>
-            <div class="info-item">
+      <ul class="menu">
+        <div class="barra-pesquisa">
+          <input type="text" id="searchInput" placeholder="Buscar Item" />
+
+          <div
+            id="busca-destaque"
+            class="busca-destaque-popup"
+            style="display: none"
+          ></div>
+          <p id="msgBusca" style="display: none; color: red; font-weight: bold">
+            Nenhum item encontrado.
+          </p>
+        </div>
+        <li id="entradas">
+          <button class="secao" onclick="toggleSublista(1)">Entradas</button>
+          <ul class="sublista" id="sublista1">
+            <li>
+              <div class="info-item">
                 <p class="desc1">SALADAS</p>
-            </div>
-        </li>
-        
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">SALADA SUPREMO ORIENTE</span>
-                <p class="desc">Acelga, cenoura, repolho, pimentão, presunto, tudo desfiado e com ovos de codorna.</p>
-            </div>
-            <div class="precos-container">
+                <p class="desc">
+                  Acelga, cenoura, repolho, pimentão, presunto, tudo desfiado e
+                  com ovos de codorna.
+                </p>
+              </div>
+              <div class="precos-container">
                 <div class="preco-btn-container">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 26,98</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 26,98</span>
                 </div>
-            </div>
-        </li>
-        
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">SALADA MIX JAPONESA</span>
                 <p class="desc">Alface, pepino japonês, rúcula, kani e atum.</p>
-            </div>
-            <div class="precos-container">
+              </div>
+              <div class="precos-container">
                 <div class="preco-btn-container">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 57,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 57,99</span>
                 </div>
-            </div>
-        </li>
-        
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">MIX DE POLVO</span>
-                <p class="desc">Alface, pepino japonês, rúcula, kani e polvo.</p>
-            </div>
-            <div class="precos-container">
+                <p class="desc">
+                  Alface, pepino japonês, rúcula, kani e polvo.
+                </p>
+              </div>
+              <div class="precos-container">
                 <div class="preco-btn-container">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 69,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 69,99</span>
                 </div>
-            </div>
-        </li>
-        
-        <li>
-            <div class="info-item">
+              </div>
+            </li>
+
+            <li>
+              <div class="info-item">
                 <p class="desc1">SUNOMONOS</p>
-            </div>
-        </li>
-        
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">SUNOMONO DE KANI</span>
                 <p class="desc">Pepino japonês fatiado em conserva com kani.</p>
-            </div>
-            <div class="precos-container">
+              </div>
+              <div class="precos-container">
                 <div class="preco-btn-container">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 39,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 39,90</span>
                 </div>
-            </div>
-        </li>
-        
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">SUNOMONO ESPECIAL</span>
-                <p class="desc">Pepino japonês fatiado em conserva com kani, camarão cozido e salmão.</p>
-            </div>
-            <div class="precos-container">
+                <p class="desc">
+                  Pepino japonês fatiado em conserva com kani, camarão cozido e
+                  salmão.
+                </p>
+              </div>
+              <div class="precos-container">
                 <div class="preco-btn-container">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 58,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 58,90</span>
                 </div>
-            </div>
-        </li>
-        
-        <li>
-            <div class="info-item">
+              </div>
+            </li>
+
+            <li>
+              <div class="info-item">
                 <p class="desc1">FRITOS</p>
-            </div>
-        </li>
-        
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">BATATA FRITA</span>
-                <p class="desc">Batatas fritas douradas e crocantes, servidas quentinhas.</p>
-            </div>
-            <div class="precos-container">
+                <p class="desc">
+                  Batatas fritas douradas e crocantes, servidas quentinhas.
+                </p>
+              </div>
+              <div class="precos-container">
                 <div class="preco-btn-container">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 22,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 22,90</span>
                 </div>
-            </div>
-        </li>
-        
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">ROLINHO PRIMAVERA</span>
-                <p class="desc">Recheada com carne moída, repolho e cenoura, enrolados em massa fina de harumaki.</p>
-            </div>
-            <div class="precos-container">
+                <p class="desc">
+                  Recheada com carne moída, repolho e cenoura, enrolados em
+                  massa fina de harumaki.
+                </p>
+              </div>
+              <div class="precos-container">
                 <div class="preco-btn-container">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 12,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 12,99</span>
                 </div>
-            </div>
-        </li>
-        
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">ROLINHO DE QUEIJO</span>
                 <p class="desc">Mussarela enrolada em massa fina de harumaki</p>
-            </div>
-            <div class="precos-container">
+              </div>
+              <div class="precos-container">
                 <div class="preco-btn-container">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 12,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 12,99</span>
                 </div>
-            </div>
-        </li>
-        
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">ROLINHO DE CAMARÃO COM CATUPIRY</span>
-                <p class="desc">Filé de camarão refolgado ao alho e óleo com catupiry, enrolados em massa fina de harumaki</p>
-            </div>
-            <div class="precos-container">
+                <p class="desc">
+                  Filé de camarão refolgado ao alho e óleo com catupiry,
+                  enrolados em massa fina de harumaki
+                </p>
+              </div>
+              <div class="precos-container">
                 <div class="preco-btn-container">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 18,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 18,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">CHIPS DE BATATA DOCE</span>
-                <p class="desc">Batata doce crocante e temperada, ideal como petisco.</p>
-            </div>
-            <div class="precos-container">
+                <p class="desc">
+                  Batata doce crocante e temperada, ideal como petisco.
+                </p>
+              </div>
+              <div class="precos-container">
                 <div class="preco-btn-container">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 19,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 19,99</span>
                 </div>
-            </div>
-        </li>
-        
-        <li>
-            <div class="info-item">
+              </div>
+            </li>
+
+            <li>
+              <div class="info-item">
                 <p class="desc1">OUTROS</p>
-            </div>
-        </li>
-        
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">SOBREMESA</span>
                 <p class="desc"></p>
-            </div>
-            <div class="precos-container">
+              </div>
+              <div class="precos-container">
                 <div class="preco-btn-container">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 6,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 6,99</span>
                 </div>
-            </div>
-        </li>
-        
-        <li>
-            <div class="info-item">
+              </div>
+            </li>
+
+            <li>
+              <div class="info-item">
                 <p class="desc1">CAFÉ</p>
-            </div>
-        </li>
-        
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">CAFÉ P</span>
                 <p class="desc"></p>
-            </div>
-            <div class="precos-container">
+              </div>
+              <div class="precos-container">
                 <div class="preco-btn-container">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 5,00</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 5,00</span>
                 </div>
-            </div>
-        </li>
-        
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">CAFÉ G</span>
                 <p class="desc"></p>
-            </div>
-            <div class="precos-container">
+              </div>
+              <div class="precos-container">
                 <div class="preco-btn-container">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 10,00</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 10,00</span>
                 </div>
-            </div>
-        </li>
-        
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">CAPPUCCINO</span>
                 <p class="desc"></p>
-            </div>
-            <div class="precos-container">
+              </div>
+              <div class="precos-container">
                 <div class="preco-btn-container">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 12,00</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 12,00</span>
                 </div>
-            </div>
-        </li>
-        
-        <li>
-            <div class="info-item">
+              </div>
+            </li>
+
+            <li>
+              <div class="info-item">
                 <p class="desc1">PEÇAS À LA CARTE</p>
-            </div>
-        </li>
-        
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">HOT HOOL</span>
                 <p class="desc"></p>
-            </div>
-            <div class="precos-container">
+              </div>
+              <div class="precos-container">
                 <div class="preco-btn-container">
-                    <span>PEÇA</span>
-                    <span class="preco-valor">R$ 19,99</span>
+                  <span>PEÇA</span>
+                  <span class="preco-valor">R$ 19,99</span>
                 </div>
-            </div>
-        </li>
-        
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">LAMINA 4 UNIDADES</span>
                 <p class="desc"></p>
-            </div>
-            <div class="precos-container">
+              </div>
+              <div class="precos-container">
                 <div class="preco-btn-container">
-                    <span>PEÇA</span>
-                    <span class="preco-valor">R$ 19,99</span>
+                  <span>PEÇA</span>
+                  <span class="preco-valor">R$ 19,99</span>
                 </div>
-            </div>
-        </li>
-        
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">JOY 4 UNIDADES</span>
                 <p class="desc"></p>
-            </div>
-            <div class="precos-container">
+              </div>
+              <div class="precos-container">
                 <div class="preco-btn-container">
-                    <span>PEÇA</span>
-                    <span class="preco-valor">R$ 22,99</span>
+                  <span>PEÇA</span>
+                  <span class="preco-valor">R$ 22,99</span>
                 </div>
-            </div>
+              </div>
+            </li>
+          </ul>
         </li>
-    </ul>
-</li>   
-<li id="yakissoba-especial">
-    <button class="secao" onclick="toggleSublista(2)">Yakissoba Especial</button>
-    <ul class="sublista" id="sublista2">
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+        <li id="yakissoba-especial">
+          <button class="secao" onclick="toggleSublista(2)">
+            Yakissoba Especial
+          </button>
+          <ul class="sublista" id="sublista2">
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">YAKISSOBA ESPECIAL COMPLETO</span>
-                <p class="desc">Macarrão com filé de camarão, fatias de carne, cubos de frango, fatias de presunto e legumes fatiados(cenoura, acelga e brócolis).</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Macarrão com filé de camarão, fatias de carne, cubos de
+                  frango, fatias de presunto e legumes fatiados(cenoura, acelga
+                  e brócolis).
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>01 PESSOA</span>
-                    <span class="preco-valor">R$ 44,98</span>
+                  <span>01 PESSOA</span>
+                  <span class="preco-valor">R$ 44,98</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 69,90</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 69,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>05 PESSOAS</span>
-                    <span class="preco-valor">R$ 129,90</span>
+                  <span>05 PESSOAS</span>
+                  <span class="preco-valor">R$ 129,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">YAKISSOBA ESPECIAL SEM LEGUMES</span>
-                <p class="desc">Macarrão com filé de camarão, fatias de carne, cubos de frango e fatias de presunto.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Macarrão com filé de camarão, fatias de carne, cubos de frango
+                  e fatias de presunto.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>01 PESSOA</span>
-                    <span class="preco-valor">R$ 49,90</span>
+                  <span>01 PESSOA</span>
+                  <span class="preco-valor">R$ 49,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 79,90</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 79,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>05 PESSOAS</span>
-                    <span class="preco-valor">R$ 139,90</span>
+                  <span>05 PESSOAS</span>
+                  <span class="preco-valor">R$ 139,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">YAKISSOBA SUPREMO COMPLETO</span>
-                <p class="desc">Macarrão com filé de camarão, fatias de carne cubos de frango, fatias de presunto, legumes desfiados, cenoura, repolho, pimentão ao molho supremo da casa, refogados com pouco molho.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Macarrão com filé de camarão, fatias de carne cubos de frango,
+                  fatias de presunto, legumes desfiados, cenoura, repolho,
+                  pimentão ao molho supremo da casa, refogados com pouco molho.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>01 PESSOA</span>
-                    <span class="preco-valor">R$ 48,98</span>
+                  <span>01 PESSOA</span>
+                  <span class="preco-valor">R$ 48,98</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 82,90</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 82,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>05 PESSOAS</span>
-                    <span class="preco-valor">R$ 142,90</span>
+                  <span>05 PESSOAS</span>
+                  <span class="preco-valor">R$ 142,90</span>
                 </div>
-            </div>
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
+                <span class="nome-item">YAKISSOBA SUPREMO SEM LEGUMES</span>
+                <p class="desc">
+                  Macarrão com filé de camarão, fatias de carne, cubos de
+                  frango, fatias de presunto ao molho supremo da casa, refogado
+                  com pouco molho.
+                </p>
+              </div>
+              <div class="preco-opcoes">
+                <div class="preco-btn-container item-interativo">
+                  <span>01 PESSOA</span>
+                  <span class="preco-valor">R$ 53,98</span>
+                </div>
+                <div class="preco-btn-container item-interativo">
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 86,90</span>
+                </div>
+                <div class="preco-btn-container item-interativo">
+                  <span>05 PESSOAS</span>
+                  <span class="preco-valor">R$ 162,90</span>
+                </div>
+              </div>
+            </li>
+          </ul>
         </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
-                <span class="nome-item">YAKISSOBA SUPREMO COMPLETO SEM LEGUMES</span>
-                <p class="desc">Macarrão com filé de camarão, fatias de carne, cubos de frango, fatias de presunto ao molho supremo da casa, refogado com pouco molho.</p>
-            </div>
-            <div class="preco-opcoes">
-                <div class="preco-btn-container item-interativo">
-                    <span>01 PESSOA</span>
-                    <span class="preco-valor">R$ 53,98</span>
-                </div>
-                <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 86,90</span>
-                </div>
-                <div class="preco-btn-container item-interativo">
-                    <span>05 PESSOAS</span>
-                    <span class="preco-valor">R$ 162,90</span>
-                </div>
-            </div>
-        </li>
-    </ul>
-</li>
-<li id="bifum">
-    <button class="secao" onclick="toggleSublista(3)">Bifum</button>
-    <ul class="sublista" id="sublista3">
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+        <li id="bifum">
+          <button class="secao" onclick="toggleSublista(3)">Bifum</button>
+          <ul class="sublista" id="sublista3">
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">BIFUM COMPLETO</span>
-                <p class="desc">Macarrão de arroz BIRFUM, tiras de carne, tiras de frango, filé de camarão, tiras de presunto, floco de ovos, legumes fatiados (acelga, cenoura, pimentão ao molho curry).</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Macarrão de arroz BIRFUM, tiras de carne, tiras de frango,
+                  filé de camarão, tiras de presunto, floco de ovos, legumes
+                  fatiados (acelga, cenoura, pimentão ao molho curry).
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 69,90</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 69,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>05 PESSOAS</span>
-                    <span class="preco-valor">R$ 132,00</span>
+                  <span>05 PESSOAS</span>
+                  <span class="preco-valor">R$ 132,00</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">BIFUM SEM LEGUME</span>
-                <p class="desc">Macarrão de arroz BIFUM, tiras de carne, tiras de frango, tiras de presunto e floco de ovos ao molho curry.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Macarrão de arroz BIFUM, tiras de carne, tiras de frango,
+                  tiras de presunto e floco de ovos ao molho curry.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 79,90</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 79,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>05 PESSOAS</span>
-                    <span class="preco-valor">R$ 142,00</span>
+                  <span>05 PESSOAS</span>
+                  <span class="preco-valor">R$ 142,00</span>
                 </div>
-            </div>
+              </div>
+            </li>
+          </ul>
         </li>
-    </ul>
-</li>
-<li id="frango">
-    <button class="secao" onclick="toggleSublista(4)">Frango</button>
-    <ul class="sublista" id="sublista4">
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
-                <span class="nome-item">FRANGO XADREZ COM LEGUMES VARIADOS</span>
-                <p class="desc">Frango em cubos, acelga, cenoura, brócolis, pimentão, champion e cebola, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+        <li id="frango">
+          <button class="secao" onclick="toggleSublista(4)">Frango</button>
+          <ul class="sublista" id="sublista4">
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
+                <span class="nome-item"
+                  >FRANGO XADREZ COM LEGUMES VARIADOS</span
+                >
+                <p class="desc">
+                  Frango em cubos, acelga, cenoura, brócolis, pimentão, champion
+                  e cebola, acompanha arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>01 PESSOA</span>
-                    <span class="preco-valor">R$ 39,90</span>
+                  <span>01 PESSOA</span>
+                  <span class="preco-valor">R$ 39,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 59,90</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 59,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 89,90</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 89,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
-                <span class="nome-item">FRANGO XADREZ COM PIMENTÃO E CEBOLA</span>
-                <p class="desc">Frango em cubos, pimentão, cebola e amendoim, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
+                <span class="nome-item"
+                  >FRANGO XADREZ COM PIMENTÃO E CEBOLA</span
+                >
+                <p class="desc">
+                  Frango em cubos, pimentão, cebola e amendoim, acompanha arroz
+                  e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>01 PESSOA</span>
-                    <span class="preco-valor">R$ 39,90</span>
+                  <span>01 PESSOA</span>
+                  <span class="preco-valor">R$ 39,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 59,90</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 59,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 89,90</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 89,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">FRANGO XADREZ AO MOLHO DE TOMATE</span>
-                <p class="desc">Frango em cubos, tomate, cebola ao molho de tomate, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Frango em cubos, tomate, cebola ao molho de tomate, acompanha
+                  arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>01 PESSOA</span>
-                    <span class="preco-valor">R$ 39,90</span>
+                  <span>01 PESSOA</span>
+                  <span class="preco-valor">R$ 39,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 58,90</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 58,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 89,90</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 89,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">FRANGO XADREZ AO MOLHO CURRY</span>
-                <p class="desc">Frango em cubos, fatias de cebola, pimentão e cenoura ao molho curry, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Frango em cubos, fatias de cebola, pimentão e cenoura ao molho
+                  curry, acompanha arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>01 PESSOA</span>
-                    <span class="preco-valor">R$ 39,90</span>
+                  <span>01 PESSOA</span>
+                  <span class="preco-valor">R$ 39,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 58,90</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 58,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 89,90</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 89,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">FRANGO XADREZ SEM LEGUMES</span>
-                <p class="desc">Frango em cubos, molho shoyu, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Frango em cubos, molho shoyu, acompanha arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>01 PESSOA</span>
-                    <span class="preco-valor">R$ 39,90</span>
+                  <span>01 PESSOA</span>
+                  <span class="preco-valor">R$ 39,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 62,90</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 62,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 98,90</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 98,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">FRANGO EMPANADO</span>
-                <p class="desc">Frango em cubos empanados em massa fina, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Frango em cubos empanados em massa fina, acompanha arroz e
+                  fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 89,90</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 89,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">FRANGO A MILANESA</span>
-                <p class="desc">Filé de frango empanado na farinha panko, refolgado ao molho tonkatsu, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Filé de frango empanado na farinha panko, refolgado ao molho
+                  tonkatsu, acompanha arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 89,90</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 89,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">FRANGO A PASSARINHA</span>
-                <p class="desc">Coxinha de asa de frango, acompanha arroz e fritas</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Coxinha de asa de frango, acompanha arroz e fritas
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 89,90</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 89,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 99,99</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 99,99</span>
                 </div>
-            </div>
+              </div>
+            </li>
+          </ul>
         </li>
-    </ul>
-</li>
-<li id="carnes">
-    <button class="secao" onclick="toggleSublista(5)">Carnes</button>
-    <ul class="sublista" id="sublista5">
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+        <li id="carnes">
+          <button class="secao" onclick="toggleSublista(5)">Carnes</button>
+          <ul class="sublista" id="sublista5">
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">CARNE IMPERIAL</span>
-                <p class="desc">Fatias de carne, cebolinha verde e batata refogada ao molho shoyu, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Fatias de carne, cebolinha verde e batata refogada ao molho
+                  shoyu, acompanha arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>01 PESSOA</span>
-                    <span class="preco-valor">R$ 41,98</span>
+                  <span>01 PESSOA</span>
+                  <span class="preco-valor">R$ 41,98</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 59,98</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 59,98</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 99,98</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 99,98</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">CARNE SUPREMA</span>
-                <p class="desc">Fatias de carne, cebolinha verde, molho de churrasco oriental, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Fatias de carne, cebolinha verde, molho de churrasco oriental,
+                  acompanha arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>01 PESSOAS</span>
-                    <span class="preco-valor">R$ 42,98</span>
+                  <span>01 PESSOAS</span>
+                  <span class="preco-valor">R$ 42,98</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 62,98</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 62,98</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 105,98</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 105,98</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">CARNE ACEBOLADA</span>
-                <p class="desc">Fatias de carne, cebola desfiada, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Fatias de carne, cebola desfiada, acompanha arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>01 PESSOA</span>
-                    <span class="preco-valor">R$ 41,98</span>
+                  <span>01 PESSOA</span>
+                  <span class="preco-valor">R$ 41,98</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 59,98</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 59,98</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 99,98</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 99,98</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">CARNE SEM LEGUMES</span>
-                <p class="desc">Fatias de carne ao molho shoyu, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Fatias de carne ao molho shoyu, acompanha arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>01 PESSOA</span>
-                    <span class="preco-valor">R$ 43,98</span>
+                  <span>01 PESSOA</span>
+                  <span class="preco-valor">R$ 43,98</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 63,98</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 63,98</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 105,98</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 105,98</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">CARNE AO MOLHO DE TOMATE</span>
-                <p class="desc">Fatias de carne, tomate, cebola ao molho de tomate, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Fatias de carne, tomate, cebola ao molho de tomate, acompanha
+                  arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>01 PESSOA</span>
-                    <span class="preco-valor">R$ 41,98</span>
+                  <span>01 PESSOA</span>
+                  <span class="preco-valor">R$ 41,98</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 59,98</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 59,98</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 99,98</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 99,98</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">CARNE COM LEGUMES VARIADOS</span>
-                <p class="desc">Fatias de carne, cebola, pimentão, canoura, brócolis e champion, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Fatias de carne, cebola, pimentão, canoura, brócolis e
+                  champion, acompanha arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>01 PESSOA</span>
-                    <span class="preco-valor">R$ 41,98</span>
+                  <span>01 PESSOA</span>
+                  <span class="preco-valor">R$ 41,98</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 59,98</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 59,98</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 99,88</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 99,88</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">CARNE COM BRÓCOLIS</span>
-                <p class="desc">Fatias de carne com brócolis ao molho shoyu, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Fatias de carne com brócolis ao molho shoyu, acompanha arroz e
+                  fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>01 PESSOA</span>
-                    <span class="preco-valor">R$ 41,98</span>
+                  <span>01 PESSOA</span>
+                  <span class="preco-valor">R$ 41,98</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 59,98</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 59,98</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 99,88</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 99,88</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">CARNE AO MOLHO CURRY</span>
-                <p class="desc">Fatias de carne, pimentão, cebola, cenoura ao molho curry, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Fatias de carne, pimentão, cebola, cenoura ao molho curry,
+                  acompanha arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>01 PESSOA</span>
-                    <span class="preco-valor">R$ 41,98</span>
+                  <span>01 PESSOA</span>
+                  <span class="preco-valor">R$ 41,98</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 59,98</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 59,98</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 99,88</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 99,88</span>
                 </div>
-            </div>
+              </div>
+            </li>
+          </ul>
         </li>
-    </ul>
-</li>
-<li id="camarao">
-    <button class="secao" onclick="toggleSublista(6)">Camarão</button>
-    <ul class="sublista" id="sublista6">
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+        <li id="camarao">
+          <button class="secao" onclick="toggleSublista(6)">Camarão</button>
+          <ul class="sublista" id="sublista6">
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">CAMARÃO AO MOLHO DE TOMATE</span>
-                <p class="desc">Filé de camarão ao molho de tomate com pedaços de tomate e cebola, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Filé de camarão ao molho de tomate com pedaços de tomate e
+                  cebola, acompanha arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>01 PESSOA</span>
-                    <span class="preco-valor">R$ 59,90</span>
+                  <span>01 PESSOA</span>
+                  <span class="preco-valor">R$ 59,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 89,90</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 89,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 169,90</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 169,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">CAMARÃO AO MOLHO SHOYU</span>
-                <p class="desc">Filé de camarão, acelga, champion, cenoura e brócolis, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Filé de camarão, acelga, champion, cenoura e brócolis,
+                  acompanha arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>01 PESSOA</span>
-                    <span class="preco-valor">R$ 59,90</span>
+                  <span>01 PESSOA</span>
+                  <span class="preco-valor">R$ 59,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 89,90</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 89,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 169,90</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 169,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">CAMARÃO ALHO E ÓLEO</span>
-                <p class="desc">Camarão inteiro frito puxado no alho e cebola picada, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Camarão inteiro frito puxado no alho e cebola picada,
+                  acompanha arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 139,90</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 139,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">CAMARÃO EMPANADO</span>
-                <p class="desc">Filé de camarão com calda, empanado em massa fina feito com farinha de trigo, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Filé de camarão com calda, empanado em massa fina feito com
+                  farinha de trigo, acompanha arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 139,98</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 139,98</span>
                 </div>
-            </div>
+              </div>
+            </li>
+          </ul>
         </li>
-    </ul>
-</li>
-<li id="peixe">
-    <button class="secao" onclick="toggleSublista(7)">Peixe</button>
-    <ul class="sublista" id="sublista7">
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+        <li id="peixe">
+          <button class="secao" onclick="toggleSublista(7)">Peixe</button>
+          <ul class="sublista" id="sublista7">
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">PEIXE AO MOLHO DE TOMATE</span>
-                <p class="desc">Filé de peixe ao molho de tomate com cebola e tomate fatiado, acompanha arrroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Filé de peixe ao molho de tomate com cebola e tomate fatiado,
+                  acompanha arrroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 69,90</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 69,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 119,90</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 119,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">PEIXE AO MOLHO SHOYU</span>
-                <p class="desc">Filé de peixe ao molho shoyu com legumes fatiados, acelga, cenoura, brócolis e champion, acomapnha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Filé de peixe ao molho shoyu com legumes fatiados, acelga,
+                  cenoura, brócolis e champion, acomapnha arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 79,90</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 79,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 119,90</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 119,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">PEIXE FRITO</span>
-                <p class="desc">Filé de peixe frito, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Filé de peixe frito, acompanha arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 79,90</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 79,90</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 119,90</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 119,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">PEIXE EMPANADO</span>
-                <p class="desc">Bastões de filé de peixe empanado em massa fina feito na farinha de trigo, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Bastões de filé de peixe empanado em massa fina feito na
+                  farinha de trigo, acompanha arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 119,90</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 119,90</span>
                 </div>
-            </div>
+              </div>
+            </li>
+          </ul>
         </li>
-    </ul>
-</li>
-<li id="chapas">
-    <button class="secao" onclick="toggleSublista(8)">Chapas</button>
-    <ul class="sublista" id="sublista8">
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+        <li id="chapas">
+          <button class="secao" onclick="toggleSublista(8)">Chapas</button>
+          <ul class="sublista" id="sublista8">
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">FILÉ NA CHAPA</span>
-                <p class="desc">Filé mignon grelhados na chapa ao molho misto, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Filé mignon grelhados na chapa ao molho misto, acompanha arroz
+                  e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 149,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 149,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">FILÉ DE FRANGO NA CHAPA</span>
-                <p class="desc">Filé de frango grelhado na chapa ao molho misto, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Filé de frango grelhado na chapa ao molho misto, acompanha
+                  arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 99,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 99,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">CHAPA SUPREMO ORIENTE</span>
-                <p class="desc">Filé de camarão, fatias de carne, cubos de frango, legumes fatiados, acelga, cenoura, brócolis, ovos de codorna e presunto, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Filé de camarão, fatias de carne, cubos de frango, legumes
+                  fatiados, acelga, cenoura, brócolis, ovos de codorna e
+                  presunto, acompanha arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 119,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 119,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">CAMARÃO AO ALHO E ÓLEO NA CHAPA</span>
                 <p class="desc">Camarão inteiro frito com alho e cebola.</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 139,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 139,90</span>
                 </div>
-            </div>
+              </div>
+            </li>
+          </ul>
         </li>
-    </ul>
-</li>
-<li id="arroz">
-    <button class="secao" onclick="toggleSublista(9)">Arroz</button>
-    <ul class="sublista" id="sublista9">
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+        <li id="arroz">
+          <button class="secao" onclick="toggleSublista(9)">Arroz</button>
+          <ul class="sublista" id="sublista9">
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">ARROZ ESPECIAL</span>
-                <p class="desc">Arroz, tiras de frango, tiras de carne, filé de camarão, presunto, ovos e ervilhas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Arroz, tiras de frango, tiras de carne, filé de camarão,
+                  presunto, ovos e ervilhas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 41,98</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 41,98</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">ARROZ DE CAMARÃO</span>
-                <p class="desc">Arroz, filé de camarão, presunto, ovos e ervilhas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Arroz, filé de camarão, presunto, ovos e ervilhas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 39,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 39,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">ARROZ DE FRANGO</span>
-                <p class="desc">Arroz, tiras de frango, presunto, ovos e ervilhas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Arroz, tiras de frango, presunto, ovos e ervilhas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 36,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 36,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">ARROZ DE CARNE</span>
-                <p class="desc">Arroz, tiras de carne, presunto, ovos e ervilhas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Arroz, tiras de carne, presunto, ovos e ervilhas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 38,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 38,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">ARROZ CHOP-SUEY</span>
                 <p class="desc">Arroz, presunto, ovos e ervilhas.</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 31,98</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 31,98</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">ARROZ BRANCO</span>
                 <p class="desc"></p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 19,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 19,99</span>
                 </div>
-            </div>
+              </div>
+            </li>
+          </ul>
         </li>
-    </ul>
-</li>
-<li id="familia-feliz">
-    <button class="secao" onclick="toggleSublista(10)">Familia Feliz</button>
-    <ul class="sublista" id="sublista10">
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+        <li id="familia-feliz">
+          <button class="secao" onclick="toggleSublista(10)">
+            Familia Feliz
+          </button>
+          <ul class="sublista" id="sublista10">
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">FAMILIA FELIZ COMPLETA</span>
-                <p class="desc">Fatias de carne, cubos de frango, filé de camarão, presunto, legumes fatiados, acelga, cenoura e brócolis, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  Fatias de carne, cubos de frango, filé de camarão, presunto,
+                  legumes fatiados, acelga, cenoura e brócolis, acompanha arroz
+                  e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>01 PESSOA</span>
-                    <span class="preco-valor">R$ 44,98</span>
+                  <span>01 PESSOA</span>
+                  <span class="preco-valor">R$ 44,98</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 69,98</span>
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 69,98</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 129,98</span>
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 129,98</span>
                 </div>
-            </div>
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
+                <span class="nome-item">FAMILIA FELIZ SEM LEGUMES</span>
+                <p class="desc">
+                  Fatias de carne, cubos de frango, filé de camarão, fatias de
+                  presunto, acompanha arroz e fritas.
+                </p>
+              </div>
+              <div class="preco-opcoes">
+                <div class="preco-btn-container item-interativo">
+                  <span>01 PESSOA</span>
+                  <span class="preco-valor">R$ 49,98</span>
+                </div>
+                <div class="preco-btn-container item-interativo">
+                  <span>02 PESSOAS</span>
+                  <span class="preco-valor">R$ 79,98</span>
+                </div>
+                <div class="preco-btn-container item-interativo">
+                  <span>04 PESSOAS</span>
+                  <span class="preco-valor">R$ 139,98</span>
+                </div>
+              </div>
+            </li>
+          </ul>
         </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
-                <span class="nome-item">FAMILLIA FELIZ SEM LEGUMES</span>
-                <p class="desc">Fatias de carne, cubos de frango, filé de camarão, fatias de presunto, acompanha arroz e fritas.</p>
-            </div>
-            <div class="preco-opcoes">
-                <div class="preco-btn-container item-interativo">
-                    <span>01 PESSOA</span>
-                    <span class="preco-valor">R$ 49,98</span>
-                </div>
-                <div class="preco-btn-container item-interativo">
-                    <span>02 PESSOAS</span>
-                    <span class="preco-valor">R$ 79,98</span>
-                </div>
-                <div class="preco-btn-container item-interativo">
-                    <span>04 PESSOAS</span>
-                    <span class="preco-valor">R$ 139,98</span>
-                </div>
-            </div>
-        </li>
-    </ul>
-</li>
-<li id="temakis">
-    <button class="secao" onclick="toggleSublista(11)">Temakis</button>
-    <ul class="sublista" id="sublista11">
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+        <li id="temakis">
+          <button class="secao" onclick="toggleSublista(11)">Temakis</button>
+          <ul class="sublista" id="sublista11">
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">TEMAKI DE SALMÃO FRESCO</span>
                 <p class="desc">Apenas salmão.</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 39,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 39,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">TEMAKI DE SALMÃO EMPANADO</span>
                 <p class="desc">Apenas o salmão empanado.</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 38,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 38,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">TEMAKI DE SALMÃO FLAMBADO</span>
                 <p class="desc">Apenas o salmão flambado.</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 39,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 39,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">TEMAKI FILADELFIA</span>
                 <p class="desc">Pasta de salmão grelhado.</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 29,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 29,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">TEMAKI SKIN</span>
                 <p class="desc">Pele de salmão selecionada e empanada.</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 21,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 21,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">TEMAKI DE KANI FRESCO</span>
                 <p class="desc">Apenas o kani.</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 19,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 19,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">TEMAKI DE KANI EMPANADO</span>
                 <p class="desc">Apenas kani empanado.</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 21,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 21,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">TEMAKI DE ATUM FRESCO</span>
                 <p class="desc">Apenas o atum.</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 31,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 31,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">TEMAKI DE PEIXE BRANCO FRESCO</span>
                 <p class="desc">Apenas o peixe branco.</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 39,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 39,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">TEMAKI DE CAMARÃO COZIDO</span>
                 <p class="desc">Apenas o camarão.</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 31,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 31,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">TEMAKI EBITEM</span>
                 <p class="desc">Recheio de camarão empanado.</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 31,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 31,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">TEMAKI EBISAKE</span>
                 <p class="desc">Recheio de camarão cozido e salmão fresco.</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 39,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 39,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">TEMAKI DE POLVO</span>
                 <p class="desc">Apenas o polvo.</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 39,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 39,90</span>
                 </div>
-            </div>
+              </div>
+            </li>
+          </ul>
         </li>
-    </ul>
-</li>
-<li id="temakis-especiais">
-    <button class="secao" onclick="toggleSublista(12)">Temakis Especiais</button>
-    <ul class="sublista" id="sublista12">
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+        <li id="temakis-especiais">
+          <button class="secao" onclick="toggleSublista(12)">
+            Temakis Especiais
+          </button>
+          <ul class="sublista" id="sublista12">
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">TEMAKI JHOW</span>
-                <p class="desc">(SALMÃO, CAMARÃO COZIDO ou KANI) <br><br>
-                Acompanha cream cheese polengrinho, arroz japonês, enrolado com lâmina de salmão flambado mais a proteína.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc">
+                  (SALMÃO, CAMARÃO COZIDO ou KANI)
+                  <br /><br />
+                  Acompanha cream cheese polengrinho, arroz japonês, enrolado
+                  com lâmina de salmão flambado mais a proteína.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 69,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 69,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">EMPANE SEU TEMAKI</span>
                 <p class="desc">(CADA)</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 4,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 4,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">RETIRE O ARROZ DO SEU TEMAKI</span>
                 <p class="desc">(CADA)</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 9,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 9,99</span>
                 </div>
-            </div>
+              </div>
+            </li>
+          </ul>
         </li>
-    </ul>
-</li>
-<li id="sushi-burguer">
-    <button class="secao" onclick="toggleSublista(13)">Sushi Burguer</button>
-    <ul class="sublista" id="sublista13">
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
-                <span class="nome-item">UMA PROTEÍNA</span>
-                <p class="desc">PÃO ARTESANAL DE ARROZ EMPANADO E FRITO.</p>
-            </div>
-            <div class="preco-opcoes">
+        <li id="sushi-burguer">
+          <button class="secao" onclick="toggleSublista(13)">
+            Sushi Burguer
+          </button>
+          <ul class="sublista" id="sublista13">
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
+                <span class="nome-item">SUSHI BURGUER COM UMA PROTEINA</span>
+                <p class="desc">Escolhido entre:
+                  Salmão fresco, salmão empanado, Salmão flambado, camarão
+                  cozido, camarão empanado, atum fresco, peixe branco, polvo ou
+                  kani fresco.</p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 24,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 24,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
-                <span class="nome-item">DUAS PROTEÍNAS</span>
-                <p class="desc">PÃO ARTESANAL DE ARROZ EMPANADO E FRITO.</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
+                <span class="nome-item">SUSHI BURGUER COM DUAS PROTEINAS</span>
+                <p class="desc">Escolhido entre:
+                  Salmão fresco, salmão empanado, Salmão flambado, camarão
+                  cozido, camarão empanado, atum fresco, peixe branco, polvo ou
+                  kani fresco..</p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 27,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 27,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
-                <span class="nome-item">TRÊS PROTEÍNAS</span>
-                <p class="desc">PÃO ARTESANAL DE ARROZ EMPANADO E FRITO.</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
+                <span class="nome-item">SUSHI BURGUER COM TRES PROTEINAS</span>
+                <p class="desc">Escolhido entre:
+                  Salmão fresco, salmão empanado, Salmão flambado, camarão
+                  cozido, camarão empanado, atum fresco, peixe branco, polvo ou
+                  kani fresco.</p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 29,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 29,99</span>
                 </div>
-            </div>
+              </div>
+            </li>
+          </ul>
         </li>
-        </ul>
-</li>
-<li id="sushi-dog">
-    <button class="secao" onclick="toggleSublista(14)">Sushi Dog</button>
-    <ul class="sublista" id="sublista14">
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
-                <span class="nome-item">UMA PROTEÍNA</span>
-                <p class="desc">PÃO ARTESANAL DE ARROZ EMPANADO E FRITO. Escolhido entre: Salmão fresco, salmão empanado, Salmão flambado, camarão cozido, camarão empanado, atum fresco, peixe branco, polvo ou kani fresco.</p>
-            </div>
-            <div class="preco-opcoes">
+        <li id="sushi-dog">
+          <button class="secao" onclick="toggleSublista(14)">Sushi Dog</button>
+          <ul class="sublista" id="sublista14">
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
+                <span class="nome-item">SUSHI DOG COM UMA PROTEINA</span>
+                <p class="desc">
+                  Escolhido entre:
+                  Salmão fresco, salmão empanado, Salmão flambado, camarão
+                  cozido, camarão empanado, atum fresco, peixe branco, polvo ou
+                  kani fresco.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 29,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 29,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
-                <span class="nome-item">DUAS PROTEÍNAS</span>
-                <p class="desc">PÃO ARTESANAL DE ARROZ EMPANADO E FRITO. Escolhido entre: Salmão fresco, salmão empanado, Salmão flambado, camarão cozido, camarão empanado, atum fresco, peixe branco, polvo ou kani fresco.</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
+                <span class="nome-item">SUSHI DOG COM DUAS PROTEINAS</span>
+                <p class="desc">
+                  Escolhido entre:
+                  Salmão fresco, salmão empanado, Salmão flambado, camarão
+                  cozido, camarão empanado, atum fresco, peixe branco, polvo ou
+                  kani fresco.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 35,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 35,99</span>
                 </div>
-            </div>
-            
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
-                <span class="nome-item">TRÊS PROTEÍNAS</span>
-                <p class="desc">PÃO ARTESANAL DE ARROZ EMPANADO E FRITO. Escolhido entre: Salmão fresco, salmão empanado, Salmão flambado, camarão cozido, camarão empanado, atum fresco, peixe branco, polvo ou kani fresco.</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
+                <span class="nome-item">SUSHI DOG COM TRES PROTEINAS</span>
+                <p class="desc">
+                  Escolhido entre:
+                  Salmão fresco, salmão empanado, Salmão flambado, camarão
+                  cozido, camarão empanado, atum fresco, peixe branco, polvo ou
+                  kani fresco.
+                </p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 39,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 39,99</span>
                 </div>
-            </div>
+              </div>
+            </li>
+          </ul>
         </li>
-    </ul>
-</li>
-<li id="bebidas">
-    <button class="secao" onclick="toggleSublista(15)">Bebidas</button>
-    <ul class="sublista" id="sublista15">
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+        <li id="bebidas">
+          <button class="secao" onclick="toggleSublista(15)">Bebidas</button>
+          <ul class="sublista" id="sublista15">
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">ÁGUA MINERAL</span>
                 <p class="desc"></p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 4,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 4,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">ÁGUA COM GÁS</span>
                 <p class="desc"></p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 5,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 5,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">LIMONETO</span>
                 <p class="desc">REFRIGERANTE</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 8,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 8,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">COCA COLA</span>
                 <p class="desc">REFRIGERANTE</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 6,99</span>
+                  <span>LATA</span>
+                  <span class="preco-valor">R$ 6,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+                <div class="preco-btn-container item-interativo">
+                  <span>1 LITRO</span>
+                  <span class="preco-valor">R$ 13,99</span>
+                </div>
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">COCA COLA ZERO</span>
                 <p class="desc">REFRIGERANTE</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 6,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 6,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">SPRITE</span>
                 <p class="desc">REFRIGERANTE</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 6,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 6,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">FANTA</span>
                 <p class="desc">REFRIGERANTE</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 6,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 6,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">SCHWEEPPES</span>
                 <p class="desc">REFRIGERANTE</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 6,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 6,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">GUARANÁ</span>
                 <p class="desc">REFRIGERANTE</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 6,99</span>
+                  <span>LATA</span>
+                  <span class="preco-valor">R$ 6,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+                <div class="preco-btn-container item-interativo">
+                  <span>1 LITRO</span>
+                  <span class="preco-valor">R$ 13,99</span>
+                </div>
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">GUARANÁ ZERO</span>
                 <p class="desc">REFRIGERANTE</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 6,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 6,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">REDBULL</span>
                 <p class="desc">ENERGÉTICO</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 12,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 12,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">BUDWEISER</span>
                 <p class="desc">CERVEJA (LONGNECK)</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 11,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 11,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">HEINEKEN</span>
                 <p class="desc">CERVEJA (LONGNECK)</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 13,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 13,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">CORONA</span>
                 <p class="desc">CERVEJA (LONGNECK)</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 14,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 14,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">SHOT DE LIMÃO</span>
                 <p class="desc">OUTROS</p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 3,00</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 3,00</span>
                 </div>
-            </div>
+              </div>
+            </li>
+          </ul>
         </li>
-    </ul>
-</li>
-<li id="sucos">
-    <button class="secao" onclick="toggleSublista(16)">Sucos</button>
-    <ul class="sublista" id="sublista16">
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+        <li id="sucos">
+          <button class="secao" onclick="toggleSublista(16)">Sucos</button>
+          <ul class="sublista" id="sublista16">
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">LIMÃO</span>
                 <p class="desc"></p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>COPO</span>
-                    <span class="preco-valor">R$ 7,99</span>
+                  <span>COPO</span>
+                  <span class="preco-valor">R$ 7,99</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>JARRA</span>
-                    <span class="preco-valor">R$ 19,99</span>
+                  <span>JARRA</span>
+                  <span class="preco-valor">R$ 19,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">LARANJA</span>
                 <p class="desc"></p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>COPO</span>
-                    <span class="preco-valor">R$ 7,99</span>
+                  <span>COPO</span>
+                  <span class="preco-valor">R$ 7,99</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>JARRA</span>
-                    <span class="preco-valor">R$ 19,99</span>
+                  <span>JARRA</span>
+                  <span class="preco-valor">R$ 19,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">ABACAXI</span>
                 <p class="desc"></p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>COPO</span>
-                    <span class="preco-valor">R$ 7,99</span>
+                  <span>COPO</span>
+                  <span class="preco-valor">R$ 7,99</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>JARRA</span>
-                    <span class="preco-valor">R$ 19,99</span>
+                  <span>JARRA</span>
+                  <span class="preco-valor">R$ 19,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">MORANGO</span>
                 <p class="desc"></p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>COPO</span>
-                    <span class="preco-valor">R$ 7,99</span>
+                  <span>COPO</span>
+                  <span class="preco-valor">R$ 7,99</span>
                 </div>
                 <div class="preco-btn-container item-interativo">
-                    <span>JARRA</span>
-                    <span class="preco-valor">R$ 19,99</span>
+                  <span>JARRA</span>
+                  <span class="preco-valor">R$ 19,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">LARANJA C/ MORANGO</span>
                 <p class="desc"></p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>JARRA</span>
-                    <span class="preco-valor">R$ 19,99</span>
+                  <span>JARRA</span>
+                  <span class="preco-valor">R$ 19,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">LIMONADA CHINESA</span>
                 <p class="desc"></p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>JARRA</span>
-                    <span class="preco-valor">R$ 19,99</span>
+                  <span>JARRA</span>
+                  <span class="preco-valor">R$ 19,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">LIMONADA SUIÇA</span>
                 <p class="desc"></p>
-            </div>
-            <div class="preco-opcoes">
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>JARRA</span>
-                    <span class="preco-valor">R$ 19,99</span>
+                  <span>JARRA</span>
+                  <span class="preco-valor">R$ 19,99</span>
                 </div>
-            </div>
+              </div>
+            </li>
+          </ul>
         </li>
-    </ul>
-</li>
-<li id="Vinhos">
-    <button class="secao" onclick="toggleSublista(17)">Vinhos</button>
-    <ul class="sublista" id="sublista17">
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+        <li id="Vinhos">
+          <button class="secao" onclick="toggleSublista(17)">Vinhos</button>
+          <ul class="sublista" id="sublista17">
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">CASAL GARCIA - VINHO VERDE</span>
-                <p class="desc">Descrição opcional do vinho tinto, como a uva ou a região.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc"></p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 103,16</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 103,16</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">STA HELENA - CABERNET SAUVIGNON</span>
-                <p class="desc">Descrição opcional do vinho branco, como a uva ou a região.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc"></p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 65,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 65,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">STA HELENA - MALBEC</span>
-                <p class="desc">Descrição opcional do vinho rosé, como a uva ou a região.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc"></p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 65,99</span>
+                  <span></span>
+                  <span class="preco-valor">R$ 65,99</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">CAMPO LARGO - SUAVE TINTO</span>
-                <p class="desc">Descrição opcional do espumante, como brut ou demi-sec.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc"></p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 44,99</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 44,99</span>
                 </div>
-            </div>
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
+                <span class="nome-item">CASILLERO DEL DIABLO</span>
+                <p class="desc"></p>
+              </div>
+              <div class="preco-opcoes">
+                <div class="preco-btn-container item-interativo">
+                  <span>.</span>
+                  <span class="preco-valor">R$ 79,99</span>
+                </div>
+              </div>
+            </li>
+          </ul>
         </li>
-    </ul>
-</li>
-<li id="Espumantes">
-    <button class="secao" onclick="toggleSublista(18)">Espumantes</button>
-    <ul class="sublista" id="sublista18">
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+        <li id="Espumantes">
+          <button class="secao" onclick="toggleSublista(18)">Espumantes</button>
+          <ul class="sublista" id="sublista18">
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">MOSCATEL BRANCO</span>
-                <p class="desc">Descrição opcional do vinho tinto, como a uva ou a região.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc"></p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 83,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 83,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">MOSCATEL ROSÉ</span>
-                <p class="desc">Descrição opcional do vinho branco, como a uva ou a região.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc"></p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 83,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 83,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">VERO BRUT</span>
-                <p class="desc">Descrição opcional do vinho rosé, como a uva ou a região.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc"></p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 65,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 65,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">BRUT 187ml</span>
-                <p class="desc">Descrição opcional do espumante, como brut ou demi-sec.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc"></p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 45,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 45,90</span>
                 </div>
-            </div>
-        </li>
-        <li class="item-cardapio">
-            <div class="info-item descricao-container">
+              </div>
+            </li>
+            <li class="item-cardapio">
+              <div class="info-item descricao-container">
                 <span class="nome-item">MOSCATEL 187ml</span>
-                <p class="desc">Descrição opcional do espumante, como brut ou demi-sec.</p>
-            </div>
-            <div class="preco-opcoes">
+                <p class="desc"></p>
+              </div>
+              <div class="preco-opcoes">
                 <div class="preco-btn-container item-interativo">
-                    <span>ÚNICA</span>
-                    <span class="preco-valor">R$ 39,90</span>
+                  <span>.</span>
+                  <span class="preco-valor">R$ 39,90</span>
                 </div>
-            </div>
+              </div>
+            </li>
+          </ul>
         </li>
-    </ul>
-</li>
-    </ul>
-  </div>
-  <button id="btn-topo" aria-label="Voltar ao topo">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-  <div id="btn-carrinho" class="btn-carrinho">
-  <i class="fas fa-shopping-cart"></i>
-  <span id="contador-carrinho" class="contador-carrinho">0</span>
-</div>
+      </ul>
+    </div>
+    <button id="btn-topo" aria-label="Voltar ao topo">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    <div id="btn-carrinho" class="btn-carrinho">
+      <i class="fas fa-shopping-cart"></i>
+      <span id="contador-carrinho" class="contador-carrinho">0</span>
+    </div>
 
-<div id="modal-carrinho" class="modal-carrinho">
-  <div class="modal-conteudo">
-    <div class="modal-header">
-      <h2>Seu Pedido</h2>
-      <button id="fechar-carrinho" class="fechar-carrinho">&times;</button>
+    <div id="modal-carrinho" class="modal-carrinho">
+      <div class="modal-conteudo">
+        <div class="modal-header">
+          <h2>Seu Pedido</h2>
+          <button id="fechar-carrinho" class="fechar-carrinho">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <ul id="lista-pedido" class="lista-pedido"></ul>
+          <p id="total-pedido" class="total-pedido">Total: R$ 0,00</p>
+        </div>
+        <div class="modal-footer">
+          <button id="btn-fazer-pedido" class="btn-fazer-pedido">
+            Fazer Pedido
+          </button>
+        </div>
+      </div>
     </div>
-    
-    <div class="modal-body">
-      <ul id="lista-pedido" class="lista-pedido">
-        </ul>
-      <p id="total-pedido" class="total-pedido">Total: R$ 0,00</p>
+    <div id="modal-opcoes-pedido" class="modal-opcoes-pedido">
+      <div class="modal-conteudo-opcoes">
+        <h3>Como você gostaria de fazer o pedido?</h3>
+        <button id="btn-garcom" class="btn-opcoes">Estou no restaurante</button>
+        <button id="btn-whatsapp" class="btn-opcoes">
+          Pedido para entrega (WhatsApp)
+        </button>
+        <button id="btn-cancelar" class="btn-opcoes btn-cancelar">
+          Cancelar
+        </button>
+      </div>
     </div>
-    <div class="modal-footer">
-      <button id="btn-fazer-pedido" class="btn-fazer-pedido">Fazer Pedido</button>
-    </div>
-  </div>
-</div>
-<div id="modal-opcoes-pedido" class="modal-opcoes-pedido">
-  <div class="modal-conteudo-opcoes">
-    <h3>Como você gostaria de fazer o pedido?</h3>
-    <button id="btn-garcom" class="btn-opcoes">Estou no restaurante</button>
-    <button id="btn-whatsapp" class="btn-opcoes">Pedido para entrega (WhatsApp)</button>
-    <button id="btn-cancelar" class="btn-opcoes btn-cancelar">Cancelar</button>
-  </div>
-</div>
-<div id="modal-confirmacao" class="modal">
-    <div class="modal-content">
+    <div id="modal-confirmacao" class="modal">
+      <div class="modal-content">
         <span class="close-btn" id="fechar-confirmacao">&times;</span>
         <h2>Pedido Enviado!</h2>
-        <p>Seu pedido foi enviado com sucesso e em breve alguém entrará em contato para finalizá-lo. Agradecemos a preferência!</p>
+        <p>
+          Seu pedido foi enviado com sucesso e em breve alguém entrará em
+          contato para finalizá-lo. Agradecemos a preferência!
+        </p>
         <button class="modal-button" id="ok-btn">OK</button>
+      </div>
     </div>
-</div>
 
-<div id="modal-dados-cliente" class="modal">
-    <div class="modal-content">
+    <div id="modal-dados-cliente" class="modal">
+      <div class="modal-content">
         <span id="fechar-dados-cliente" class="fechar-modal">&times;</span>
         <h2>Dados para o Pedido</h2>
-<form id="form-dados-cliente">
-    <div class="form-group-inline top-fields">
-        <div class="form-group">
-            <label for="nome-cliente">Nome:</label>
-            <input type="text" id="nome-cliente" placeholder="Seu nome completo" required>
-        </div>
-        <div class="opcao-retirada">
-            <input type="checkbox" id="retirada-local">
-            <label for="retirada-local">Retirar no local</label>
-        </div>
-    </div>
-
-    <div id="endereco-completo-container">
-        <div class="form-group">
-            <label for="endereco-cliente">Endereço:</label>
-            <input type="text" id="endereco-cliente" placeholder="Rua, Número, Bairro">
-        </div>
-
-        <div class="form-group-inline">
+        <form id="form-dados-cliente">
+          <div class="form-group-inline top-fields">
             <div class="form-group">
+              <label for="nome-cliente">Nome:</label>
+              <input
+                type="text"
+                id="nome-cliente"
+                placeholder="Seu nome completo"
+                required
+              />
+            </div>
+            <div class="opcao-retirada">
+              <input type="checkbox" id="retirada-local" />
+              <label for="retirada-local">Retirar no local</label>
+            </div>
+          </div>
+
+          <div id="endereco-completo-container">
+            <div class="form-group">
+              <label for="endereco-cliente">Endereço:</label>
+              <input
+                type="text"
+                id="endereco-cliente"
+                placeholder="Rua, Número, Bairro"
+              />
+            </div>
+
+            <div class="form-group-inline">
+              <div class="form-group">
                 <label for="bairro-cliente">Bairro:</label>
-                <input type="text" id="bairro-cliente" placeholder="Ex: Centro" autocomplete="address-level2">
-            </div>
-            <div class="form-group">
+                <input
+                  type="text"
+                  id="bairro-cliente"
+                  placeholder="Ex: Centro"
+                  autocomplete="address-level2"
+                />
+              </div>
+              <div class="form-group">
                 <label for="complemento-cliente">Complemento:</label>
-                <input type="text" id="complemento-cliente" placeholder="Apto, bloco, etc.">
+                <input
+                  type="text"
+                  id="complemento-cliente"
+                  placeholder="Apto, bloco, etc."
+                />
+              </div>
             </div>
-        </div>
-    </div>
-    
-    <div class="form-group">
-        <label for="telefone-cliente">Telefone:</label>
-        <input type="tel" id="telefone-cliente" placeholder="(DDD) 9xxxx-xxxx" required>
-    </div>
+          </div>
 
-    <button type="submit" id="btn-finalizar-dados" class="btn-finalizar">Finalizar Pedido</button>
-</form>
+          <div class="form-group">
+            <label for="telefone-cliente">Telefone:</label>
+            <input
+              type="tel"
+              id="telefone-cliente"
+              placeholder="(DDD) 9xxxx-xxxx"
+              required
+            />
+          </div>
+
+          <button type="submit" id="btn-finalizar-dados" class="btn-finalizar">
+            Finalizar Pedido
+          </button>
+        </form>
+      </div>
     </div>
-</div>
-<div id="modal-escolha" class="modal">
-    <div class="modal-content">
+    <div id="modal-escolha" class="modal">
+      <div class="modal-content">
         <span class="close-btn" id="fechar-escolha">&times;</span>
         <h2>Como você quer finalizar o pedido?</h2>
         <div class="opcoes-buttons">
-            <button id="btn-escolha-wpp">Enviar por WhatsApp</button>
-            <button id="btn-escolha-restaurante">Estou no Restaurante</button>
+          <button id="btn-escolha-wpp">Enviar por WhatsApp</button>
+          <button id="btn-escolha-restaurante">Estou no Restaurante</button>
         </div>
+      </div>
     </div>
-</div>
-<div id="modal-resumo-garcom" class="modal">
-    <div class="modal-content">
+    <div id="modal-resumo-garcom" class="modal">
+      <div class="modal-content">
         <span id="fechar-resumo-garcom" class="fechar-modal">&times;</span>
         <h2 class="resumo-title">Resumo do Pedido</h2>
         <p class="resumo-message">Mostre esta tela para o garçom.</p>
-        <div id="resumo-pedido-container">
-            </div>
+        <div id="resumo-pedido-container"></div>
         <button id="btn-finalizar-garcom" class="btn-finalizar">Fechar</button>
+      </div>
     </div>
-</div>
 
-<div id="modal-prato" class="modal-prato-overlay">
-    <div class="modal-prato-content">
+    <div id="modal-prato" class="modal-prato-overlay">
+      <div class="modal-prato-content">
         <span id="fechar-prato" class="fechar-prato">&times;</span>
         <h2 id="prato-titulo">Nome do Prato</h2>
         <p id="prato-descricao">Descrição do prato...</p>
-        
-        <div class="opcoes-prato">
-            <div id="prato-tamanhos" class="container-tamanhos">
-                </div>
-            
-            <label class="prato-obervacoes" for="prato-observacoes">Observações</label>
-            <textarea id="prato-observacoes" placeholder="Digite suas observações aqui..."></textarea>
-        </div>
-        
-        <button id="btn-adicionar-prato" class="btn-adicionar-prato">Adicionar ao Carrinho</button>
-    </div>
-</div>
-<div id="modal-confirmacao" class="modal">
-    </div>
 
-<div id="modal-pagamento" class="modal">
-    <div class="modal-content">
+        <div class="opcoes-prato">
+          <div id="prato-tamanhos" class="container-tamanhos"></div>
+
+          <label class="prato-obervacoes" for="prato-observacoes"
+            >Observações</label
+          >
+          <textarea
+            id="prato-observacoes"
+            placeholder="Digite suas observações aqui..."
+          ></textarea>
+        </div>
+
+        <button id="btn-adicionar-prato" class="btn-adicionar-prato">
+          Adicionar ao Carrinho
+        </button>
+      </div>
+    </div>
+    <div id="modal-confirmacao" class="modal"></div>
+
+    <div id="modal-pagamento" class="modal">
+      <div class="modal-content">
         <span class="close-btn" id="fechar-pagamento">&times;</span>
         <h3>Como você gostaria de pagar?</h3>
         <button id="btn-pagamento-dinheiro" class="btn-principal">
-            <i class="fas fa-money-bill-wave"></i> Dinheiro
+          <i class="fas fa-money-bill-wave"></i> Dinheiro
         </button>
         <button id="btn-pagamento-cartao" class="btn-secundario">
-            <i class="fas fa-credit-card"></i> Cartão
+          <i class="fas fa-credit-card"></i> Cartão
         </button>
+      </div>
     </div>
-</div>
-<div id="modal-troco" class="modal">
-    <div class="modal-content">
+    <div id="modal-troco" class="modal">
+      <div class="modal-content">
         <span class="close-btn" id="fechar-troco">&times;</span>
         <h3>Precisa de troco?</h3>
         <p>Para quanto seria?</p>
         <div class="form-group-troco">
-            <span>R$</span>
-            <input type="number" id="valor-troco-input" placeholder="00,00">
+          <span>R$</span>
+          <input type="number" id="valor-troco-input" placeholder="00,00" />
         </div>
-        <button id="btn-confirmar-troco" class="btn-principal1">Confirmar</button>
+        <button id="btn-confirmar-troco" class="btn-principal1">
+          Confirmar
+        </button>
+      </div>
     </div>
-</div>
 
-<script src="script.js" type="module"></script>
-</body>
-</html>
+    <script src="script.js" type="module"></script>
   </body>
 </html>
