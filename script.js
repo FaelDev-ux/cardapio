@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // VARIÁVEIS AJUSTADAS PARA CORRESPONDER AO HTML
   const nomeClienteInput = document.getElementById('nome-cliente')
+  const cepClienteInput = document.getElementById('cep-cliente')
   const enderecoClienteInput = document.getElementById('endereco-cliente')
   const bairroClienteInput = document.getElementById('bairro-cliente')
   const complementoClienteInput = document.getElementById('complemento-cliente')
@@ -169,6 +170,72 @@ document.addEventListener('DOMContentLoaded', () => {
     // Adicione mais bairros e suas taxas aqui
   }
   const taxaEntregaEl = document.getElementById('taxa-entrega')
+
+  function normalizarTexto(texto = '') {
+    return texto
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .trim()
+  }
+
+  function obterTaxaEntrega(bairro = '') {
+    return TAXAS_POR_BAIRRO[normalizarTexto(bairro)] || 0
+  }
+
+  function formatarCep(valor = '') {
+    const cepLimpo = valor.replace(/\D/g, '').slice(0, 8)
+    if (cepLimpo.length <= 5) {
+      return cepLimpo
+    }
+    return `${cepLimpo.slice(0, 5)}-${cepLimpo.slice(5)}`
+  }
+
+  async function buscarEnderecoPorCep(cep) {
+    const cepLimpo = cep.replace(/\D/g, '')
+
+    if (cepLimpo.length !== 8) {
+      throw new Error('CEP inv?lido.')
+    }
+
+    const response = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`)
+    const data = await response.json()
+
+    if (!response.ok || data.erro) {
+      throw new Error('CEP n?o encontrado.')
+    }
+
+    return data
+  }
+
+  async function preencherEnderecoViaCep() {
+    if (!cepClienteInput || retiradaCheckbox?.checked) {
+      return
+    }
+
+    const cep = cepClienteInput.value
+
+    if (cep.replace(/\D/g, '').length !== 8) {
+      return
+    }
+
+    try {
+      const endereco = await buscarEnderecoPorCep(cep)
+
+      if (enderecoClienteInput && !enderecoClienteInput.value.trim()) {
+        enderecoClienteInput.value = endereco.logradouro || ''
+      }
+
+      if (bairroClienteInput) {
+        bairroClienteInput.value = endereco.bairro || ''
+      }
+
+      atualizarCarrinho()
+    } catch (error) {
+      console.error('Erro ao buscar CEP:', error)
+      alert('N?o foi poss?vel localizar o CEP informado.')
+    }
+  }
 
   // --- LÓGICA DO CARDÁPIO (SEÇÕES EXPANSÍVEIS) ---
   // Quando a página carrega, todas as sublistas começam abertas
@@ -384,8 +451,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const isRetirada = retiradaCheckbox.checked
       if (!isRetirada && bairroClienteInput) {
-        const bairroDigitado = bairroClienteInput.value.toLowerCase().trim()
-        taxa = TAXAS_POR_BAIRRO[bairroDigitado] || 0
+        taxa = obterTaxaEntrega(bairroClienteInput.value)
       }
 
       if (taxaEntregaEl) {
@@ -504,6 +570,14 @@ document.addEventListener('DOMContentLoaded', () => {
     bairroClienteInput.addEventListener('input', atualizarCarrinho)
   }
 
+  if (cepClienteInput) {
+    cepClienteInput.addEventListener('input', () => {
+      cepClienteInput.value = formatarCep(cepClienteInput.value)
+    })
+
+    cepClienteInput.addEventListener('blur', preencherEnderecoViaCep)
+  }
+
   // Remova o código antigo da função btnEscolhaRestaurante
   if (btnEscolhaRestaurante) {
     btnEscolhaRestaurante.addEventListener('click', () => {
@@ -595,6 +669,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const nome = nomeClienteInput.value.trim()
       const telefone = telefoneClienteInput.value.trim()
       const isRetirada = retiradaCheckbox.checked
+      const cep = cepClienteInput ? cepClienteInput.value.trim() : ''
       const bairro = bairroClienteInput.value.trim()
       const complemento = complementoClienteInput.value.trim()
 
@@ -603,7 +678,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const endereco = enderecoClienteInput.value.trim()
         enderecoCompleto = `${endereco}, ${bairro}${
           complemento ? `, ${complemento}` : ''
-        }`
+        }${cep ? ` - CEP: ${cep}` : ''}`
       }
 
       if (
@@ -619,12 +694,18 @@ document.addEventListener('DOMContentLoaded', () => {
       const totalItens = carrinho.reduce((sum, item) => sum + item.preco, 0)
       let taxa = 0
       if (!isRetirada) {
-        const bairroLowerCase = bairro.toLowerCase()
-        taxa = TAXAS_POR_BAIRRO[bairroLowerCase] || 0
+        taxa = obterTaxaEntrega(bairro)
       }
       const totalFinal = totalItens + taxa
 
-      const cliente = { nome, endereco: enderecoCompleto, telefone, bairro }
+      const cliente = {
+        nome,
+        endereco: enderecoCompleto,
+        telefone,
+        bairro,
+        cep,
+        complemento
+      }
 
       pedidoTemp = {
         cliente: cliente,
@@ -735,6 +816,7 @@ document.addEventListener('DOMContentLoaded', () => {
         atualizarCarrinho()
 
         if (nomeClienteInput) nomeClienteInput.value = ''
+        if (cepClienteInput) cepClienteInput.value = ''
         if (enderecoClienteInput) enderecoClienteInput.value = ''
         if (bairroClienteInput) bairroClienteInput.value = ''
         if (complementoClienteInput) complementoClienteInput.value = ''
