@@ -237,6 +237,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function resetarFormularioCliente() {
+    if (formDadosCliente) {
+      formDadosCliente.reset()
+    }
+
+    if (cepClienteInput) cepClienteInput.value = ''
+    if (enderecoClienteInput) enderecoClienteInput.value = ''
+    if (bairroClienteInput) bairroClienteInput.value = ''
+    if (complementoClienteInput) complementoClienteInput.value = ''
+    if (telefoneClienteInput) telefoneClienteInput.value = ''
+    if (retiradaCheckbox) retiradaCheckbox.checked = false
+    if (enderecoContainer) enderecoContainer.style.display = ''
+
+    atualizarCarrinho()
+  }
+
   // --- LÓGICA DO CARDÁPIO (SEÇÕES EXPANSÍVEIS) ---
   // Quando a página carrega, todas as sublistas começam abertas
   sublistas.forEach(sublista => {
@@ -562,7 +578,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (retiradaCheckbox.checked) {
         enderecoContainer.style.display = 'none'
       } else {
-        enderecoContainer.style.display = 'flex'
+        enderecoContainer.style.display = ''
       }
       atualizarCarrinho()
     })
@@ -656,6 +672,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnEscolhaWpp) {
     btnEscolhaWpp.addEventListener('click', () => {
       modalEscolha.style.display = 'none'
+      resetarFormularioCliente()
       modalDadosCliente.style.display = 'flex'
     })
   }
@@ -815,14 +832,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('carrinhoSalvo')
         atualizarCarrinho()
 
-        if (nomeClienteInput) nomeClienteInput.value = ''
-        if (cepClienteInput) cepClienteInput.value = ''
-        if (enderecoClienteInput) enderecoClienteInput.value = ''
-        if (bairroClienteInput) bairroClienteInput.value = ''
-        if (complementoClienteInput) complementoClienteInput.value = ''
-        if (telefoneClienteInput) telefoneClienteInput.value = ''
-        if (retiradaCheckbox) retiradaCheckbox.checked = false
-        if (enderecoContainer) enderecoContainer.style.display = 'flex'
+        resetarFormularioCliente()
       })
       .catch(error => {
         console.error('Erro ao enviar pedido para o Firebase: ', error)
