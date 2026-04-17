@@ -1810,3 +1810,71 @@ input[type="tel"] {
     background-color: #0069d9;
     transform: translateY(-2px);
 }
+
+/* ====== Melhorias Visuais do Formulario ====== */
+#endereco-completo-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+}
+
+#endereco-completo-container .form-group,
+#endereco-completo-container .form-group-inline {
+    margin-bottom: 0;
+}
+
+#cep-cliente {
+    letter-spacing: 0.08em;
+    font-weight: 700;
+}
+
+#bairro-cliente[readonly] {
+    background: rgba(255, 255, 255, 0.12);
+    color: #f7f1d5;
+    border: 1px solid rgba(247, 168, 53, 0.35);
+}
+
+.taxa-entrega-form {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(247, 168, 53, 0.16), rgba(181, 0, 0, 0.18));
+    border: 1px solid rgba(247, 168, 53, 0.3);
+    color: #fff7df;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+#modal-dados-cliente .modal-content {
+    max-width: 460px;
+}
+
+#form-dados-cliente input {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+#form-dados-cliente input:focus {
+    border-color: rgba(247, 168, 53, 0.8);
+    box-shadow: 0 0 0 3px rgba(247, 168, 53, 0.18);
+}
+
+@media (max-width: 600px) {
+    #endereco-completo-container {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .taxa-entrega-form {
+        font-size: 0.9rem;
+        padding: 10px 12px;
+    }
+}

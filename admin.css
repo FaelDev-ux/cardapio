@@ -113,3 +113,88 @@ body {
 .btn-whatsapp:hover {
     background-color: #128C7E;
 }
+
+.order-item {
+  padding: 16px 0;
+}
+
+.order-header {
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ececec;
+}
+
+.order-details {
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #fafafa, #f2f2f2);
+}
+
+.order-details p {
+  margin: 0 0 8px;
+}
+
+.order-details ul {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.order-details li {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid #ececec;
+}
+
+.order-details li small {
+  display: block;
+  margin-top: 6px;
+  color: #8a4b00;
+}
+
+.order-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.btn-ready,
+.btn-print,
+.btn-reprint,
+.btn-whatsapp {
+  margin-right: 0;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.btn-reprint {
+  background-color: #ff9800;
+  color: #fff;
+}
+
+.btn-reprint:hover {
+  background-color: #e68900;
+}
+
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #e8fff1;
+  color: #15803d;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+}
