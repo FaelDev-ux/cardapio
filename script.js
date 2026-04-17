@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const nomeClienteInput = document.getElementById('nome-cliente')
   const cepClienteInput = document.getElementById('cep-cliente')
   const enderecoClienteInput = document.getElementById('endereco-cliente')
+  const numeroClienteInput = document.getElementById('numero-cliente')
   const bairroClienteInput = document.getElementById('bairro-cliente')
   const complementoClienteInput = document.getElementById('complemento-cliente')
   const telefoneClienteInput = document.getElementById('telefone-cliente')
@@ -105,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let pedidoTemp = {}
   let carrinho = []
+  let ultimoEnderecoCep = null
 
   const TAXAS_POR_BAIRRO = {
     'jaguaribe': 11.0,
@@ -170,6 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Adicione mais bairros e suas taxas aqui
   }
   const taxaEntregaEl = document.getElementById('taxa-entrega')
+  const taxaEntregaFormEl = document.getElementById('taxa-entrega-form')
 
   function normalizarTexto(texto = '') {
     return texto
@@ -181,6 +184,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function obterTaxaEntrega(bairro = '') {
     return TAXAS_POR_BAIRRO[normalizarTexto(bairro)] || 0
+  }
+
+  function formatarMoeda(valor = 0) {
+    return `R$ ${Number(valor || 0).toFixed(2).replace('.', ',')}`
+  }
+
+  function atualizarResumoTaxaFormulario() {
+    if (!taxaEntregaFormEl) {
+      return
+    }
+
+    if (retiradaCheckbox?.checked) {
+      taxaEntregaFormEl.textContent = 'Sem taxa para retirada no local'
+      return
+    }
+
+    const bairro = bairroClienteInput?.value?.trim() || ''
+    if (!bairro) {
+      taxaEntregaFormEl.textContent = 'Informe o CEP para calcular'
+      return
+    }
+
+    const taxa = obterTaxaEntrega(bairro)
+    if (taxa > 0) {
+      taxaEntregaFormEl.textContent = `Taxa calculada para ${bairro}: ${formatarMoeda(taxa)}`
+      return
+    }
+
+    taxaEntregaFormEl.textContent = 'Bairro sem taxa cadastrada. Confira o endere?o.'
   }
 
   function formatarCep(valor = '') {
@@ -221,6 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       const endereco = await buscarEnderecoPorCep(cep)
+      ultimoEnderecoCep = endereco
 
       if (enderecoClienteInput && !enderecoClienteInput.value.trim()) {
         enderecoClienteInput.value = endereco.logradouro || ''
@@ -230,10 +263,13 @@ document.addEventListener('DOMContentLoaded', () => {
         bairroClienteInput.value = endereco.bairro || ''
       }
 
+      atualizarResumoTaxaFormulario()
       atualizarCarrinho()
     } catch (error) {
+      ultimoEnderecoCep = null
       console.error('Erro ao buscar CEP:', error)
       alert('N?o foi poss?vel localizar o CEP informado.')
+      atualizarResumoTaxaFormulario()
     }
   }
 
@@ -242,15 +278,57 @@ document.addEventListener('DOMContentLoaded', () => {
       formDadosCliente.reset()
     }
 
+    ultimoEnderecoCep = null
     if (cepClienteInput) cepClienteInput.value = ''
     if (enderecoClienteInput) enderecoClienteInput.value = ''
+    if (numeroClienteInput) numeroClienteInput.value = ''
     if (bairroClienteInput) bairroClienteInput.value = ''
     if (complementoClienteInput) complementoClienteInput.value = ''
     if (telefoneClienteInput) telefoneClienteInput.value = ''
     if (retiradaCheckbox) retiradaCheckbox.checked = false
     if (enderecoContainer) enderecoContainer.style.display = ''
 
+    atualizarResumoTaxaFormulario()
     atualizarCarrinho()
+  }
+
+  function montarEnderecoFormatado({
+    rua = '',
+    numero = '',
+    bairro = '',
+    complemento = '',
+    cep = ''
+  }) {
+    const partes = []
+
+    if (rua) {
+      partes.push(numero ? `${rua}, ${numero}` : rua)
+    }
+
+    if (bairro) {
+      partes.push(bairro)
+    }
+
+    if (complemento) {
+      partes.push(complemento)
+    }
+
+    if (cep) {
+      partes.push(`CEP: ${cep}`)
+    }
+
+    return partes.join(' - ')
+  }
+
+  function normalizarItensPedido(itens = []) {
+    return itens.map(item => ({
+      nome: item.nome,
+      preco: Number(item.preco || 0),
+      produto: item.produto || item.nome,
+      tamanho: item.tamanho || '',
+      observacao: item.observacao || '',
+      descricao: item.descricao || ''
+    }))
   }
 
   // --- LÓGICA DO CARDÁPIO (SEÇÕES EXPANSÍVEIS) ---
@@ -387,7 +465,14 @@ document.addEventListener('DOMContentLoaded', () => {
           nomeCompleto += ` - Obs: ${observacoes}`
         }
 
-        carrinho.push({ nome: nomeCompleto, preco: precoTamanho })
+        carrinho.push({
+          nome: nomeCompleto,
+          preco: precoTamanho,
+          produto: nomePrato,
+          tamanho: descricaoTamanho,
+          observacao: observacoes,
+          descricao: pratoDescEl ? pratoDescEl.textContent.trim() : ''
+        })
         salvarCarrinho()
         atualizarCarrinho()
         modalPrato.style.display = 'none'
@@ -469,6 +554,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!isRetirada && bairroClienteInput) {
         taxa = obterTaxaEntrega(bairroClienteInput.value)
       }
+      atualizarResumoTaxaFormulario()
 
       if (taxaEntregaEl) {
         if (taxa > 0) {
@@ -580,15 +666,21 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         enderecoContainer.style.display = ''
       }
+      atualizarResumoTaxaFormulario()
       atualizarCarrinho()
     })
 
-    bairroClienteInput.addEventListener('input', atualizarCarrinho)
+    bairroClienteInput.addEventListener('input', () => {
+      atualizarResumoTaxaFormulario()
+      atualizarCarrinho()
+    })
   }
 
   if (cepClienteInput) {
     cepClienteInput.addEventListener('input', () => {
       cepClienteInput.value = formatarCep(cepClienteInput.value)
+      ultimoEnderecoCep = null
+      atualizarResumoTaxaFormulario()
     })
 
     cepClienteInput.addEventListener('blur', preencherEnderecoViaCep)
@@ -606,21 +698,31 @@ document.addEventListener('DOMContentLoaded', () => {
       // NOVO CÓDIGO AQUI
       modalEscolha.style.display = 'none'
 
-      const total = carrinho.reduce((sum, item) => sum + item.preco, 0)
+      const itensPedido = normalizarItensPedido(carrinho)
+      const subtotal = itensPedido.reduce((sum, item) => sum + item.preco, 0)
 
       pedidoTemp = {
         cliente: {
           nome: 'Cliente no Local',
-          endereco: 'Retirada no Local',
           telefone: 'N/A',
-          email: ''
+          endereco: 'Retirada no Local',
+          enderecoFormatado: 'Retirada no Local',
+          rua: '',
+          numero: '',
+          bairro: '',
+          complemento: '',
+          cep: '',
+          cidade: '',
+          uf: ''
         },
-        itens: carrinho,
-        total: total,
+        itens: itensPedido,
+        subtotal,
+        total: subtotal,
         data: new Date().toLocaleString('pt-BR'),
         status: 'pendente',
         finalizacao: 'estabelecimento',
-        taxaEntrega: 0
+        taxaEntrega: 0,
+        impressao_concluida: false
       }
 
       // Exibe o resumo diretamente para o garçom
@@ -693,9 +795,14 @@ document.addEventListener('DOMContentLoaded', () => {
       let enderecoCompleto = 'Retirada no Local'
       if (!isRetirada) {
         const endereco = enderecoClienteInput.value.trim()
-        enderecoCompleto = `${endereco}, ${bairro}${
-          complemento ? `, ${complemento}` : ''
-        }${cep ? ` - CEP: ${cep}` : ''}`
+        const numero = numeroClienteInput ? numeroClienteInput.value.trim() : ''
+        enderecoCompleto = montarEnderecoFormatado({
+          rua: endereco,
+          numero,
+          bairro,
+          complemento,
+          cep
+        })
       }
 
       if (
@@ -708,30 +815,42 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const dataPedido = new Date().toLocaleString('pt-BR')
-      const totalItens = carrinho.reduce((sum, item) => sum + item.preco, 0)
+      const itensPedido = normalizarItensPedido(carrinho)
+      const subtotal = itensPedido.reduce((sum, item) => sum + item.preco, 0)
       let taxa = 0
       if (!isRetirada) {
         taxa = obterTaxaEntrega(bairro)
       }
-      const totalFinal = totalItens + taxa
+      const totalFinal = subtotal + taxa
+      const rua = isRetirada ? '' : enderecoClienteInput.value.trim()
+      const numero = isRetirada ? '' : numeroClienteInput.value.trim()
+      const cidade = ultimoEnderecoCep?.localidade || ''
+      const uf = ultimoEnderecoCep?.uf || ''
 
       const cliente = {
         nome,
-        endereco: enderecoCompleto,
         telefone,
-        bairro,
         cep,
-        complemento
+        rua,
+        numero,
+        bairro,
+        complemento,
+        cidade,
+        uf,
+        endereco: enderecoCompleto,
+        enderecoFormatado: enderecoCompleto
       }
 
       pedidoTemp = {
-        cliente: cliente,
-        itens: carrinho,
+        cliente,
+        itens: itensPedido,
+        subtotal,
         total: totalFinal,
         taxaEntrega: taxa,
         data: dataPedido,
         status: 'pendente',
-        finalizacao: 'whatsapp'
+        finalizacao: 'whatsapp',
+        impressao_concluida: false
       }
 
       modalDadosCliente.style.display = 'none'
