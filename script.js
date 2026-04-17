@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return
     }
 
-    taxaEntregaFormEl.textContent = 'Bairro sem taxa cadastrada. Confira o endere?o.'
+    taxaEntregaFormEl.textContent = 'Bairro sem taxa cadastrada. Confira o endereço.'
   }
 
   function formatarCep(valor = '') {
@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const data = await response.json()
 
     if (!response.ok || data.erro) {
-      throw new Error('CEP n?o encontrado.')
+      throw new Error('CEP não encontrado.')
     }
 
     return data
@@ -268,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       ultimoEnderecoCep = null
       console.error('Erro ao buscar CEP:', error)
-      alert('N?o foi poss?vel localizar o CEP informado.')
+      alert('Não foi possível localizar o CEP informado.')
       atualizarResumoTaxaFormulario()
     }
   }
